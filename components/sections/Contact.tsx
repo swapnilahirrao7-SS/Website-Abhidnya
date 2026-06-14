@@ -1,0 +1,406 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Send,
+  Mail,
+  Phone,
+  MapPin,
+  CheckCircle,
+  Loader2,
+  Building2,
+  User,
+  MessageSquare,
+  Package,
+} from "lucide-react";
+
+const productOptions = [
+  "Red Split Lentils (Masoor Dal)",
+  "Kabuli Chickpeas (Chole)",
+  "Toor Dal",
+  "Green Moong",
+  "Basmati Rice",
+  "Sharbati Wheat",
+  "Turmeric (Powder/Finger)",
+  "Cumin Seeds",
+  "Sunflower Seeds",
+  "Custom / Other",
+];
+
+interface FormState {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  product: string;
+  quantity: string;
+  message: string;
+}
+
+const initialForm: FormState = {
+  name: "",
+  company: "",
+  email: "",
+  phone: "",
+  product: "",
+  quantity: "",
+  message: "",
+};
+
+export default function Contact() {
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    await new Promise((r) => setTimeout(r, 1400));
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact" className="section-pad bg-cream" aria-labelledby="contact-heading">
+      <div className="section-container">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
+          <span className="badge-green mb-4">Get In Touch</span>
+          <h2
+            id="contact-heading"
+            className="font-display text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5"
+          >
+            Start Your{" "}
+            <span className="bg-gradient-to-r from-primary to-forest-mid bg-clip-text text-transparent">
+              Bulk Inquiry
+            </span>
+          </h2>
+          <p className="text-gray-500 text-lg leading-relaxed">
+            Whether you&apos;re a retailer, food brand, distributor, or export house —
+            we can fulfill custom grades, packaging, and certifications.
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-5 gap-10 items-start">
+          {/* Contact Info (left panel) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-2 space-y-6"
+          >
+            <div className="bg-primary rounded-2xl p-7 text-white">
+              <h3 className="font-display font-bold text-xl mb-6">Contact Details</h3>
+              <div className="space-y-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                    <Building2 className="w-5 h-5 text-accent-300" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm mb-0.5">Registered Office</div>
+                    <div className="text-white/65 text-sm leading-relaxed">
+                      Abhidnya Agro Industries Pvt. Ltd.
+                      <br />
+                      Plot 14, MIDC Industrial Area
+                      <br />
+                      Pune, Maharashtra 411019
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                    <Phone className="w-5 h-5 text-accent-300" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm mb-0.5">Phone</div>
+                    <a
+                      href="tel:+912012345678"
+                      className="text-white/65 text-sm hover:text-accent-300 transition-colors"
+                    >
+                      +91 20 1234 5678
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
+                    <Mail className="w-5 h-5 text-accent-300" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm mb-0.5">Email</div>
+                    <a
+                      href="mailto:exports@abhidnyaagro.com"
+                      className="text-white/65 text-sm hover:text-accent-300 transition-colors"
+                    >
+                      exports@abhidnyaagro.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Processing Unit Info */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card">
+              <h4 className="font-display font-bold text-gray-900 text-base mb-4">
+                Processing Unit
+              </h4>
+              <div className="flex items-start gap-3 text-sm text-gray-500">
+                <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span>
+                  Survey No. 245, Uruli Devachi, Pune-Solapur Highway, Pune 412308
+                  <br />
+                  <span className="text-primary font-medium text-xs mt-1 inline-block">
+                    Open Mon–Sat: 9AM – 6PM IST
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            {/* Why respond fast */}
+            <div className="bg-accent/8 border border-accent/20 rounded-2xl p-5">
+              <div className="flex items-center gap-2 text-accent-700 font-semibold text-sm mb-2">
+                <CheckCircle className="w-4 h-4" />
+                We respond within 4 business hours
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Our dedicated B2B sales team reviews every inquiry personally to provide
+                the most accurate quotation, including custom packaging and certification options.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Form (right panel) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-3"
+          >
+            <div className="bg-white/80 backdrop-blur-md border border-white/60 rounded-3xl p-8 shadow-card-hover">
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12"
+                >
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <CheckCircle className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="font-display font-bold text-gray-900 text-2xl mb-3">
+                    Inquiry Received!
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto mb-6">
+                    Thank you for reaching out. Our team will review your requirements and
+                    get back to you within 4 business hours.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-primary text-sm font-semibold hover:underline"
+                  >
+                    Submit another inquiry
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {/* Name */}
+                    <div>
+                      <label htmlFor="name" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Full Name <span className="text-red-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          required
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Your full name"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                            text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                            focus:ring-primary/25 focus:border-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Company */}
+                    <div>
+                      <label htmlFor="company" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Company / Business
+                      </label>
+                      <div className="relative">
+                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                          id="company"
+                          name="company"
+                          type="text"
+                          value={form.company}
+                          onChange={handleChange}
+                          placeholder="Company or trade name"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                            text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                            focus:ring-primary/25 focus:border-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {/* Email */}
+                    <div>
+                      <label htmlFor="email" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Email <span className="text-red-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          required
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="you@company.com"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                            text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                            focus:ring-primary/25 focus:border-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div>
+                      <label htmlFor="phone" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Phone
+                      </label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={form.phone}
+                          onChange={handleChange}
+                          placeholder="+91 98765 43210"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                            text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                            focus:ring-primary/25 focus:border-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {/* Product Interest */}
+                    <div>
+                      <label htmlFor="product" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Product Interest <span className="text-red-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <Package className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                        <select
+                          id="product"
+                          name="product"
+                          required
+                          value={form.product}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                            text-gray-800 appearance-none focus:outline-none focus:ring-2
+                            focus:ring-primary/25 focus:border-primary transition-colors"
+                        >
+                          <option value="">Select a product</option>
+                          {productOptions.map((p) => (
+                            <option key={p} value={p}>{p}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Quantity */}
+                    <div>
+                      <label htmlFor="quantity" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                        Quantity (Metric Tons)
+                      </label>
+                      <input
+                        id="quantity"
+                        name="quantity"
+                        type="text"
+                        value={form.quantity}
+                        onChange={handleChange}
+                        placeholder="e.g. 5 MT, 1 container"
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm
+                          text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                          focus:ring-primary/25 focus:border-primary transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label htmlFor="message" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                      Message / Requirements <span className="text-red-400">*</span>
+                    </label>
+                    <div className="relative">
+                      <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        required
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Tell us about your requirements — grade, packaging, delivery location, certification needs, etc."
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                          text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                          focus:ring-primary/25 focus:border-primary transition-colors resize-none"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="btn-primary w-full justify-center text-base py-4 disabled:opacity-70"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending Inquiry...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Send Bulk Inquiry
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-xs text-gray-400">
+                    Your information is secure and will never be shared. We respond within 4 business hours.
+                  </p>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
