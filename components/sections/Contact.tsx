@@ -113,11 +113,15 @@ export default function Contact() {
                   <div>
                     <div className="font-semibold text-sm mb-0.5">Registered Office</div>
                     <div className="text-white/65 text-sm leading-relaxed">
-                      Abhidnya Agro Industries Pvt. Ltd.
+                      Abhidnya Agro Industries
                       <br />
-                      Plot 14, MIDC Industrial Area
+                      A-403, 4th Floor, Omkar Residency,
                       <br />
-                      Pune, Maharashtra 411019
+                      Above Formula One Zone Tyre Shop,
+                      <br />
+                      Near Fog City Hotel, Gangapur Road,
+                      <br />
+                      Nashik - 422013
                     </div>
                   </div>
                 </div>
@@ -129,10 +133,10 @@ export default function Contact() {
                   <div>
                     <div className="font-semibold text-sm mb-0.5">Phone</div>
                     <a
-                      href="tel:+912012345678"
+                      href="tel:+919145226001"
                       className="text-white/65 text-sm hover:text-accent-300 transition-colors"
                     >
-                      +91 20 1234 5678
+                      9145226001 / 9145446001
                     </a>
                   </div>
                 </div>
@@ -144,10 +148,10 @@ export default function Contact() {
                   <div>
                     <div className="font-semibold text-sm mb-0.5">Email</div>
                     <a
-                      href="mailto:exports@abhidnyaagro.com"
+                      href="mailto:abhidnyaagroindustries6001@gmail.com"
                       className="text-white/65 text-sm hover:text-accent-300 transition-colors"
                     >
-                      exports@abhidnyaagro.com
+                      abhidnyaagroindustries6001@gmail.com
                     </a>
                   </div>
                 </div>
@@ -162,7 +166,7 @@ export default function Contact() {
               <div className="flex items-start gap-3 text-sm text-gray-500">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>
-                  Survey No. 245, Uruli Devachi, Pune-Solapur Highway, Pune 412308
+                  689/6 Dhadne - 424306, Tal-Sakri, Dist-Dhule, Maharashtra
                   <br />
                   <span className="text-primary font-medium text-xs mt-1 inline-block">
                     Open Mon–Sat: 9AM – 6PM IST

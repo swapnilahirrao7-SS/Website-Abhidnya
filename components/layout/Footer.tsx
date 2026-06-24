@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Leaf,
   Mail,
   Phone,
   MapPin,
   Award,
   CheckCircle,
   Send,
+  Leaf,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -112,10 +113,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-5 group w-fit">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" strokeWidth={2} />
-              </div>
+            <Link href="/" className="flex items-center gap-2 mb-5 group w-fit">
+              <Image
+                src="/logo.png"
+                alt="Abhidnya Agro Industries Logo"
+                width={64}
+                height={64}
+                className="object-contain w-16 h-16"
+              />
               <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-white text-lg">Abhidnya Agro</span>
                 <span className="text-[10px] font-medium tracking-widest uppercase text-accent-400">
@@ -131,22 +136,22 @@ export default function Footer() {
             {/* Contact Info */}
             <address className="not-italic space-y-3 mb-7">
               <a
-                href="mailto:info@abhidnyaagro.com"
+                href="mailto:abhidnyaagroindustries6001@gmail.com"
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-accent transition-colors"
               >
                 <Mail className="w-4 h-4 text-accent shrink-0" />
-                info@abhidnyaagro.com
+                abhidnyaagroindustries6001@gmail.com
               </a>
               <a
-                href="tel:+912012345678"
+                href="tel:+919145226001"
                 className="flex items-center gap-3 text-sm text-white/60 hover:text-accent transition-colors"
               >
                 <Phone className="w-4 h-4 text-accent shrink-0" />
-                +91 20 1234 5678
+                9145226001 / 9145446001
               </a>
               <div className="flex items-start gap-3 text-sm text-white/60">
                 <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                <span>Plot 14, MIDC Industrial Area, Pune, Maharashtra 411019</span>
+                <span>A-403, 4th Floor, Omkar Residency, Above Formula One Zone Tyre Shop, Near Fog City Hotel, Gangapur Road, Nashik - 422013</span>
               </div>
             </address>
 

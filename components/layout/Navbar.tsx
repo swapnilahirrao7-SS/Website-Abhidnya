@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Leaf, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -42,12 +43,17 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-1.5 group"
             aria-label="Abhidnya Agro Industries Home"
           >
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center group-hover:bg-forest-mid transition-colors shadow-md">
-              <Leaf className="w-5 h-5 text-white" strokeWidth={2} />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Abhidnya Agro Industries Logo"
+              width={64}
+              height={64}
+              className="object-contain w-16 h-16"
+              priority
+            />
             <div className="flex flex-col leading-none">
               <span
                 className={`font-display font-bold text-base tracking-tight transition-colors ${

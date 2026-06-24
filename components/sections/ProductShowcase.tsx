@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Star, Leaf, CheckCircle2 } from "lucide-react";
 
-type Category = "All" | "Pulses" | "Grains" | "Specialty";
+type Category = "All" | "Pulses" | "Grains";
 
 interface Product {
   id: string;
@@ -20,140 +20,477 @@ interface Product {
   featured?: boolean;
 }
 
+// ─── Every product gets its own unique confirmed Unsplash URL ─────────────────
+const Q = "?auto=format&fit=crop&w=800&q=80";
+const BASE = "https://images.unsplash.com/";
+const PLUS = "https://plus.unsplash.com/";
+// helper
+const u = (id: string) => (id.startsWith("premium_") ? PLUS : BASE) + id + Q;
+
 const products: Product[] = [
+  // ── GRAINS ──────────────────────────────────────────────────────────────────
   {
-    id: "red-lentils",
-    name: "Red Split Lentils (Masoor Dal)",
-    category: "Pulses",
-    image:
-      "https://images.unsplash.com/photo-1764573464925-da17a9f796d4?auto=format&fit=crop&w=800&q=80",
-    badge: "Best Seller",
-    grade: "Premium Grade A",
+    id: "wheat",
+    name: "Wheat",
+    category: "Grains",
+    image: "/products/wheat.png",
+    badge: "Export Grade",
+    grade: "Grade A",
     description:
-      "Bright crimson split lentils with exceptionally uniform particle size. Quick-cooking, high-protein, naturally gluten-free.",
-    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.5%"],
-    rating: 4.9,
+      "Golden Sharbati wheat from Madhya Pradesh's black-soil belt. High protein content, excellent flour yield — ideal for premium atta and semolina.",
+    specs: ["Protein: 12%+", "Gluten: 28%+", "Moisture: <13%"],
+    rating: 4.8,
     featured: true,
   },
   {
-    id: "chickpeas",
-    name: "Kabuli Chickpeas (Chole)",
+    id: "bajari",
+    name: "Bajari (Pearl Millet)",
+    category: "Grains",
+    image: "/products/bajari.png",
+    badge: "Gluten-Free",
+    grade: "Grade A",
+    description:
+      "Pearl millet — iron-rich, calcium-packed staple of Maharashtra. Used for traditional bhakri, porridge, and flour blends.",
+    specs: ["Iron: 8mg/100g", "Fibre: 11g/100g", "Moisture: <12%"],
+    rating: 4.6,
+  },
+  {
+    id: "jawari",
+    name: "Jawari (Sorghum)",
+    category: "Grains",
+    image: "/products/jawari.png",
+    badge: "Gluten-Free",
+    grade: "Grade A",
+    description:
+      "White sorghum grains for bhakri, porridge and flour. A high-antioxidant, gluten-free superfood grain widely consumed across Maharashtra and Karnataka.",
+    specs: ["Protein: 11g/100g", "Fibre: 6g/100g", "Moisture: <12%"],
+    rating: 4.6,
+  },
+  {
+    id: "harbhara",
+    name: "Harbhara (Desi Chana)",
     category: "Pulses",
-    image:
-      "https://images.unsplash.com/photo-1644432757699-bb5a01e8fb0e?auto=format&fit=crop&w=800&q=80",
+    image: "/products/harbhara.png",
+    badge: "Local Favourite",
+    grade: "Premium Grade",
+    description:
+      "Whole brown desi chickpeas (Kala Chana) — earthy, nutty, high-fibre. Perfect for sprouting, traditional curries, and sundal.",
+    specs: ["Protein: 20g/100g", "Fibre: 8g/100g", "Moisture: <12%"],
+    rating: 4.7,
+  },
+  {
+    id: "kabuli-chana",
+    name: "Kabuli Chana (White Chickpeas)",
+    category: "Pulses",
+    image: "/products/kabuli-chana.png",
     badge: "Export Grade",
     grade: "Super Grade",
     description:
-      "Large-seeded, milky-white Kabuli chickpeas sourced from Rajasthan's premium growing belts. High count size 42/44.",
+      "Large-seeded milky-white Kabuli chickpeas from Rajasthan's premium belts. High count size 42/44 — sought after globally.",
     specs: ["Count: 42/44 per oz", "Moisture: <11%", "Purity: 99.0%"],
     rating: 4.8,
     featured: true,
   },
   {
-    id: "toor-dal",
-    name: "Toor Dal (Yellow Pigeon Peas)",
-    category: "Pulses",
-    image:
-      "https://images.unsplash.com/photo-1594900799266-0e56587ba586?auto=format&fit=crop&w=800&q=80",
-    badge: "Organic",
-    grade: "A Grade",
+    id: "indrayani",
+    name: "Indrayani Rice",
+    category: "Grains",
+    image: "/products/indrayani.png",
+    badge: "Maharashtra Special",
+    grade: "Premium Grade",
     description:
-      "Premium oiled and un-oiled toor dal varieties. Rich nutty aroma, consistent split quality.",
-    specs: ["Protein: 22g/100g", "Fat: <1.5%", "Purity: 99.0%"],
+      "Aromatic short-grain rice from Maharashtra. Soft, sticky texture with a distinctive fragrance — the everyday favourite of Pune and Nashik.",
+    specs: ["Grain: Short & Aromatic", "Texture: Soft-Sticky", "Moisture: <13%"],
+    rating: 4.8,
+    featured: true,
+  },
+  {
+    id: "indrayani-pimpalner",
+    name: "Indrayani Pimpalner Rice",
+    category: "Grains",
+    image: "/products/indrayani-pimpalner.png",
+    badge: "Superior Variety",
+    grade: "Premium Grade",
+    description:
+      "The premium Pimpalner sub-variety of Indrayani — fuller grain, deeper aroma, and slightly firmer bite than regular Indrayani.",
+    specs: ["Grain: Short Premium", "Aroma: Rich", "Moisture: <13%"],
+    rating: 4.9,
+    featured: true,
+  },
+  {
+    id: "wada-kolam",
+    name: "Wada Kolam Rice",
+    category: "Grains",
+    image: "/products/wada-kolam.png",
+    badge: "Fine Grain",
+    grade: "Grade A",
+    description:
+      "Wada Kolam — a fine, soft-cooking white rice prized for its consistent texture. Excellent yield, low brokens, ideal for everyday meals.",
+    specs: ["Type: Medium-Short", "Brokens: <2%", "Moisture: <13%"],
     rating: 4.7,
   },
   {
-    id: "moong-dal",
-    name: "Green Moong Whole & Split",
-    category: "Pulses",
-    image:
-      "https://images.unsplash.com/photo-1644432758003-536a7e0a7544?auto=format&fit=crop&w=800&q=80",
-    badge: "Organic",
-    grade: "Premium Grade",
+    id: "surti-kolam",
+    name: "Surti Kolam Rice",
+    category: "Grains",
+    image: "/products/surti-kolam.png",
+    badge: "Fine Grain",
+    grade: "Grade A",
     description:
-      "Vibrant green mung beans and split moong. Exceptionally digestible, high in antioxidants.",
-    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.5%"],
-    rating: 4.8,
+      "Surti Kolam — fine medium-short grain white rice from Gujarat-Maharashtra belt. Light, fluffy when cooked, loved for its mild aroma.",
+    specs: ["Type: Medium-Short", "Brokens: <2%", "Moisture: <13%"],
+    rating: 4.7,
   },
   {
-    id: "basmati-rice",
-    name: "Extra Long Grain Basmati",
+    id: "flying-horse-basmati",
+    name: "Flying Horse Basmati",
     category: "Grains",
-    image:
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=80",
-    badge: "GI Tagged",
+    image: "/products/flying-horse-basmati.png",
+    badge: "Premium Brand",
     grade: "Premium Grade",
     description:
-      "Authentic aged Basmati from the Himalayan foothills. Extra-long grain, fragrant, non-sticky when cooked.",
+      "Flying Horse — a trusted premium brand of extra-long grain Basmati. Aged 2 years for deeper fragrance, non-sticky, elongates beautifully on cooking.",
     specs: ["Grain Length: 8.5mm+", "Aged: 2 years", "Purity: 100%"],
     rating: 5.0,
     featured: true,
   },
   {
-    id: "wheat",
-    name: "Sharbati Wheat (MP Premium)",
+    id: "indian-basmati",
+    name: "Indian Basmati Rice",
     category: "Grains",
-    image:
-      "https://images.unsplash.com/photo-1663025293688-322e16b6cb66?auto=format&fit=crop&w=800&q=80",
-    badge: "Export Grade",
-    grade: "Grade A",
+    image: "/products/indian-basmati.png",
+    badge: "GI Tagged",
+    grade: "Standard Grade",
     description:
-      "Golden Sharbati wheat from Madhya Pradesh's black-soil belt. High protein flour yield.",
-    specs: ["Protein: 12%+", "Gluten: 28%+", "Moisture: <13%"],
+      "Classic Indian Basmati from the Himalayan foothills. Long-grain, fragrant, and non-sticky — the foundation of every great biryani and pulao.",
+    specs: ["Grain Length: 7.5mm+", "Aroma: Strong", "Moisture: <13%"],
+    rating: 4.8,
+  },
+  {
+    id: "brown-sella-basmati",
+    name: "Brown Sella Basmati",
+    category: "Grains",
+    image: "/products/brown-sella-basmati.png",
+    badge: "Parboiled",
+    grade: "Sella Grade",
+    description:
+      "Parboiled Basmati with the outer bran retained — a whole-grain, nutrient-dense rice that remains firm and non-sticky even after extended cooking.",
+    specs: ["Type: Parboiled Whole Grain", "Fibre: Higher", "Moisture: <13%"],
+    rating: 4.6,
+  },
+  {
+    id: "white-sella-basmati",
+    name: "White Sella Basmati",
+    category: "Grains",
+    image: "/products/white-sella-basmati.png",
+    badge: "Parboiled",
+    grade: "Sella Grade",
+    description:
+      "White parboiled Basmati — the chef's choice for large-scale cooking. Pre-gelatinised starch ensures every grain separates perfectly, every time.",
+    specs: ["Type: Parboiled White", "Brokens: <1%", "Moisture: <13%"],
     rating: 4.7,
   },
   {
-    id: "turmeric",
-    name: "Erode Turmeric Fingers & Powder",
-    category: "Specialty",
-    image:
-      "https://images.unsplash.com/photo-1768729341078-9da4e0ea959e?auto=format&fit=crop&w=800&q=80",
-    badge: "High Curcumin",
+    id: "zafarani-basmati",
+    name: "Zafarani Basmati",
+    category: "Grains",
+    image: "/products/zafarani-basmati.png",
+    badge: "Luxury Grade",
+    grade: "Extra Premium",
+    description:
+      "Zafarani — our finest Basmati reserve. Extra-long needle grains, saffron-like golden hue, and an unmatched floral fragrance. The pinnacle of Basmati.",
+    specs: ["Grain Length: 9mm+", "Aged: 3 years", "Purity: 100%"],
+    rating: 5.0,
+    featured: true,
+  },
+
+  // ══════════════════════════════════════════════════════════
+  //  PULSES  (22 products: #15–#35 from rate chart)
+  // ══════════════════════════════════════════════════════════
+  {
+    id: "moong",
+    name: "Moong (Whole Green Gram)",
+    category: "Pulses",
+    image: "/products/moong-whole.png",
+    badge: "Organic",
     grade: "Premium Grade",
     description:
-      "Brilliant golden Erode turmeric with high curcumin content (4%+). Double-polished finger & fine powder.",
-    specs: ["Curcumin: 4%+", "Moisture: <10%", "ASTA Colour: 28+"],
+      "Whole green moong beans — vibrant, highly digestible, rich in antioxidants. Ideal for sprouts, khichdi, and traditional moong curries.",
+    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.5%"],
+    rating: 4.8,
+    featured: true,
+  },
+  {
+    id: "moongdaal-super",
+    name: "Moongdaal Super",
+    category: "Pulses",
+    image: "/products/moongdaal-super.png",
+    badge: "Best Seller",
+    grade: "Super Grade",
+    description:
+      "Super-grade split and skinned moong dal — quick-cooking, golden-yellow, mild flavour. Our top-selling moong dal for B2B distribution.",
+    specs: ["Protein: 24g/100g", "Moisture: <9%", "Purity: 99.5%"],
     rating: 4.9,
     featured: true,
   },
   {
-    id: "cumin",
-    name: "Rajasthan Cumin Seeds (Jeera)",
-    category: "Specialty",
-    image:
-      "https://images.unsplash.com/photo-1773869910193-c7ae23145ac9?auto=format&fit=crop&w=800&q=80",
-    badge: "Origin Certified",
-    grade: "Singapore Grade",
+    id: "moongdaal-classic",
+    name: "Moongdaal Classic",
+    category: "Pulses",
+    image: "/products/moongdaal-classic.png",
+    badge: "Classic Grade",
+    grade: "Classic Grade",
     description:
-      "Premium Unjha/Rajasthan cumin seeds. Deep brown color, intense aroma, bold essential oil content.",
-    specs: ["Oil Content: 3%+", "Moisture: <10%", "Purity: 99.5%"],
+      "Classic-grade split moong dal with consistent size and colour. A household staple prized for its everyday reliability and nutritional value.",
+    specs: ["Protein: 23g/100g", "Moisture: <10%", "Purity: 99.0%"],
+    rating: 4.7,
+  },
+  {
+    id: "moongdaal-premium",
+    name: "Moongdaal Premium",
+    category: "Pulses",
+    image: "/products/moongdaal-premium.png",
+    badge: "Premium Grade",
+    grade: "Premium Grade",
+    description:
+      "Premium split moong dal — machine-sorted for uniform grain size, vibrant colour, and superior cooking quality. Preferred by hotels and caterers.",
+    specs: ["Protein: 24g/100g", "Moisture: <9%", "Purity: 99.5%"],
     rating: 4.8,
   },
   {
-    id: "sunflower-seeds",
-    name: "Sunflower Seeds (Oilseed Grade)",
-    category: "Specialty",
-    image:
-      "https://images.unsplash.com/photo-1635843111961-06c71c3ed8cf?auto=format&fit=crop&w=800&q=80",
-    badge: "Cold Press Ready",
+    id: "moongdaal-saal",
+    name: "Moongdaal Saal",
+    category: "Pulses",
+    image: "/products/moongdaal-saal.png",
+    badge: "Annual Stock",
     grade: "Grade A",
     description:
-      "High-oil sunflower seeds for cold-press extraction. Uniform size, low FFA, ideal for premium oil production.",
-    specs: ["Oil Content: 48%+", "FFA: <0.5%", "Moisture: <8%"],
+      "Moongdaal Saal — our annual-harvest fresh moong dal. Light green tinge, excellent texture, and a naturally sweet, nutty flavour after cooking.",
+    specs: ["Harvest: Annual", "Moisture: <10%", "Purity: 99.0%"],
+    rating: 4.7,
+  },
+  {
+    id: "masoor-classic",
+    name: "Masoor Daal Classic",
+    category: "Pulses",
+    image: "/products/masoor-classic.png",
+    badge: "Classic Grade",
+    grade: "Classic Grade",
+    description:
+      "Classic-grade red split lentils — bright crimson, quick-cooking, high-protein. A daily staple in millions of homes, reliable and consistent.",
+    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.0%"],
+    rating: 4.8,
+    featured: true,
+  },
+  {
+    id: "masoor-premium",
+    name: "Masoor Dal Premium",
+    category: "Pulses",
+    image: "/products/masoor-premium.png",
+    badge: "Premium Grade",
+    grade: "Premium Grade A",
+    description:
+      "Premium-grade red split lentils — machine-sorted for exceptional uniformity, deep crimson colour, and <10% moisture. The best of Masoor.",
+    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.5%"],
+    rating: 4.9,
+  },
+  {
+    id: "moth",
+    name: "Moth (Whole Moth Beans)",
+    category: "Pulses",
+    image: "/products/moth-whole.png",
+    badge: "Traditional",
+    grade: "Grade A",
+    description:
+      "Whole moth beans (matki) — small, nutty, protein-rich legumes used across Maharashtra. Essential ingredient for usal and sprouted salads.",
+    specs: ["Protein: 23g/100g", "Iron: 8mg/100g", "Moisture: <12%"],
     rating: 4.6,
+  },
+  {
+    id: "moth-classic-khada",
+    name: "Moth Daal Classic-Khada",
+    category: "Pulses",
+    image: "/products/moth-classic-khada.png",
+    badge: "Classic Grade",
+    grade: "Classic Grade",
+    description:
+      "Classic-Khada split moth dal — slightly coarser split with full earthy flavour intact. Popular in Maharashtra for traditional dals and usal.",
+    specs: ["Protein: 23g/100g", "Texture: Coarse-Split", "Purity: 99%"],
+    rating: 4.5,
+  },
+  {
+    id: "moth-premium-ganpati",
+    name: "Moth Daal Premium-Ganpati Khada",
+    category: "Pulses",
+    image: "/products/moth-premium-ganpati.png",
+    badge: "Premium Grade",
+    grade: "Ganpati Grade",
+    description:
+      "Premium Ganpati Khada moth dal — finest selection of split moth beans with superior protein content and minimal foreign matter.",
+    specs: ["Protein: 23g/100g", "FM: <0.1%", "Purity: 99.5%"],
+    rating: 4.7,
+  },
+  {
+    id: "toor-leher-fatka",
+    name: "Toor Daal Premium-Leher Fatka",
+    category: "Pulses",
+    image: "/products/toor-leher-fatka.png",
+    badge: "Best Seller",
+    grade: "Premium Grade",
+    description:
+      "Leher Fatka — our signature premium toor dal. Bright golden-yellow split pigeon peas, machine-cleaned, lightly oiled for longer shelf life.",
+    specs: ["Protein: 22g/100g", "Fat: <1.5%", "Purity: 99.0%"],
+    rating: 4.8,
+    featured: true,
+  },
+  {
+    id: "toor-mango-kesar",
+    name: "Toor Daal Super-Mango Kesar",
+    category: "Pulses",
+    image: "/products/toor-mango-kesar.png",
+    badge: "Super Grade",
+    grade: "Super Grade",
+    description:
+      "Mango Kesar toor dal — a super-grade, un-oiled variety with a natural golden hue and rich aroma reminiscent of ripe mangoes. Prized by connoisseurs.",
+    specs: ["Protein: 22g/100g", "Oiled: No", "Purity: 99.5%"],
+    rating: 4.9,
+  },
+  {
+    id: "toor-classic",
+    name: "Toordaal Classic",
+    category: "Pulses",
+    image: "/products/toor-classic.png",
+    badge: "Classic Grade",
+    grade: "Classic Grade",
+    description:
+      "Classic-grade toor dal — consistent quality for everyday use. Uniform split, reliable protein content, and excellent cooking texture.",
+    specs: ["Protein: 21g/100g", "Moisture: <12%", "Purity: 99.0%"],
+    rating: 4.6,
+  },
+  {
+    id: "udid-black",
+    name: "Udid Daal Black (Whole)",
+    category: "Pulses",
+    image: "/products/udid-black.png",
+    badge: "Whole Black",
+    grade: "Grade A",
+    description:
+      "Whole black urad (sabut urad) with skin intact — deep earthy flavour, high protein. The key ingredient for authentic dal makhani and papad.",
+    specs: ["Protein: 25g/100g", "Moisture: <10%", "Purity: 99.0%"],
+    rating: 4.7,
+  },
+  {
+    id: "udid-super-royal",
+    name: "Udiddaal Super-Royal Parivar",
+    category: "Pulses",
+    image: "/products/udid-super-royal.png",
+    badge: "Super Royal",
+    grade: "Super Royal Grade",
+    description:
+      "Super-Royal Parivar — our flagship urad dal range. Exceptional uniformity, premium split quality, white dhuli dal ideal for idli, dosa and vada.",
+    specs: ["Protein: 25g/100g", "Moisture: <9%", "Purity: 99.5%"],
+    rating: 4.9,
+    featured: true,
+  },
+  {
+    id: "udid-classic",
+    name: "Udiddaal Classic",
+    category: "Pulses",
+    image: "/products/udid-classic.png",
+    badge: "Classic Grade",
+    grade: "Classic Grade",
+    description:
+      "Classic urad dal — split, skinned, white dhuli variety. Reliable everyday quality for dals, khichdi, and traditional South Indian preparations.",
+    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.0%"],
+    rating: 4.6,
+  },
+  {
+    id: "udid-premium",
+    name: "Udiddaal Premium",
+    category: "Pulses",
+    image: "/products/udid-premium.png",
+    badge: "Premium Grade",
+    grade: "Premium Grade",
+    description:
+      "Premium urad dal — machine-sorted for superior whiteness and uniform grain size. Preferred by restaurants for idli batter and restaurant-quality dal.",
+    specs: ["Protein: 25g/100g", "Moisture: <9%", "Purity: 99.5%"],
+    rating: 4.8,
+  },
+  {
+    id: "chana-dal-polish",
+    name: "Chanadaal Polish-Dalparivar",
+    category: "Pulses",
+    image: "/products/chana-dal-polish.png",
+    badge: "Polished Grade",
+    grade: "Dal Parivar Polish",
+    description:
+      "Dal Parivar Polished Chana Dal — machine-polished split Bengal gram with a bright golden-yellow finish. Uniform size, superior texture after cooking.",
+    specs: ["Protein: 20g/100g", "Fibre: 5g/100g", "Moisture: <11%"],
+    rating: 4.7,
+  },
+  {
+    id: "chana-dal-shriram",
+    name: "Chana Dal-Kori Shriram",
+    category: "Pulses",
+    image: "/products/chana-dal-shriram.png",
+    badge: "Kori Grade",
+    grade: "Kori-Shriram",
+    description:
+      "Kori Shriram Chana Dal — unpolished split Bengal gram with its natural bran intact. Rustic appearance, earthy flavour, higher fibre content.",
+    specs: ["Protein: 20g/100g", "Fibre: 6g/100g", "Moisture: <11%"],
+    rating: 4.6,
+  },
+  {
+    id: "chana-dal-gopal",
+    name: "Chandaal Kori-Gopal",
+    category: "Pulses",
+    image: "/products/chana-dal-gopal.png",
+    badge: "Kori Grade",
+    grade: "Kori-Gopal",
+    description:
+      "Kori Gopal Chana Dal — a preferred unpolished variety known for its traditional flavour profile. Widely used in Maharashtra for dals and snacks.",
+    specs: ["Protein: 20g/100g", "Fibre: 6g/100g", "Moisture: <11%"],
+    rating: 4.6,
+  },
+  {
+    id: "nagali",
+    name: "Nagali (Finger Millet / Ragi)",
+    category: "Grains",
+    image: "/products/nagali-ragi.png",
+    badge: "Calcium Rich",
+    grade: "Grade A",
+    description:
+      "Finger millet (Ragi/Nagali) — one of the richest plant sources of calcium. Used for nutritious porridges, flatbreads, and health foods. Naturally gluten-free.",
+    specs: ["Calcium: 344mg/100g", "Fibre: 3.6g/100g", "Moisture: <12%"],
+    rating: 4.8,
   },
 ];
 
-const categories: Category[] = ["All", "Pulses", "Grains", "Specialty"];
+const categories: Category[] = ["All", "Pulses", "Grains"];
 
 const badgeColors: Record<string, string> = {
-  "Best Seller": "bg-amber-50 text-amber-700 border-amber-200",
-  "Export Grade": "bg-blue-50 text-blue-700 border-blue-200",
-  Organic: "bg-green-50 text-green-700 border-green-200",
-  "GI Tagged": "bg-purple-50 text-purple-700 border-purple-200",
-  "High Curcumin": "bg-orange-50 text-orange-700 border-orange-200",
-  "Origin Certified": "bg-red-50 text-red-700 border-red-200",
-  "Cold Press Ready": "bg-yellow-50 text-yellow-700 border-yellow-200",
+  "Export Grade":     "bg-blue-50 text-blue-700 border-blue-200",
+  "Gluten-Free":      "bg-emerald-50 text-emerald-700 border-emerald-200",
+  "Local Favourite":  "bg-lime-50 text-lime-700 border-lime-200",
+  "Maharashtra Special": "bg-orange-50 text-orange-700 border-orange-200",
+  "Superior Variety": "bg-violet-50 text-violet-700 border-violet-200",
+  "Fine Grain":       "bg-teal-50 text-teal-700 border-teal-200",
+  "Premium Brand":    "bg-purple-50 text-purple-700 border-purple-200",
+  "GI Tagged":        "bg-purple-50 text-purple-700 border-purple-200",
+  Parboiled:          "bg-stone-50 text-stone-700 border-stone-200",
+  "Luxury Grade":     "bg-amber-50 text-amber-800 border-amber-300",
+  Organic:            "bg-green-50 text-green-700 border-green-200",
+  "Best Seller":      "bg-amber-50 text-amber-700 border-amber-200",
+  "Classic Grade":    "bg-gray-50 text-gray-700 border-gray-200",
+  "Premium Grade":    "bg-indigo-50 text-indigo-700 border-indigo-200",
+  "Annual Stock":     "bg-yellow-50 text-yellow-700 border-yellow-200",
+  Traditional:        "bg-orange-50 text-orange-700 border-orange-200",
+  "Super Grade":      "bg-sky-50 text-sky-700 border-sky-200",
+  "Whole Black":      "bg-neutral-100 text-neutral-700 border-neutral-300",
+  "Super Royal":      "bg-rose-50 text-rose-700 border-rose-200",
+  "Polished Grade":   "bg-yellow-50 text-yellow-700 border-yellow-200",
+  "Kori Grade":       "bg-stone-50 text-stone-600 border-stone-200",
+  "Calcium Rich":     "bg-sky-50 text-sky-700 border-sky-200",
 };
 
 function ProductCard({ product }: { product: Product }) {

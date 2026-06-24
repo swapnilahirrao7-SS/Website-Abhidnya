@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const milestones = [
-  { year: "2001", event: "Founded in Pune with a vision to modernize agro processing" },
+  { year: "2001", event: "Founded in Nashik with a vision to modernize agro processing" },
   { year: "2007", event: "Received FSSAI certification & ISO 22000 accreditation" },
   { year: "2013", event: "Expanded to 2,000+ direct farmer partnerships across Maharashtra & MP" },
   { year: "2018", event: "Launched export operations serving 15+ countries" },
@@ -109,12 +109,12 @@ export default function About() {
               </span>
             </h2>
             <p className="text-gray-500 text-lg leading-relaxed mb-6">
-              Founded in 2001 by agricultural entrepreneur Shri Ramesh Patil,
+              Founded by Ujwala Amrut Biraris,
               Abhidnya Agro Industries was born from a simple belief: Indian farmers deserve
               better markets, and Indian consumers deserve better produce.
             </p>
             <p className="text-gray-500 leading-relaxed mb-8">
-              Over two decades, we have grown from a modest grain trading operation in Pune into
+              Over two decades, we have grown from a modest grain trading operation in Nashik into
               a fully-integrated agro processing company — operating a 50,000 sq.ft. HACCP-certified
               processing unit, employing 200+ people, and touching the lives of 2,000+ farming
               families across Maharashtra, Madhya Pradesh, and Rajasthan.
