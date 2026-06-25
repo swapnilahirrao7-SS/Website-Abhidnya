@@ -7,7 +7,6 @@ import {
   Leaf,
   Users,
   Factory,
-  Award,
   ArrowRight,
 } from "lucide-react";
 
@@ -23,7 +22,7 @@ const commitments = [
   "Direct sourcing eliminates exploitative middlemen, ensuring farmers receive 15–20% above MSP",
   "Zero-waste processing — husk and by-products converted to animal feed",
   "Rainwater harvesting and solar-powered processing unit",
-  "Women empowerment: 60% of workforce at our processing unit are women",
+  "We actively encourage women empowerment — our processing unit proudly employs and uplifts women from local communities",
 ];
 
 export default function About() {
@@ -41,9 +40,9 @@ export default function About() {
             className="relative"
           >
             {/* Main image */}
-            <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative h-[340px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1565793928422-3e23f8dd3c37?auto=format&fit=crop&w=1200&q=85"
+                src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=85"
                 alt="State-of-the-art food processing facility at Abhidnya Agro"
                 fill
                 className="object-cover"
@@ -52,13 +51,25 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-t from-forest/40 to-transparent" />
             </div>
 
+            {/* Second image below */}
+            <div className="relative h-[200px] mt-4 rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1200&q=85"
+                alt="Lush green agricultural fields in Maharashtra"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-forest/30 to-transparent" />
+            </div>
+
             {/* Floating card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="absolute -bottom-8 -right-6 lg:-right-10 bg-white rounded-2xl p-5 shadow-card-hover
+              className="absolute bottom-4 -right-6 lg:-right-10 bg-white rounded-2xl p-5 shadow-card-hover
                 border border-gray-100 w-56"
             >
               <div className="flex items-center gap-3 mb-3">
@@ -66,28 +77,13 @@ export default function About() {
                   <Factory className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <div className="font-display font-bold text-gray-900 text-lg leading-none">50K+</div>
-                  <div className="text-xs text-gray-500 mt-0.5">Tons processed / year</div>
+                  <div className="font-display font-bold text-gray-900 text-lg leading-none">1.2L sq.ft.</div>
+                  <div className="text-xs text-gray-500 mt-0.5">Fully automated unit</div>
                 </div>
               </div>
               <div className="text-xs text-gray-500 leading-relaxed">
-                Fully automated sortex & grading — zero human contamination in critical stages.
+                Fully automated sortex &amp; grading — zero human contamination in critical stages.
               </div>
-            </motion.div>
-
-            {/* Second floating accent */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute -top-6 -left-6 lg:-left-8 bg-accent rounded-2xl p-4 shadow-lg w-44"
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Award className="w-4 h-4 text-white" />
-                <span className="text-white font-bold text-xs">ISO 22000</span>
-              </div>
-              <div className="text-white/80 text-[11px]">International Food Safety Standard</div>
             </motion.div>
           </motion.div>
 
@@ -113,11 +109,11 @@ export default function About() {
               Abhidnya Agro Industries was born from a simple belief: Indian farmers deserve
               better markets, and Indian consumers deserve better produce.
             </p>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Over two decades, we have grown from a modest grain trading operation in Nashik into
-              a fully-integrated agro processing company — operating a 50,000 sq.ft. HACCP-certified
-              processing unit, employing 200+ people, and touching the lives of 2,000+ farming
-              families across Maharashtra, Madhya Pradesh, and Rajasthan.
+            <p className="text-gray-500 text-base leading-relaxed mb-8">
+              We have grown from a modest grain trading operation in Nashik into a fully-integrated
+              agro processing company — operating a 1,20,000 sq.ft. fully automated processing unit,
+              employing 200+ dedicated professionals, and enriching the lives of farming families
+              across Maharashtra.
             </p>
 
             {/* Commitments */}

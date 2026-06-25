@@ -24,7 +24,7 @@ const values = [
     icon: Factory,
     title: "State-of-the-Art Processing",
     description:
-      "Our MIDC processing unit uses the latest sortex, de-husking, and grading machinery ensuring zero-contamination, consistent grade, and superior shelf life.",
+      "Our fully automated processing unit uses the latest sortex, de-husking, and grading machinery ensuring zero-contamination, consistent grade, and superior shelf life.",
     color: "text-primary",
     bg: "bg-primary/5",
     border: "border-primary/10",
@@ -42,7 +42,7 @@ const values = [
     icon: Globe,
     title: "Global Quality Standards",
     description:
-      "ISO 22000, HACCP, and AGMARK certified. Our export division meets EU, FDA, and Codex Alimentarius standards for 20+ destination markets.",
+      "Stringent in-house quality checks at every stage — from sourcing to packaging. Our products meet international standards and are currently exported to Dubai.",
     color: "text-accent-700",
     bg: "bg-accent/8",
     border: "border-accent/15",
@@ -60,7 +60,7 @@ const values = [
     icon: Handshake,
     title: "Farmer Partnership Program",
     description:
-      "We partner directly with 2,000+ farming families across Maharashtra and MP, ensuring fair MSP + premium, reducing middlemen and maximising farm income.",
+      "We partner directly with farming families across Maharashtra, ensuring fair pricing, reducing middlemen and maximising farm income.",
     color: "text-rose-600",
     bg: "bg-rose-50",
     border: "border-rose-100",
