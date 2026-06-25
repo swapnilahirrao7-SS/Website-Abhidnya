@@ -266,7 +266,7 @@ const products: Product[] = [
     grade: "Grade A",
     description:
       "Moongdaal Saal — our annual-harvest fresh moong dal. Light green tinge, excellent texture, and a naturally sweet, nutty flavour after cooking.",
-    specs: ["Harvest: Annual", "Moisture: <10%", "Purity: 99.0%"],
+    specs: ["Protein: 24g/100g", "Moisture: <10%", "Purity: 99.0%"],
     rating: 4.7,
   },
   {
@@ -364,7 +364,7 @@ const products: Product[] = [
     grade: "Classic Grade",
     description:
       "Classic-grade toor dal — consistent quality for everyday use. Uniform split, reliable protein content, and excellent cooking texture.",
-    specs: ["Protein: 21g/100g", "Moisture: <12%", "Purity: 99.0%"],
+    specs: ["Protein: 22g/100g", "Moisture: <12%", "Purity: 99.0%"],
     rating: 4.6,
   },
   {
@@ -425,7 +425,7 @@ const products: Product[] = [
     grade: "Dal Parivar Polish",
     description:
       "Dal Parivar Polished Chana Dal — machine-polished split Bengal gram with a bright golden-yellow finish. Uniform size, superior texture after cooking.",
-    specs: ["Protein: 20g/100g", "Fibre: 5g/100g", "Moisture: <11%"],
+    specs: ["Protein: 20g/100g", "Fibre: 8g/100g", "Moisture: <11%"],
     rating: 4.7,
   },
   {
@@ -437,7 +437,7 @@ const products: Product[] = [
     grade: "Kori-Shriram",
     description:
       "Kori Shriram Chana Dal — unpolished split Bengal gram with its natural bran intact. Rustic appearance, earthy flavour, higher fibre content.",
-    specs: ["Protein: 20g/100g", "Fibre: 6g/100g", "Moisture: <11%"],
+    specs: ["Protein: 20g/100g", "Fibre: 10g/100g", "Moisture: <11%"],
     rating: 4.6,
   },
   {
@@ -449,7 +449,7 @@ const products: Product[] = [
     grade: "Kori-Gopal",
     description:
       "Kori Gopal Chana Dal — a preferred unpolished variety known for its traditional flavour profile. Widely used in Maharashtra for dals and snacks.",
-    specs: ["Protein: 20g/100g", "Fibre: 6g/100g", "Moisture: <11%"],
+    specs: ["Protein: 20g/100g", "Fibre: 10g/100g", "Moisture: <11%"],
     rating: 4.6,
   },
   {
@@ -461,7 +461,7 @@ const products: Product[] = [
     grade: "Grade A",
     description:
       "Finger millet (Ragi/Nagali) — one of the richest plant sources of calcium. Used for nutritious porridges, flatbreads, and health foods. Naturally gluten-free.",
-    specs: ["Calcium: 344mg/100g", "Fibre: 3.6g/100g", "Moisture: <12%"],
+    specs: ["Calcium: 344mg/100g", "Fibre: 11g/100g", "Moisture: <12%"],
     rating: 4.8,
   },
 ];
@@ -514,16 +514,25 @@ function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           fill
-          className={`object-cover transition-transform duration-500 ${
+          className={`object-cover transition-transform duration-700 ${
             hovered ? "scale-110" : "scale-100"
           }`}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
-        {/* Gradient overlay on hover */}
+        {/* Gradient overlay on hover — very light, just enough to lift the View Spec button */}
         <div
-          className={`absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent
+          className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent
             transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
+        />
+
+        {/* Shine sweep on hover */}
+        <div
+          className={`absolute inset-0 transition-transform duration-700 pointer-events-none
+            ${hovered ? "translate-x-full" : "-translate-x-full"}`}
+          style={{
+            background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%)",
+          }}
         />
 
         {/* Badge */}
@@ -551,11 +560,14 @@ function ProductCard({ product }: { product: Product }) {
           className="absolute bottom-3 inset-x-3"
         >
           <button
+            onClick={() =>
+              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+            }
             className="w-full flex items-center justify-center gap-2 bg-white text-primary
               font-semibold text-sm rounded-xl py-2.5 hover:bg-primary hover:text-white
               transition-colors duration-200"
           >
-            View Specifications
+            Request Spec Sheet
             <ArrowUpRight className="w-4 h-4" />
           </button>
         </motion.div>

@@ -8,14 +8,17 @@ import {
   Users,
   Factory,
   ArrowRight,
+  Sprout,
+  Globe,
+  Warehouse,
 } from "lucide-react";
 
 const milestones = [
-  { year: "2001", event: "Founded in Nashik with a vision to modernize agro processing" },
-  { year: "2007", event: "Received FSSAI certification & ISO 22000 accreditation" },
-  { year: "2013", event: "Expanded to 2,000+ direct farmer partnerships across Maharashtra & MP" },
-  { year: "2018", event: "Launched export operations serving 15+ countries" },
-  { year: "2023", event: "Commissioned new 50,000 sq.ft HACCP-compliant processing unit" },
+  { year: "2022", event: "Founded in Nashik with a vision to modernize agro processing", icon: Sprout, color: "bg-emerald-500", glow: "shadow-emerald-500/40" },
+  { year: "2023", event: "Setup the fully automated plant in Dhadane, Sakri", icon: Factory, color: "bg-primary", glow: "shadow-primary/40" },
+  { year: "2024", event: "Expanded more direct farmer partnerships across Maharashtra", icon: Users, color: "bg-amber-500", glow: "shadow-amber-500/40" },
+  { year: "2025", event: "Launched export operations serving Dubai", icon: Globe, color: "bg-blue-500", glow: "shadow-blue-500/40" },
+  { year: "2026", event: "15,000 sq.ft. additional storage capacity Godown commissioned", icon: Warehouse, color: "bg-violet-500", glow: "shadow-violet-500/40" },
 ];
 
 const commitments = [
@@ -27,15 +30,28 @@ const commitments = [
 
 export default function About() {
   return (
-    <section id="about" className="section-pad bg-white overflow-hidden" aria-labelledby="about-heading">
-      <div className="section-container">
+    <section id="about" className="section-pad bg-white overflow-hidden relative" aria-labelledby="about-heading">
+      {/* Gradient orbs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          animate={{ x: [0, 20, 0], y: [0, -30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full bg-emerald-50 opacity-60 blur-3xl"
+        />
+        <motion.div
+          animate={{ x: [0, -25, 0], y: [0, 20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-amber-50 opacity-50 blur-3xl"
+        />
+      </div>
+      <div className="section-container relative">
         {/* Top row: split layout */}
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center mb-24">
           {/* Left: Modern Imagery */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: false, margin: "-60px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative"
           >
@@ -67,7 +83,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               className="absolute bottom-4 -right-6 lg:-right-10 bg-white rounded-2xl p-5 shadow-card-hover
                 border border-gray-100 w-56"
@@ -91,7 +107,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: false, margin: "-60px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="badge-green mb-5">Our Heritage</span>
@@ -140,7 +156,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: false, margin: "-40px" }}
           transition={{ duration: 0.7 }}
         >
           <div className="text-center mb-12">
@@ -151,37 +167,70 @@ export default function About() {
           </div>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-1/2 -translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-primary/40 to-primary/20" />
+            {/* Animated gradient timeline line */}
+            <div className="hidden md:block absolute left-1/2 -translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400 via-primary to-violet-500 opacity-30" />
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              style={{ originY: 0 }}
+              className="hidden md:block absolute left-1/2 -translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400 via-primary to-violet-500"
+            />
 
-            <div className="space-y-8">
-              {milestones.map((m, i) => (
-                <motion.div
-                  key={m.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className={`flex flex-col md:flex-row items-center gap-6 ${
-                    i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  <div className={`md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                    <div className="inline-flex items-center gap-2 bg-primary/8 border border-primary/15 rounded-xl px-4 py-2">
-                      <span className="font-display font-extrabold text-primary text-xl">{m.year}</span>
+            <div className="space-y-10">
+              {milestones.map((m, i) => {
+                const Icon = m.icon;
+                const isLeft = i % 2 === 0;
+                return (
+                  <motion.div
+                    key={m.year}
+                    initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, margin: "-30px" }}
+                    transition={{ delay: i * 0.08, duration: 0.55, ease: "easeOut" }}
+                    className={`flex flex-col md:flex-row items-center gap-6 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}
+                  >
+                    {/* Year + content side */}
+                    <div className={`md:w-[calc(50%-2.5rem)] w-full ${isLeft ? "md:text-right" : "md:text-left"}`}>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        className="group inline-block w-full"
+                      >
+                        {/* Year badge */}
+                        <div className={`inline-flex items-center gap-2 mb-3 ${isLeft ? "md:flex-row-reverse" : ""} flex-row`}>
+                          <span className={`font-display font-extrabold text-2xl bg-gradient-to-r from-primary to-forest-mid bg-clip-text text-transparent`}>
+                            {m.year}
+                          </span>
+                        </div>
+                        {/* Event card */}
+                        <div className={`relative bg-white border border-gray-100 rounded-2xl p-5 shadow-card
+                          group-hover:shadow-card-hover group-hover:-translate-y-1 transition-all duration-300 overflow-hidden`}>
+                          {/* Coloured left/right accent bar */}
+                          <div className={`absolute top-0 ${isLeft ? "right-0" : "left-0"} bottom-0 w-1 ${m.color} rounded-full`} />
+                          <p className="text-gray-600 text-sm leading-relaxed">{m.event}</p>
+                          {/* Subtle hover glow */}
+                          <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-[0.04] transition-opacity duration-300 ${m.color}`} />
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
 
-                  {/* Center dot */}
-                  <div className="hidden md:flex w-4 h-4 rounded-full bg-primary border-4 border-primary/20 shrink-0 z-10" />
+                    {/* Center icon node */}
+                    <motion.div
+                      whileInView={{ scale: [0, 1.2, 1] }}
+                      viewport={{ once: false }}
+                      transition={{ delay: i * 0.08 + 0.2, duration: 0.4 }}
+                      className={`hidden md:flex w-12 h-12 rounded-full ${m.color} ${m.glow}
+                        shadow-lg items-center justify-center shrink-0 z-10 border-4 border-white`}
+                    >
+                      <Icon className="w-5 h-5 text-white" />
+                    </motion.div>
 
-                  <div className={`md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "" : ""}`}>
-                    <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 text-sm text-gray-600 leading-relaxed">
-                      {m.event}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                    {/* Empty spacer side */}
+                    <div className="md:w-[calc(50%-2.5rem)] hidden md:block" />
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </motion.div>
@@ -190,7 +239,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ delay: 0.2, duration: 0.7 }}
           className="mt-20 grid grid-cols-3 gap-4 rounded-3xl overflow-hidden h-56"
         >

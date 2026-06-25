@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   Send,
   Mail,
@@ -15,17 +16,56 @@ import {
   Package,
 } from "lucide-react";
 
-const productOptions = [
-  "Red Split Lentils (Masoor Dal)",
-  "Kabuli Chickpeas (Chole)",
-  "Toor Dal",
-  "Green Moong",
-  "Basmati Rice",
-  "Sharbati Wheat",
-  "Turmeric (Powder/Finger)",
-  "Cumin Seeds",
-  "Sunflower Seeds",
-  "Custom / Other",
+const productGroups: { label: string; options: string[] }[] = [
+  {
+    label: "── Grains ──",
+    options: [
+      "Wheat",
+      "Bajari (Pearl Millet)",
+      "Jawari (Sorghum)",
+      "Indrayani Rice",
+      "Indrayani Pimpalner Rice",
+      "Wada Kolam Rice",
+      "Surti Kolam Rice",
+      "Flying Horse Basmati",
+      "Indian Basmati Rice",
+      "Brown Sella Basmati",
+      "White Sella Basmati",
+      "Zafarani Basmati",
+      "Nagali (Finger Millet / Ragi)",
+    ],
+  },
+  {
+    label: "── Pulses ──",
+    options: [
+      "Harbhara (Desi Chana)",
+      "Kabuli Chana (White Chickpeas)",
+      "Moong (Whole Green Gram)",
+      "Moongdaal Super",
+      "Moongdaal Classic",
+      "Moongdaal Premium",
+      "Moongdaal Saal",
+      "Masoor Daal Classic",
+      "Masoor Dal Premium",
+      "Moth (Whole Moth Beans)",
+      "Moth Daal Classic-Khada",
+      "Moth Daal Premium-Ganpati Khada",
+      "Toor Daal Premium-Leher Fatka",
+      "Toor Daal Super-Mango Kesar",
+      "Toordaal Classic",
+      "Udid Daal Black (Whole)",
+      "Udiddaal Super-Royal Parivar",
+      "Udiddaal Classic",
+      "Udiddaal Premium",
+      "Chanadaal Polish-Dalparivar",
+      "Chana Dal-Kori Shriram",
+      "Chandaal Kori-Gopal",
+    ],
+  },
+  {
+    label: "── Other ──",
+    options: ["Custom / Multiple Products"],
+  },
 ];
 
 interface FormState {
@@ -52,6 +92,13 @@ export default function Contact() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const isFormValid =
+    form.name.trim() !== "" &&
+    form.email.trim() !== "" &&
+    form.product !== "" &&
+    form.message.trim() !== "";
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -62,9 +109,33 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1400));
-    setLoading(false);
-    setSubmitted(true);
+    setError(null);
+
+    const serviceId  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "";
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
+    const publicKey  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? "";
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: form.name,
+          company:   form.company,
+          reply_to:  form.email,
+          phone:     form.phone || "Not provided",
+          product:   form.product,
+          quantity:  form.quantity || "Not specified",
+          message:   form.message,
+        },
+        publicKey,
+      );
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly at abhidnyaagroindustries6001@gmail.com");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -74,7 +145,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-60px" }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
@@ -99,7 +170,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7 }}
             className="lg:col-span-2 space-y-6"
           >
@@ -192,7 +263,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7 }}
             className="lg:col-span-3"
           >
@@ -331,8 +402,12 @@ export default function Contact() {
                             focus:ring-primary/25 focus:border-primary transition-colors"
                         >
                           <option value="">Select a product</option>
-                          {productOptions.map((p) => (
-                            <option key={p} value={p}>{p}</option>
+                          {productGroups.map((group) => (
+                            <optgroup key={group.label} label={group.label}>
+                              {group.options.map((p) => (
+                                <option key={p} value={p}>{p}</option>
+                              ))}
+                            </optgroup>
                           ))}
                         </select>
                       </div>
@@ -379,10 +454,16 @@ export default function Contact() {
                     </div>
                   </div>
 
+                  {error && (
+                    <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                      {error}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="btn-primary w-full justify-center text-base py-4 disabled:opacity-70"
+                    disabled={loading || !isFormValid}
+                    className="btn-primary w-full justify-center text-base py-4 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
                   >
                     {loading ? (
                       <>
@@ -396,9 +477,16 @@ export default function Contact() {
                       </>
                     )}
                   </button>
-                  <p className="text-center text-xs text-gray-400">
-                    Your information is secure and will never be shared. We respond within 4 business hours.
-                  </p>
+                  {!isFormValid && (
+                    <p className="text-center text-xs text-gray-400">
+                      Please fill in Full Name, Email, Product Interest and Requirements to continue.
+                    </p>
+                  )}
+                  {isFormValid && (
+                    <p className="text-center text-xs text-gray-400">
+                      Your information is secure and will never be shared. We respond within 4 business hours.
+                    </p>
+                  )}
                 </form>
               )}
             </div>

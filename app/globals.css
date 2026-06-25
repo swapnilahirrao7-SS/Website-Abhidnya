@@ -139,8 +139,8 @@
 
   .btn-primary:hover {
     background-color: var(--color-forest-mid);
-    transform: translateY(-1px);
-    box-shadow: 0 0 40px rgba(27,67,50,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(27,67,50,0.15), 0 0 40px rgba(27,67,50,0.30), 0 8px 24px rgba(27,67,50,0.25);
   }
 
   .btn-primary:active {
@@ -194,8 +194,8 @@
 
   .btn-amber:hover {
     background-color: var(--color-accent-700);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-glow-amber);
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(217,119,6,0.15), 0 0 40px rgba(217,119,6,0.35), 0 8px 24px rgba(217,119,6,0.25);
   }
 
   .btn-amber:focus {
@@ -240,4 +240,19 @@
 ::selection {
   background-color: rgba(27, 67, 50, 0.25);
   color: var(--color-primary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-primary) 40%, transparent); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 30%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 0%, transparent); }
+}
+
+.badge-green {
+  animation: badgePulse 3s ease-in-out infinite;
 }

@@ -8,10 +8,8 @@ import {
   MapPin,
   Award,
   CheckCircle,
-  Send,
   Leaf,
 } from "lucide-react";
-import { useState } from "react";
 
 const footerLinks = {
   company: [
@@ -45,17 +43,6 @@ const certifications = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
-    }
-  };
-
   const handleNavClick = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -63,50 +50,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-forest text-white" aria-label="Site footer">
-      {/* Newsletter bar */}
-      <div className="bg-primary border-b border-white/10">
-        <div className="section-container py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="font-display font-bold text-lg text-white">
-                Stay Updated with Harvest Insights
-              </h3>
-              <p className="text-sm text-white/70 mt-1">
-                Get market prices, new product launches, and agro news directly.
-              </p>
-            </div>
-            <form onSubmit={handleSubscribe} className="flex gap-2 w-full md:w-auto">
-              {subscribed ? (
-                <div className="flex items-center gap-2 text-green-300 font-medium">
-                  <CheckCircle className="w-5 h-5" />
-                  <span>Subscribed! Thank you.</span>
-                </div>
-              ) : (
-                <>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="flex-1 md:w-72 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5
-                      text-white placeholder:text-white/50 text-sm focus:outline-none focus:ring-2
-                      focus:ring-accent/50 focus:border-accent"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="flex items-center gap-2 bg-accent hover:bg-accent-700 text-white
-                      font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm"
-                  >
-                    <Send className="w-4 h-4" />
-                    Subscribe
-                  </button>
-                </>
-              )}
-            </form>
-          </div>
-        </div>
-      </div>
 
       {/* Main footer */}
       <div className="section-container py-16">

@@ -78,11 +78,14 @@ export default function Navbar() {
               <li key={link.href}>
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className={`text-sm font-medium transition-colors duration-150 hover:text-accent ${
+                  className={`group relative text-sm font-medium transition-colors duration-150 ${
                     scrolled ? "text-gray-700 hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                 >
                   {link.label}
+                  <span className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100
+                    transition-transform duration-300 origin-left
+                    ${scrolled ? "bg-primary" : "bg-accent-300"}`} />
                 </button>
               </li>
             ))}

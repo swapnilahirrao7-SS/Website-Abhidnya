@@ -6,12 +6,12 @@ import { TrendingUp, Users, Globe, Package, Award, Leaf } from "lucide-react";
 import Image from "next/image";
 
 const stats = [
-  { value: 50000, suffix: "+", label: "Tons Processed", sublabel: "Annually", icon: Package },
-  { value: 20, suffix: "+", label: "Export Countries", sublabel: "Worldwide", icon: Globe },
-  { value: 2000, suffix: "+", label: "Farmer Partners", sublabel: "Directly sourced", icon: Users },
-  { value: 100, suffix: "%", label: "Quality Certified", sublabel: "FSSAI & ISO", icon: Award },
-  { value: 23, suffix: " Yrs", label: "Industry Legacy", sublabel: "Since 2001", icon: TrendingUp },
-  { value: 12, suffix: "+", label: "Product Variants", sublabel: "Across categories", icon: Leaf },
+  { value: 35,     suffix: "+",      label: "Premium Products",       sublabel: "Across categories",     icon: Package    },
+  { value: 120000, suffix: " sq.ft.", label: "Processing Facility",    sublabel: "Fully automated unit",  icon: Award      },
+  { value: 99,     suffix: ".5%",    label: "Purity Guarantee",        sublabel: "Across all product lines", icon: Users  },
+  { value: 100,    suffix: "%",      label: "Farm-Direct Sourcing",    sublabel: "Zero middlemen",        icon: Leaf       },
+  { value: 15000,  suffix: " sq.ft.", label: "New Storage Added",      sublabel: "2026 expansion",        icon: TrendingUp },
+  { value: 3,      suffix: " Yrs",   label: "Years of Excellence",     sublabel: "& growing since 2023",  icon: Globe      },
 ];
 
 function AnimatedNumber({
@@ -26,7 +26,7 @@ function AnimatedNumber({
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start) { setCount(0); return; }
     let startTime: number | null = null;
     const duration = 2000;
 
@@ -51,7 +51,7 @@ function AnimatedNumber({
 
 export default function Stats() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
@@ -81,7 +81,7 @@ export default function Stats() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
@@ -99,8 +99,8 @@ export default function Stats() {
             </span>
           </h2>
           <p className="text-white/60 text-lg leading-relaxed">
-            Over two decades of consistent growth, trusted partnerships, and measurable impact
-            across the agricultural value chain.
+            Built on integrity and powered by precision — our rapid growth story in numbers,
+            from a single vision to a fully automated agro powerhouse.
           </p>
         </motion.div>
 
@@ -113,7 +113,7 @@ export default function Stats() {
                 key={stat.label}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
+                viewport={{ once: false, margin: "-40px" }}
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 className="relative bg-white/8 backdrop-blur-sm border border-white/15 rounded-2xl p-6 lg:p-8
                   hover:bg-white/12 transition-all duration-300 group"
@@ -141,23 +141,6 @@ export default function Stats() {
           })}
         </div>
 
-        {/* Bottom trust strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-center"
-        >
-          <div className="text-white/50 text-sm">Trusted by industry leaders including</div>
-          <div className="flex flex-wrap justify-center gap-6">
-            {["Metro Cash & Carry", "BigBasket B2B", "Reliance Fresh", "D-Mart Wholesale"].map((brand) => (
-              <span key={brand} className="text-white/70 font-semibold text-sm">
-                {brand}
-              </span>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
