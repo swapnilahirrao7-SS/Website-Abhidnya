@@ -6,9 +6,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Award,
-  CheckCircle,
-  Leaf,
 } from "lucide-react";
 
 const footerLinks = {
@@ -34,13 +31,6 @@ const footerLinks = {
     { label: "FAQs", href: "#contact" },
   ],
 };
-
-const certifications = [
-  { label: "FSSAI Certified", icon: Award },
-  { label: "ISO 22000", icon: CheckCircle },
-  { label: "Organic India", icon: Leaf },
-  { label: "AGMARK", icon: Award },
-];
 
 export default function Footer() {
   const handleNavClick = (href: string) => {
@@ -72,7 +62,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-xs">
-              Cultivating trust since 2001. We bridge premium farmlands with your table —
+              Cultivating trust since 2022. We bridge premium farmlands with your table —
               delivering pure, traceable, and sustainably sourced agricultural products.
             </p>
 
@@ -101,14 +91,22 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex items-center gap-3">
               {[
-                { label: "Facebook", href: "#", svg: <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /> },
-                { label: "X (Twitter)", href: "#", svg: <><path d="M4 4l16 16M4 20L20 4" strokeLinecap="round" /></> },
-                { label: "LinkedIn", href: "#", svg: <><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></> },
-                { label: "Instagram", href: "#", svg: <><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></> },
+                {
+                  label: "Facebook",
+                  href: "https://www.facebook.com/share/19q5qmzgs9/",
+                  svg: <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />,
+                },
+                {
+                  label: "Instagram",
+                  href: "https://www.instagram.com/abhidnya.agro.industries?igsh=MTlzdjZsM2pmZGhlbA==",
+                  svg: <><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></>,
+                },
               ].map(({ label, href, svg }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center
                     hover:bg-accent transition-colors text-white/70 hover:text-white"
@@ -147,25 +145,8 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Certifications */}
+        {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10">
-          <p className="text-xs uppercase tracking-widest font-semibold text-white/40 mb-4">
-            Certifications & Accreditations
-          </p>
-          <div className="flex flex-wrap gap-3 mb-8">
-            {certifications.map(({ label, icon: Icon }) => (
-              <div
-                key={label}
-                className="flex items-center gap-1.5 bg-white/8 border border-white/15
-                  rounded-full px-4 py-1.5 text-xs font-medium text-white/70"
-              >
-                <Icon className="w-3.5 h-3.5 text-accent" />
-                {label}
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
             <p>© {new Date().getFullYear()} Abhidnya Agro Industries Pvt. Ltd. All rights reserved.</p>
             <div className="flex items-center gap-6">
