@@ -5,10 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { navigateToInquiry } from "@/lib/inquiryNavigation";
 
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Products", href: "#products" },
+  { label: "Outlets", href: "#outlets" },
   { label: "About", href: "#about" },
   { label: "Quality", href: "#quality" },
   { label: "Contact", href: "#contact" },
@@ -94,7 +96,7 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
             <button
-              onClick={() => handleNavClick("#contact")}
+              onClick={() => navigateToInquiry("bulk")}
               className="btn-primary text-sm px-5 py-2.5"
             >
               Get a Quote
@@ -139,7 +141,7 @@ export default function Navbar() {
                 ))}
                 <li className="pt-2 border-t border-gray-100 mt-2">
                   <button
-                    onClick={() => handleNavClick("#contact")}
+                    onClick={() => navigateToInquiry("bulk")}
                     className="btn-primary w-full justify-center text-sm"
                   >
                     Get a Quote

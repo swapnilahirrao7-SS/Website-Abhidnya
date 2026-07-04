@@ -149,12 +149,12 @@ const expectedProducts = [
   "Kabuli Chana (White Chickpeas)", "Moong (Whole Green Gram)",
   "Moongdaal Super", "Moongdaal Classic", "Moongdaal Premium",
   "Moongdaal Saal", "Masoor Daal Classic", "Masoor Dal Premium",
-  "Moth (Whole Moth Beans)", "Moth Daal Classic-Khada",
-  "Moth Daal Premium-Ganpati Khada", "Toor Daal Premium-Leher Fatka",
-  "Toor Daal Super-Mango Kesar", "Toordaal Classic",
-  "Udid Daal Black (Whole)", "Udiddaal Super-Royal Parivar",
-  "Udiddaal Classic", "Udiddaal Premium", "Chanadaal Polish-Dalparivar",
-  "Chana Dal-Kori Shriram", "Chandaal Kori-Gopal",
+  "Moth (Whole Moth Beans)", "Moth Daal Classic",
+  "Moth Daal Premium", "Toor Daal Premium",
+  "Toor Daal Super", "Toordaal Classic",
+  "Udid Daal Black (Whole)", "Udiddaal Super",
+  "Udiddaal Classic", "Udiddaal Premium", "Chanadaal Polish",
+  "Chana Dal", "Chandaal Kori",
 ];
 
 let dropdownMissing = 0;
@@ -252,6 +252,74 @@ const nextCfg = readFile("next.config.ts");
 nextCfg.includes("images.unsplash.com")
   ? pass("Unsplash remote pattern configured")
   : fail("Unsplash domain", "Missing from next.config.ts");
+
+// ── 12. INQUIRY NAVIGATION — BUTTONS → CORRECT FORM TAB ─────
+section("12 · Inquiry navigation — buttons open correct form tab");
+
+const navSrc = readFile("lib/inquiryNavigation.ts");
+const navbarSrc = readFile("components/layout/Navbar.tsx");
+const outletsSrc = readFile("components/sections/Outlets.tsx");
+
+navSrc.includes("export function navigateToInquiry")
+  ? pass("navigateToInquiry utility exported")
+  : fail("navigateToInquiry", "Missing from lib/inquiryNavigation.ts");
+
+navSrc.includes('INQUIRY_NAV_EVENT = "inquiry-navigate"')
+  ? pass("INQUIRY_NAV_EVENT defined")
+  : fail("INQUIRY_NAV_EVENT", "Missing inquiry navigation event");
+
+contactSrc.includes("INQUIRY_NAV_EVENT")
+  ? pass("Contact listens for inquiry navigation event")
+  : fail("Contact inquiry listener", "INQUIRY_NAV_EVENT not used in Contact.tsx");
+
+contactSrc.includes('setInquiryType("franchise")')
+  && contactSrc.includes('setInquiryType("bulk")')
+  ? pass("Contact switches bulk and franchise tabs")
+  : fail("Contact tab switching", "Missing setInquiryType handlers");
+
+heroSrc.includes('navigateToInquiry("bulk")')
+  ? pass('Hero "Get a Quote" opens bulk inquiry')
+  : fail("Hero bulk CTA", 'navigateToInquiry("bulk") not found in Hero.tsx');
+
+heroSrc.includes('navigateToInquiry("franchise")')
+  ? pass('Hero "Request Franchise" opens franchise form')
+  : fail("Hero franchise CTA", 'navigateToInquiry("franchise") not found in Hero.tsx');
+
+navbarSrc.includes('navigateToInquiry("bulk")')
+  ? pass('Navbar "Get a Quote" opens bulk inquiry')
+  : fail("Navbar bulk CTA", 'navigateToInquiry("bulk") not found in Navbar.tsx');
+
+showcaseSrc.includes('navigateToInquiry("bulk", { product: product.name })')
+  ? pass('"Request Spec Sheet" pre-selects product in bulk form')
+  : fail("Product spec sheet CTA", "Product pre-fill navigation missing");
+
+showcaseSrc.includes('navigateToInquiry("bulk")')
+  ? pass('"Request Custom Quote" opens bulk inquiry')
+  : fail("Custom quote CTA", 'navigateToInquiry("bulk") missing in ProductShowcase.tsx');
+
+outletsSrc.includes('navigateToInquiry("franchise")')
+  ? pass('Outlets "Request Franchise" opens franchise form')
+  : fail("Outlets franchise CTA", 'navigateToInquiry("franchise") not found in Outlets.tsx');
+
+outletsSrc.includes("ImageLightbox")
+  ? pass("Outlet carousel full-size lightbox present")
+  : fail("Outlet lightbox", "ImageLightbox not found in Outlets.tsx");
+
+outletsSrc.includes('carouselFit: "cover"')
+  ? pass("Shop 1 carousel uses cover fit to avoid side letterboxing")
+  : fail("Shop 1 carousel fit", 'carouselFit: "cover" not found for Shop 1');
+
+outletsSrc.includes("object-contain")
+  ? pass("Lightbox still uses object-contain for full-size viewing")
+  : fail("Lightbox image fit", "object-contain not found in Outlets.tsx");
+
+aboutSrc.includes('navigateToInquiry("franchise")')
+  ? pass('"Partner With Us" opens franchise form')
+  : fail("About partner CTA", 'navigateToInquiry("franchise") not found in About.tsx');
+
+footerSrc.includes("navigateToInquiry")
+  ? pass("Footer contact links use inquiry navigation")
+  : fail("Footer inquiry links", "navigateToInquiry not found in Footer.tsx");
 
 // ── SUMMARY ───────────────────────────────────────────────────
 console.log(`\n${"═".repeat(60)}`);

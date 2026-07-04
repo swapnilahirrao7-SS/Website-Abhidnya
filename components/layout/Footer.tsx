@@ -7,6 +7,7 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import { navigateToInquiry, type InquiryType } from "@/lib/inquiryNavigation";
 
 const footerLinks = {
   company: [
@@ -14,7 +15,7 @@ const footerLinks = {
     { label: "Our Story", href: "#about" },
     { label: "Certifications", href: "#quality" },
     { label: "Sustainability", href: "#about" },
-    { label: "Careers", href: "#contact" },
+    { label: "Careers", href: "#contact", inquiry: "bulk" as InquiryType },
   ],
   products: [
     { label: "Pulses & Lentils", href: "#products" },
@@ -24,16 +25,21 @@ const footerLinks = {
     { label: "Organic Range", href: "#products" },
   ],
   support: [
-    { label: "Bulk Orders", href: "#contact" },
-    { label: "B2B Inquiries", href: "#contact" },
-    { label: "Export Queries", href: "#contact" },
-    { label: "Quality Reports", href: "#contact" },
-    { label: "FAQs", href: "#contact" },
+    { label: "Bulk Orders", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "B2B Inquiries", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "Export Queries", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "Quality Reports", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "FAQs", href: "#contact", inquiry: "bulk" as InquiryType },
   ],
 };
 
 export default function Footer() {
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, inquiry?: InquiryType) => {
+    if (href === "#contact" && inquiry) {
+      navigateToInquiry(inquiry);
+      return;
+    }
+
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -133,7 +139,7 @@ export default function Footer() {
                 {links.map((link) => (
                   <li key={link.label}>
                     <button
-                      onClick={() => handleNavClick(link.href)}
+                      onClick={() => handleNavClick(link.href, "inquiry" in link ? link.inquiry : undefined)}
                       className="text-sm text-white/55 hover:text-accent transition-colors text-left"
                     >
                       {link.label}

@@ -3,7 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Sprout, Globe, Leaf } from "lucide-react";
+import { ChevronDown, Sprout, Globe, Leaf, Store, Handshake, Package, Mail } from "lucide-react";
+import { navigateToInquiry } from "@/lib/inquiryNavigation";
 
 function useCountUp(target: number, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
@@ -53,6 +54,14 @@ export default function Hero() {
 
   const handleScroll = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleFranchiseClick = () => {
+    navigateToInquiry("franchise");
+  };
+
+  const handleBulkInquiryClick = () => {
+    navigateToInquiry("bulk");
   };
 
   return (
@@ -137,6 +146,7 @@ export default function Hero() {
               { icon: Sprout, text: "Farm-Direct Sourcing" },
               { icon: Globe, text: "Exporting to Dubai" },
               { icon: Leaf, text: "35+ Premium Products" },
+              { icon: Store, text: "2 Outlets" },
             ].map(({ icon: Icon, text }, i) => (
               <motion.div
                 key={text}
@@ -146,11 +156,25 @@ export default function Hero() {
                 whileHover={{ scale: 1.08, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 style={{ willChange: "transform" }}
-                className="relative flex items-center gap-2 cursor-default overflow-hidden
+                onClick={text === "2 Outlets" ? () => handleScroll("#outlets") : undefined}
+                role={text === "2 Outlets" ? "button" : undefined}
+                tabIndex={text === "2 Outlets" ? 0 : undefined}
+                onKeyDown={
+                  text === "2 Outlets"
+                    ? (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleScroll("#outlets");
+                        }
+                      }
+                    : undefined
+                }
+                className={`relative flex items-center gap-2 overflow-hidden
                   bg-white/10 backdrop-blur-md border border-white/30 rounded-full px-4 py-2
                   text-white text-sm font-semibold
                   hover:bg-white/20 hover:border-yellow-300/60 hover:shadow-[0_0_18px_rgba(251,191,36,0.35)]
-                  transition-[background-color,border-color,box-shadow] duration-150 group"
+                  transition-[background-color,border-color,box-shadow] duration-150 group
+                  ${text === "2 Outlets" ? "cursor-pointer" : "cursor-default"}`}
               >
                 {/* Animated shimmer sweep */}
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full
@@ -189,14 +213,22 @@ export default function Hero() {
               onClick={() => handleScroll("#products")}
               className="btn-amber text-base px-8 py-4 shadow-2xl"
             >
+              <Package className="w-5 h-5" />
               Explore Our Range
-              <ArrowRight className="w-5 h-5" />
             </button>
             <button
-              onClick={() => handleScroll("#contact")}
+              onClick={handleBulkInquiryClick}
               className="btn-outline text-base px-8 py-4"
             >
+              <Mail className="w-5 h-5" />
               Get a Quote
+            </button>
+            <button
+              onClick={handleFranchiseClick}
+              className="btn-outline text-base px-8 py-4"
+            >
+              <Handshake className="w-5 h-5" />
+              Request Franchise
             </button>
           </motion.div>
 

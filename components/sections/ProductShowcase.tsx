@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Star, Leaf, CheckCircle2 } from "lucide-react";
+import { navigateToInquiry } from "@/lib/inquiryNavigation";
 
 type Category = "All" | "Pulses" | "Grains";
 
@@ -308,7 +309,7 @@ const products: Product[] = [
   },
   {
     id: "moth-classic-khada",
-    name: "Moth Daal Classic-Khada",
+    name: "Moth Daal Classic",
     category: "Pulses",
     image: "/products/moth-classic-khada.png",
     badge: "Classic Grade",
@@ -320,7 +321,7 @@ const products: Product[] = [
   },
   {
     id: "moth-premium-ganpati",
-    name: "Moth Daal Premium-Ganpati Khada",
+    name: "Moth Daal Premium",
     category: "Pulses",
     image: "/products/moth-premium-ganpati.png",
     badge: "Premium Grade",
@@ -332,7 +333,7 @@ const products: Product[] = [
   },
   {
     id: "toor-leher-fatka",
-    name: "Toor Daal Premium-Leher Fatka",
+    name: "Toor Daal Premium",
     category: "Pulses",
     image: "/products/toor-leher-fatka.png",
     badge: "Best Seller",
@@ -345,7 +346,7 @@ const products: Product[] = [
   },
   {
     id: "toor-mango-kesar",
-    name: "Toor Daal Super-Mango Kesar",
+    name: "Toor Daal Super",
     category: "Pulses",
     image: "/products/toor-mango-kesar.png",
     badge: "Super Grade",
@@ -381,7 +382,7 @@ const products: Product[] = [
   },
   {
     id: "udid-super-royal",
-    name: "Udiddaal Super-Royal Parivar",
+    name: "Udiddaal Super",
     category: "Pulses",
     image: "/products/udid-super-royal.png",
     badge: "Super Royal",
@@ -418,7 +419,7 @@ const products: Product[] = [
   },
   {
     id: "chana-dal-polish",
-    name: "Chanadaal Polish-Dalparivar",
+    name: "Chanadaal Polish",
     category: "Pulses",
     image: "/products/chana-dal-polish.png",
     badge: "Polished Grade",
@@ -430,7 +431,7 @@ const products: Product[] = [
   },
   {
     id: "chana-dal-shriram",
-    name: "Chana Dal-Kori Shriram",
+    name: "Chana Dal",
     category: "Pulses",
     image: "/products/chana-dal-shriram.png",
     badge: "Kori Grade",
@@ -442,7 +443,7 @@ const products: Product[] = [
   },
   {
     id: "chana-dal-gopal",
-    name: "Chandaal Kori-Gopal",
+    name: "Chandaal Kori",
     category: "Pulses",
     image: "/products/chana-dal-gopal.png",
     badge: "Kori Grade",
@@ -560,9 +561,7 @@ function ProductCard({ product }: { product: Product }) {
           className="absolute bottom-3 inset-x-3"
         >
           <button
-            onClick={() =>
-              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => navigateToInquiry("bulk", { product: product.name })}
             className="w-full flex items-center justify-center gap-2 bg-white text-primary
               font-semibold text-sm rounded-xl py-2.5 hover:bg-primary hover:text-white
               transition-colors duration-200"
@@ -697,7 +696,7 @@ export default function ProductShowcase() {
             Looking for a specific grade, packaging, or custom specification?
           </p>
           <button
-            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => navigateToInquiry("bulk")}
             className="btn-primary"
           >
             <Leaf className="w-4 h-4" />

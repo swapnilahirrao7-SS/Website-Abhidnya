@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import {
@@ -14,7 +14,15 @@ import {
   User,
   MessageSquare,
   Package,
+  Handshake,
 } from "lucide-react";
+import {
+  clearInquiryNavigation,
+  INQUIRY_NAV_EVENT,
+  readInquiryNavigation,
+  type InquiryNavigateDetail,
+  type InquiryType,
+} from "@/lib/inquiryNavigation";
 
 const productGroups: { label: string; options: string[] }[] = [
   {
@@ -48,18 +56,18 @@ const productGroups: { label: string; options: string[] }[] = [
       "Masoor Daal Classic",
       "Masoor Dal Premium",
       "Moth (Whole Moth Beans)",
-      "Moth Daal Classic-Khada",
-      "Moth Daal Premium-Ganpati Khada",
-      "Toor Daal Premium-Leher Fatka",
-      "Toor Daal Super-Mango Kesar",
+      "Moth Daal Classic",
+      "Moth Daal Premium",
+      "Toor Daal Premium",
+      "Toor Daal Super",
       "Toordaal Classic",
       "Udid Daal Black (Whole)",
-      "Udiddaal Super-Royal Parivar",
+      "Udiddaal Super",
       "Udiddaal Classic",
       "Udiddaal Premium",
-      "Chanadaal Polish-Dalparivar",
-      "Chana Dal-Kori Shriram",
-      "Chandaal Kori-Gopal",
+      "Chanadaal Polish",
+      "Chana Dal",
+      "Chandaal Kori",
     ],
   },
   {
@@ -89,6 +97,7 @@ const initialForm: FormState = {
 };
 
 export default function Contact() {
+  const [inquiryType, setInquiryType] = useState<InquiryType>("bulk");
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -97,8 +106,45 @@ export default function Contact() {
   const isFormValid =
     form.name.trim() !== "" &&
     form.email.trim() !== "" &&
-    form.product !== "" &&
-    form.message.trim() !== "";
+    form.message.trim() !== "" &&
+    (inquiryType === "franchise" || form.product.trim() !== "");
+
+  useEffect(() => {
+    const applyInquiryNavigation = (detail: InquiryNavigateDetail | null) => {
+      if (!detail) return;
+
+      setSubmitted(false);
+
+      if (detail.type === "franchise") {
+        setInquiryType("franchise");
+        setForm((prev) => ({
+          ...prev,
+          product: "",
+          message:
+            prev.message.trim() === ""
+              ? "I am interested in opening an Abhidnya Agro franchise outlet. Please share details on requirements, investment, and support."
+              : prev.message,
+        }));
+      } else {
+        setInquiryType("bulk");
+        if (detail.product) {
+          setForm((prev) => ({ ...prev, product: detail.product! }));
+        }
+      }
+
+      clearInquiryNavigation();
+    };
+
+    applyInquiryNavigation(readInquiryNavigation());
+
+    const handleInquiryNavigate = (event: Event) => {
+      const customEvent = event as CustomEvent<InquiryNavigateDetail>;
+      applyInquiryNavigation(customEvent.detail);
+    };
+
+    window.addEventListener(INQUIRY_NAV_EVENT, handleInquiryNavigate);
+    return () => window.removeEventListener(INQUIRY_NAV_EVENT, handleInquiryNavigate);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -124,9 +170,9 @@ export default function Contact() {
           company:   form.company,
           reply_to:  form.email,
           phone:     form.phone || "Not provided",
-          product:   form.product,
+          product:   inquiryType === "franchise" ? "Franchise Inquiry" : form.product,
           quantity:  form.quantity || "Not specified",
-          message:   form.message,
+          message:   `[${inquiryType === "franchise" ? "Franchise Request" : "Bulk Inquiry"}]\n${form.message}`,
         },
         publicKey,
       );
@@ -154,14 +200,14 @@ export default function Contact() {
             id="contact-heading"
             className="font-display text-4xl lg:text-5xl font-extrabold text-gray-900 mb-5"
           >
-            Start Your{" "}
+            Bulk Enquiries &{" "}
             <span className="bg-gradient-to-r from-primary to-forest-mid bg-clip-text text-transparent">
-              Bulk Inquiry
+              Franchise Requests
             </span>
           </h2>
           <p className="text-gray-500 text-lg leading-relaxed">
-            Whether you&apos;re a retailer, food brand, distributor, or export house —
-            we can fulfill custom grades, packaging, and certifications.
+            Order premium grains and pulses in bulk, or partner with us to open
+            an Abhidnya Agro outlet — our team responds within 4 business hours.
           </p>
         </motion.div>
 
@@ -253,8 +299,8 @@ export default function Contact() {
                 We respond within 4 business hours
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
-                Our dedicated B2B sales team reviews every inquiry personally to provide
-                the most accurate quotation, including custom packaging and certification options.
+                Our team reviews every bulk order and franchise application personally —
+                from custom packaging and grades to outlet setup guidance and ongoing support.
               </p>
             </div>
           </motion.div>
@@ -278,24 +324,62 @@ export default function Contact() {
                     <CheckCircle className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="font-display font-bold text-gray-900 text-2xl mb-3">
-                    Inquiry Received!
+                    {inquiryType === "franchise" ? "Franchise Request Received!" : "Inquiry Received!"}
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed max-w-sm mx-auto mb-6">
-                    Thank you for reaching out. Our team will review your requirements and
+                    Thank you for reaching out. Our team will review your{" "}
+                    {inquiryType === "franchise" ? "franchise application" : "requirements"} and
                     get back to you within 4 business hours.
                   </p>
                   <button
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setForm(initialForm);
+                    }}
                     className="text-primary text-sm font-semibold hover:underline"
                   >
-                    Submit another inquiry
+                    Submit another request
                   </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                  {/* Inquiry type toggle */}
+                  <div className="grid grid-cols-2 gap-2 p-1.5 bg-gray-100 rounded-2xl">
+                    <button
+                      type="button"
+                      onClick={() => setInquiryType("bulk")}
+                      className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 ${
+                        inquiryType === "bulk"
+                          ? "bg-white text-primary shadow-sm ring-1 ring-primary/10"
+                          : "text-gray-500 hover:text-gray-700"
+                      }`}
+                    >
+                      <Package className="w-4 h-4" />
+                      Bulk Inquiry
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setInquiryType("franchise")}
+                      className={`flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200 ${
+                        inquiryType === "franchise"
+                          ? "bg-white text-primary shadow-sm ring-1 ring-primary/10"
+                          : "text-gray-500 hover:text-gray-700"
+                      }`}
+                    >
+                      <Handshake className="w-4 h-4" />
+                      Franchise Request
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-gray-500 leading-relaxed -mt-1">
+                    {inquiryType === "bulk"
+                      ? "Tell us about the products, grades, and quantities you need for wholesale or export."
+                      : "Share your preferred location and interest — we'll guide you through franchise requirements and support."}
+                  </p>
+
                   <div className="grid sm:grid-cols-2 gap-5">
                     {/* Name */}
-                    <div>
+                    <div className={inquiryType === "franchise" ? "sm:col-span-2" : ""}>
                       <label htmlFor="name" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
                         Full Name <span className="text-red-400">*</span>
                       </label>
@@ -316,26 +400,28 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* Company */}
-                    <div>
-                      <label htmlFor="company" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                        Company / Business
-                      </label>
-                      <div className="relative">
-                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                        <input
-                          id="company"
-                          name="company"
-                          type="text"
-                          value={form.company}
-                          onChange={handleChange}
-                          placeholder="Company or trade name"
-                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
-                            text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
-                            focus:ring-primary/25 focus:border-primary transition-colors"
-                        />
+                    {/* Company — bulk inquiries only */}
+                    {inquiryType === "bulk" && (
+                      <div>
+                        <label htmlFor="company" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                          Company / Business
+                        </label>
+                        <div className="relative">
+                          <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <input
+                            id="company"
+                            name="company"
+                            type="text"
+                            value={form.company}
+                            onChange={handleChange}
+                            placeholder="Company or trade name"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                              text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                              focus:ring-primary/25 focus:border-primary transition-colors"
+                          />
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
@@ -384,58 +470,100 @@ export default function Contact() {
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
-                    {/* Product Interest */}
-                    <div>
-                      <label htmlFor="product" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                        Product Interest <span className="text-red-400">*</span>
-                      </label>
-                      <div className="relative">
-                        <Package className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-                        <select
-                          id="product"
-                          name="product"
-                          required
-                          value={form.product}
-                          onChange={handleChange}
-                          className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
-                            text-gray-800 appearance-none focus:outline-none focus:ring-2
-                            focus:ring-primary/25 focus:border-primary transition-colors"
-                        >
-                          <option value="">Select a product</option>
-                          {productGroups.map((group) => (
-                            <optgroup key={group.label} label={group.label}>
-                              {group.options.map((p) => (
-                                <option key={p} value={p}>{p}</option>
+                    {inquiryType === "bulk" ? (
+                      <>
+                        <div>
+                          <label htmlFor="product" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                            Product Interest <span className="text-red-400">*</span>
+                          </label>
+                          <div className="relative">
+                            <Package className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                            <select
+                              id="product"
+                              name="product"
+                              required
+                              value={form.product}
+                              onChange={handleChange}
+                              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                                text-gray-800 appearance-none focus:outline-none focus:ring-2
+                                focus:ring-primary/25 focus:border-primary transition-colors"
+                            >
+                              <option value="">Select a product</option>
+                              {productGroups.map((group) => (
+                                <optgroup key={group.label} label={group.label}>
+                                  {group.options.map((p) => (
+                                    <option key={p} value={p}>{p}</option>
+                                  ))}
+                                </optgroup>
                               ))}
-                            </optgroup>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Quantity */}
-                    <div>
-                      <label htmlFor="quantity" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                        Quantity (Metric Tons)
-                      </label>
-                      <input
-                        id="quantity"
-                        name="quantity"
-                        type="text"
-                        value={form.quantity}
-                        onChange={handleChange}
-                        placeholder="e.g. 5 MT, 1 container"
-                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm
-                          text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
-                          focus:ring-primary/25 focus:border-primary transition-colors"
-                      />
-                    </div>
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                          <label htmlFor="quantity" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                            Quantity (Metric Tons)
+                          </label>
+                          <input
+                            id="quantity"
+                            name="quantity"
+                            type="text"
+                            value={form.quantity}
+                            onChange={handleChange}
+                            placeholder="e.g. 5 MT, 1 container"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm
+                              text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                              focus:ring-primary/25 focus:border-primary transition-colors"
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div>
+                          <label htmlFor="quantity" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                            Preferred City / Location
+                          </label>
+                          <div className="relative">
+                            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <input
+                              id="quantity"
+                              name="quantity"
+                              type="text"
+                              value={form.quantity}
+                              onChange={handleChange}
+                              placeholder="e.g. Nashik, Pune, Satana"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                                text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                                focus:ring-primary/25 focus:border-primary transition-colors"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label htmlFor="company" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                            Business / Retail Experience
+                          </label>
+                          <div className="relative">
+                            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <input
+                              id="company"
+                              name="company"
+                              type="text"
+                              value={form.company}
+                              onChange={handleChange}
+                              placeholder="e.g. Kirana store, distributor"
+                              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
+                                text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
+                                focus:ring-primary/25 focus:border-primary transition-colors"
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
-                  {/* Message */}
                   <div>
                     <label htmlFor="message" className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
-                      Message / Requirements <span className="text-red-400">*</span>
+                      {inquiryType === "franchise" ? "Tell Us About Your Interest" : "Message / Requirements"}{" "}
+                      <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
                       <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
@@ -446,7 +574,11 @@ export default function Contact() {
                         required
                         value={form.message}
                         onChange={handleChange}
-                        placeholder="Tell us about your requirements — grade, packaging, delivery location, certification needs, etc."
+                        placeholder={
+                          inquiryType === "franchise"
+                            ? "Preferred outlet size, investment capacity, timeline, and any questions about franchise support..."
+                            : "Tell us about your requirements — grade, packaging, delivery location, certification needs, etc."
+                        }
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
                           text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2
                           focus:ring-primary/25 focus:border-primary transition-colors resize-none"
@@ -468,7 +600,12 @@ export default function Contact() {
                     {loading ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending Inquiry...
+                        Sending...
+                      </>
+                    ) : inquiryType === "franchise" ? (
+                      <>
+                        <Handshake className="w-5 h-5" />
+                        Submit Franchise Request
                       </>
                     ) : (
                       <>
@@ -479,7 +616,9 @@ export default function Contact() {
                   </button>
                   {!isFormValid && (
                     <p className="text-center text-xs text-gray-400">
-                      Please fill in Full Name, Email, Product Interest and Requirements to continue.
+                      {inquiryType === "franchise"
+                        ? "Please fill in Full Name, Email, and your franchise interest to continue."
+                        : "Please fill in Full Name, Email, Product Interest and Requirements to continue."}
                     </p>
                   )}
                   {isFormValid && (

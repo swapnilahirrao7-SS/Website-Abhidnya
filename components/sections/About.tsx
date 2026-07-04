@@ -12,6 +12,8 @@ import {
   Globe,
   Warehouse,
 } from "lucide-react";
+import { navigateToInquiry } from "@/lib/inquiryNavigation";
+import WaveDivider from "@/components/WaveDivider";
 
 const milestones = [
   { year: "2022", event: "Founded in Nashik with a vision to modernize agro processing", icon: Sprout, color: "bg-emerald-500", glow: "shadow-emerald-500/40" },
@@ -30,23 +32,23 @@ const commitments = [
 
 export default function About() {
   return (
-    <section id="about" className="section-pad bg-white overflow-hidden relative" aria-labelledby="about-heading">
-      {/* Gradient orbs */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          animate={{ x: [0, 20, 0], y: [0, -30, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full bg-emerald-50 opacity-60 blur-3xl"
-        />
-        <motion.div
-          animate={{ x: [0, -25, 0], y: [0, 20, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-          className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-amber-50 opacity-50 blur-3xl"
-        />
-      </div>
-      <div className="section-container relative">
-        {/* Top row: split layout */}
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center mb-24">
+    <section id="about" aria-labelledby="about-heading">
+      {/* Our Heritage — cream */}
+      <div className="section-pad bg-cream overflow-hidden relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div
+            animate={{ x: [0, 20, 0], y: [0, -30, 0] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-emerald-50 opacity-30 blur-3xl"
+          />
+          <motion.div
+            animate={{ x: [0, -25, 0], y: [0, 20, 0] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+            className="absolute -bottom-16 -right-16 w-[320px] h-[320px] rounded-full bg-amber-50 opacity-25 blur-3xl"
+          />
+        </div>
+        <div className="section-container relative">
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           {/* Left: Modern Imagery */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -143,7 +145,7 @@ export default function About() {
             </div>
 
             <button
-              onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => navigateToInquiry("franchise")}
               className="btn-primary"
             >
               Partner With Us
@@ -151,7 +153,14 @@ export default function About() {
             </button>
           </motion.div>
         </div>
+      </div>
+      </div>
 
+      <WaveDivider topColor="#f8f4ef" bottomColor="#ffffff" />
+
+      {/* Our Journey — white */}
+      <div className="section-pad bg-white overflow-hidden relative">
+        <div className="section-container relative">
         {/* Timeline section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -269,6 +278,7 @@ export default function About() {
             </div>
           ))}
         </motion.div>
+      </div>
       </div>
     </section>
   );
