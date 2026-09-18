@@ -7,11 +7,6 @@
     "nodejs_compat",
     "global_fetch_strictly_public"
   ],
-  // Paid Workers only — Free plan is capped at 10ms and ignores higher values.
-  // Helps cold starts if you are on Workers Paid.
-  "limits": {
-    "cpu_ms": 30000
-  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
