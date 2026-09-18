@@ -8,6 +8,8 @@ import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 import WaveDivider from "@/components/WaveDivider";
 
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <>
