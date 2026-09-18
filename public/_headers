@@ -3,3 +3,6 @@
 
 /products/*
   Cache-Control: public, max-age=31536000, immutable
+
+/outlets/*
+  Cache-Control: public, max-age=31536000, immutable

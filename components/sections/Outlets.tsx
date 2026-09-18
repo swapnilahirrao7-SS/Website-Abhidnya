@@ -41,13 +41,13 @@ const outlets: Outlet[] = [
     carouselFit: "cover",
     slides: [
       {
-        src: "/outlets/shop-1/shop-1-1.png",
+        src: "/outlets/shop-1/shop-1-1.webp",
         alt: "Shop 1 storefront at Khutwad Nagar, Nashik",
         objectPosition: "top",
       },
-      { src: "/outlets/shop-1/shop-1-2.png", alt: "Shop 1 interior — packaged grains on shelves", objectPosition: "center" },
-      { src: "/outlets/shop-1/shop-1-3.png", alt: "Shop 1 interior — bulk bins and product display", objectPosition: "center" },
-      { src: "/outlets/shop-1/shop-1-4.png", alt: "Shop 1 interior — wide aisle with grains and pulses", objectPosition: "center" },
+      { src: "/outlets/shop-1/shop-1-2.webp", alt: "Shop 1 interior — packaged grains on shelves", objectPosition: "center" },
+      { src: "/outlets/shop-1/shop-1-3.webp", alt: "Shop 1 interior — bulk bins and product display", objectPosition: "center" },
+      { src: "/outlets/shop-1/shop-1-4.webp", alt: "Shop 1 interior — wide aisle with grains and pulses", objectPosition: "center" },
     ],
   },
   {
@@ -57,12 +57,12 @@ const outlets: Outlet[] = [
     tagline: "Wholesale & retail — premium farm-direct grains and dal",
     slides: [
       {
-        src: "/outlets/shop-2/shop-2-1.png",
+        src: "/outlets/shop-2/shop-2-1.webp",
         alt: "Shop 2 storefront at Nampur Road, Satana",
         objectPosition: "top",
       },
-      { src: "/outlets/shop-2/shop-2-2.png", alt: "Shop 2 interior — branded product shelves" },
-      { src: "/outlets/shop-2/shop-2-3.png", alt: "Shop 2 interior — bulk bins and retail counter" },
+      { src: "/outlets/shop-2/shop-2-2.webp", alt: "Shop 2 interior — branded product shelves" },
+      { src: "/outlets/shop-2/shop-2-3.webp", alt: "Shop 2 interior — bulk bins and retail counter" },
     ],
   },
 ];
@@ -168,6 +168,7 @@ function ImageLightbox({
               src={slide.src}
               alt={slide.alt}
               fill
+              unoptimized
               className="object-contain"
               style={{ objectPosition: slide.objectPosition ?? "center" }}
               sizes="100vw"
@@ -222,6 +223,7 @@ function OutletCarousel({ outlet }: { outlet: Outlet }) {
                 src={currentSlide.src}
                 alt={currentSlide.alt}
                 fill
+                unoptimized
                 className={carouselImageClass(carouselFit)}
                 style={{ objectPosition: currentSlide.objectPosition ?? "center" }}
                 sizes="(max-width: 768px) 100vw, 50vw"
