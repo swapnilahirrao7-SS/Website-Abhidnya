@@ -34,7 +34,7 @@ const products: Product[] = [
     id: "wheat",
     name: "Wheat",
     category: "Grains",
-    image: "/products/wheat.png",
+    image: "/products/wheat.webp",
     badge: "Export Grade",
     grade: "Grade A",
     description:
@@ -47,7 +47,7 @@ const products: Product[] = [
     id: "bajari",
     name: "Bajari (Pearl Millet)",
     category: "Grains",
-    image: "/products/bajari.png",
+    image: "/products/bajari.webp",
     badge: "Gluten-Free",
     grade: "Grade A",
     description:
@@ -59,7 +59,7 @@ const products: Product[] = [
     id: "jawari",
     name: "Jawari (Sorghum)",
     category: "Grains",
-    image: "/products/jawari.png",
+    image: "/products/jawari.webp",
     badge: "Gluten-Free",
     grade: "Grade A",
     description:
@@ -71,7 +71,7 @@ const products: Product[] = [
     id: "harbhara",
     name: "Harbhara (Desi Chana)",
     category: "Pulses",
-    image: "/products/harbhara.png",
+    image: "/products/harbhara.webp",
     badge: "Local Favourite",
     grade: "Premium Grade",
     description:
@@ -83,7 +83,7 @@ const products: Product[] = [
     id: "kabuli-chana",
     name: "Kabuli Chana (White Chickpeas)",
     category: "Pulses",
-    image: "/products/kabuli-chana.png",
+    image: "/products/kabuli-chana.webp",
     badge: "Export Grade",
     grade: "Super Grade",
     description:
@@ -96,7 +96,7 @@ const products: Product[] = [
     id: "indrayani",
     name: "Indrayani Rice",
     category: "Grains",
-    image: "/products/indrayani-v2.png",
+    image: "/products/indrayani-v2.webp",
     badge: "Maharashtra Special",
     grade: "Premium Grade",
     description:
@@ -109,7 +109,7 @@ const products: Product[] = [
     id: "indrayani-pimpalner",
     name: "Indrayani Pimpalner Rice",
     category: "Grains",
-    image: "/products/indrayani-pimpalner-v2.png",
+    image: "/products/indrayani-pimpalner-v2.webp",
     badge: "Superior Variety",
     grade: "Premium Grade",
     description:
@@ -122,7 +122,7 @@ const products: Product[] = [
     id: "wada-kolam",
     name: "Wada Kolam Rice",
     category: "Grains",
-    image: "/products/wada-kolam-v2.png",
+    image: "/products/wada-kolam-v2.webp",
     badge: "Fine Grain",
     grade: "Grade A",
     description:
@@ -134,7 +134,7 @@ const products: Product[] = [
     id: "surti-kolam",
     name: "Surti Kolam Rice",
     category: "Grains",
-    image: "/products/surti-kolam-v2.png",
+    image: "/products/surti-kolam-v2.webp",
     badge: "Fine Grain",
     grade: "Grade A",
     description:
@@ -146,7 +146,7 @@ const products: Product[] = [
     id: "flying-horse-basmati",
     name: "Flying Horse Basmati",
     category: "Grains",
-    image: "/products/flying-horse-basmati.png",
+    image: "/products/flying-horse-basmati.webp",
     badge: "Premium Brand",
     grade: "Premium Grade",
     description:
@@ -159,7 +159,7 @@ const products: Product[] = [
     id: "indian-basmati",
     name: "Indian Basmati Rice",
     category: "Grains",
-    image: "/products/indian-basmati.png",
+    image: "/products/indian-basmati.webp",
     badge: "GI Tagged",
     grade: "Standard Grade",
     description:
@@ -171,7 +171,7 @@ const products: Product[] = [
     id: "brown-sella-basmati",
     name: "Brown Sella Basmati",
     category: "Grains",
-    image: "/products/brown-sella-basmati.png",
+    image: "/products/brown-sella-basmati.webp",
     badge: "Parboiled",
     grade: "Sella Grade",
     description:
@@ -183,7 +183,7 @@ const products: Product[] = [
     id: "white-sella-basmati",
     name: "White Sella Basmati",
     category: "Grains",
-    image: "/products/white-sella-basmati.png",
+    image: "/products/white-sella-basmati.webp",
     badge: "Parboiled",
     grade: "Sella Grade",
     description:
@@ -195,7 +195,7 @@ const products: Product[] = [
     id: "zafarani-basmati",
     name: "Zafarani Basmati",
     category: "Grains",
-    image: "/products/zafarani-basmati.png",
+    image: "/products/zafarani-basmati.webp",
     badge: "Luxury Grade",
     grade: "Extra Premium",
     description:
@@ -212,7 +212,7 @@ const products: Product[] = [
     id: "moong",
     name: "Moong (Whole Green Gram)",
     category: "Pulses",
-    image: "/products/moong-whole.png",
+    image: "/products/moong-whole.webp",
     badge: "Organic",
     grade: "Premium Grade",
     description:
@@ -225,7 +225,7 @@ const products: Product[] = [
     id: "moongdaal-super",
     name: "Moongdaal Super",
     category: "Pulses",
-    image: "/products/moongdaal-super.png",
+    image: "/products/moongdaal-super.webp",
     badge: "Best Seller",
     grade: "Super Grade",
     description:
@@ -238,7 +238,7 @@ const products: Product[] = [
     id: "moongdaal-classic",
     name: "Moongdaal Classic",
     category: "Pulses",
-    image: "/products/moongdaal-classic.png",
+    image: "/products/moongdaal-classic.webp",
     badge: "Classic Grade",
     grade: "Classic Grade",
     description:
@@ -250,7 +250,7 @@ const products: Product[] = [
     id: "moongdaal-premium",
     name: "Moongdaal Premium",
     category: "Pulses",
-    image: "/products/moongdaal-premium.png",
+    image: "/products/moongdaal-premium.webp",
     badge: "Premium Grade",
     grade: "Premium Grade",
     description:
@@ -262,7 +262,7 @@ const products: Product[] = [
     id: "moongdaal-saal",
     name: "Moongdaal Saal",
     category: "Pulses",
-    image: "/products/moongdaal-saal.png",
+    image: "/products/moongdaal-saal.webp",
     badge: "Annual Stock",
     grade: "Grade A",
     description:
@@ -274,7 +274,7 @@ const products: Product[] = [
     id: "masoor-classic",
     name: "Masoor Daal Classic",
     category: "Pulses",
-    image: "/products/masoor-classic.png",
+    image: "/products/masoor-classic.webp",
     badge: "Classic Grade",
     grade: "Classic Grade",
     description:
@@ -287,7 +287,7 @@ const products: Product[] = [
     id: "masoor-premium",
     name: "Masoor Dal Premium",
     category: "Pulses",
-    image: "/products/masoor-premium.png",
+    image: "/products/masoor-premium.webp",
     badge: "Premium Grade",
     grade: "Premium Grade A",
     description:
@@ -299,7 +299,7 @@ const products: Product[] = [
     id: "moth",
     name: "Moth (Whole Moth Beans)",
     category: "Pulses",
-    image: "/products/moth-whole.png",
+    image: "/products/moth-whole.webp",
     badge: "Traditional",
     grade: "Grade A",
     description:
@@ -311,7 +311,7 @@ const products: Product[] = [
     id: "moth-classic-khada",
     name: "Moth Daal Classic",
     category: "Pulses",
-    image: "/products/moth-classic-khada.png",
+    image: "/products/moth-classic-khada.webp",
     badge: "Classic Grade",
     grade: "Classic Grade",
     description:
@@ -323,7 +323,7 @@ const products: Product[] = [
     id: "moth-premium-ganpati",
     name: "Moth Daal Premium",
     category: "Pulses",
-    image: "/products/moth-premium-ganpati.png",
+    image: "/products/moth-premium-ganpati.webp",
     badge: "Premium Grade",
     grade: "Premium Grade",
     description:
@@ -335,7 +335,7 @@ const products: Product[] = [
     id: "toor-leher-fatka",
     name: "Toor Daal Premium",
     category: "Pulses",
-    image: "/products/toor-leher-fatka.png",
+    image: "/products/toor-leher-fatka.webp",
     badge: "Best Seller",
     grade: "Premium Grade",
     description:
@@ -348,7 +348,7 @@ const products: Product[] = [
     id: "toor-mango-kesar",
     name: "Toor Daal Super",
     category: "Pulses",
-    image: "/products/toor-mango-kesar.png",
+    image: "/products/toor-mango-kesar.webp",
     badge: "Super Grade",
     grade: "Super Grade",
     description:
@@ -360,7 +360,7 @@ const products: Product[] = [
     id: "toor-classic",
     name: "Toordaal Classic",
     category: "Pulses",
-    image: "/products/toor-classic.png",
+    image: "/products/toor-classic.webp",
     badge: "Classic Grade",
     grade: "Classic Grade",
     description:
@@ -372,7 +372,7 @@ const products: Product[] = [
     id: "udid-black",
     name: "Udid Daal Black (Whole)",
     category: "Pulses",
-    image: "/products/udid-black.png",
+    image: "/products/udid-black.webp",
     badge: "Whole Black",
     grade: "Grade A",
     description:
@@ -384,7 +384,7 @@ const products: Product[] = [
     id: "udid-super-royal",
     name: "Udiddaal Super",
     category: "Pulses",
-    image: "/products/udid-super-royal.png",
+    image: "/products/udid-super-royal.webp",
     badge: "Super Grade",
     grade: "Super Grade",
     description:
@@ -397,7 +397,7 @@ const products: Product[] = [
     id: "udid-classic",
     name: "Udiddaal Classic",
     category: "Pulses",
-    image: "/products/udid-classic.png",
+    image: "/products/udid-classic.webp",
     badge: "Classic Grade",
     grade: "Classic Grade",
     description:
@@ -409,7 +409,7 @@ const products: Product[] = [
     id: "udid-premium",
     name: "Udiddaal Premium",
     category: "Pulses",
-    image: "/products/udid-premium.png",
+    image: "/products/udid-premium.webp",
     badge: "Premium Grade",
     grade: "Premium Grade",
     description:
@@ -421,7 +421,7 @@ const products: Product[] = [
     id: "chana-dal-polish",
     name: "Chanadaal Polish",
     category: "Pulses",
-    image: "/products/chana-dal-polish.png",
+    image: "/products/chana-dal-polish.webp",
     badge: "Polished Grade",
     grade: "Polished Grade",
     description:
@@ -433,7 +433,7 @@ const products: Product[] = [
     id: "chana-dal-shriram",
     name: "Chana Dal",
     category: "Pulses",
-    image: "/products/chana-dal-shriram.png",
+    image: "/products/chana-dal-shriram.webp",
     badge: "Kori Grade",
     grade: "Kori Grade",
     description:
@@ -445,7 +445,7 @@ const products: Product[] = [
     id: "chana-dal-gopal",
     name: "Chandaal Kori",
     category: "Pulses",
-    image: "/products/chana-dal-gopal.png",
+    image: "/products/chana-dal-gopal.webp",
     badge: "Kori Grade",
     grade: "Kori Grade",
     description:
@@ -457,7 +457,7 @@ const products: Product[] = [
     id: "nagali",
     name: "Nagali (Finger Millet / Ragi)",
     category: "Grains",
-    image: "/products/nagali-ragi.png",
+    image: "/products/nagali-ragi.webp",
     badge: "Calcium Rich",
     grade: "Grade A",
     description:
@@ -515,6 +515,8 @@ function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           fill
+          unoptimized
+          loading="lazy"
           className={`object-cover transition-transform duration-700 ${
             hovered ? "scale-110" : "scale-100"
           }`}
