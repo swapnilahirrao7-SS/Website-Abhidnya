@@ -411,7 +411,7 @@ export default function Outlets() {
             </h3>
             <p className="text-white/75 text-sm sm:text-base leading-relaxed mb-6">
               Partner with a trusted brand backed by a fully automated processing unit,
-              35+ premium products, and farm-direct sourcing. Join our growing retail network.
+              90+ premium products, and farm-direct sourcing. Join our growing retail network.
             </p>
             <button
               type="button"

@@ -6,7 +6,7 @@ import { TrendingUp, Users, Globe, Package, Award, Leaf } from "lucide-react";
 import Image from "next/image";
 
 const stats = [
-  { value: 35,     suffix: "+",      label: "Premium Products",       sublabel: "Across categories",     icon: Package    },
+  { value: 90,     suffix: "+",      label: "Premium Products",       sublabel: "Across categories",     icon: Package    },
   { value: 120000, suffix: " sq.ft.", label: "Processing Facility",    sublabel: "Fully automated unit",  icon: Award      },
   { value: 99,     suffix: ".5%",    label: "Purity Guarantee",        sublabel: "Across all product lines", icon: Users  },
   { value: 100,    suffix: "%",      label: "Farm-Direct Sourcing",    sublabel: "Zero middlemen",        icon: Leaf       },

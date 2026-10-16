@@ -1,17 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Star, Leaf, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Star, Leaf, CheckCircle2, Search, Sparkles } from "lucide-react";
 import { navigateToInquiry } from "@/lib/inquiryNavigation";
+import { newProducts } from "@/data/newProducts";
 
-type Category = "All" | "Pulses" | "Grains";
+type Category =
+  | "All"
+  | "Pulses"
+  | "Grains"
+  | "Dry Fruits"
+  | "Oils"
+  | "Flours"
+  | "Staples"
+  | "Soap"
+  | "Shampoo"
+  | "Paste"
+  | "Detergent"
+  | "Phenyl";
+
+/** Categories added beyond the original Pulses & Grains range */
+const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
+  "Dry Fruits",
+  "Oils",
+  "Flours",
+  "Staples",
+  "Soap",
+  "Shampoo",
+  "Paste",
+  "Detergent",
+  "Phenyl",
+];
+
+const isNewCategory = (cat: Category) =>
+  NEW_CATEGORIES.includes(cat as (typeof NEW_CATEGORIES)[number]);
 
 interface Product {
   id: string;
   name: string;
-  category: Omit<Category, "All">;
+  category: Exclude<Category, "All">;
   image: string;
   badge: string;
   grade: string;
@@ -465,9 +494,8 @@ const products: Product[] = [
     specs: ["Calcium: 344mg/100g", "Fibre: 11g/100g", "Moisture: <12%"],
     rating: 4.8,
   },
+  ...newProducts,
 ];
-
-const categories: Category[] = ["All", "Pulses", "Grains"];
 
 const badgeColors: Record<string, string> = {
   "Export Grade":     "bg-blue-50 text-blue-700 border-blue-200",
@@ -492,6 +520,17 @@ const badgeColors: Record<string, string> = {
   "Polished Grade":   "bg-yellow-50 text-yellow-700 border-yellow-200",
   "Kori Grade":       "bg-stone-50 text-stone-600 border-stone-200",
   "Calcium Rich":     "bg-sky-50 text-sky-700 border-sky-200",
+  "Dry Fruit":        "bg-amber-50 text-amber-800 border-amber-200",
+  "Cooking Oil":      "bg-yellow-50 text-yellow-800 border-yellow-200",
+  Staple:             "bg-stone-50 text-stone-700 border-stone-200",
+  Flour:              "bg-orange-50 text-orange-700 border-orange-200",
+  "Bath Soap":        "bg-pink-50 text-pink-700 border-pink-200",
+  "Laundry Soap":     "bg-blue-50 text-blue-700 border-blue-200",
+  "Dish Soap":        "bg-cyan-50 text-cyan-700 border-cyan-200",
+  Shampoo:            "bg-violet-50 text-violet-700 border-violet-200",
+  Toothpaste:         "bg-sky-50 text-sky-700 border-sky-200",
+  Detergent:          "bg-indigo-50 text-indigo-700 border-indigo-200",
+  Cleaner:            "bg-teal-50 text-teal-700 border-teal-200",
 };
 
 function ProductCard({ product }: { product: Product }) {
@@ -610,9 +649,28 @@ function ProductCard({ product }: { product: Product }) {
 
 export default function ProductShowcase() {
   const [active, setActive] = useState<Category>("All");
+  const [query, setQuery] = useState("");
 
-  const filtered =
-    active === "All" ? products : products.filter((p) => p.category === active);
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: products.length };
+    for (const p of products) {
+      counts[p.category] = (counts[p.category] ?? 0) + 1;
+    }
+    return counts;
+  }, []);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return products.filter((p) => {
+      const catOk = active === "All" || p.category === active;
+      const searchOk =
+        !q ||
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.badge.toLowerCase().includes(q);
+      return catOk && searchOk;
+    });
+  }, [active, query]);
 
   return (
     <section id="products" className="section-pad bg-cream" aria-labelledby="products-heading">
@@ -637,42 +695,115 @@ export default function ProductShowcase() {
             Products
           </h2>
           <p className="text-gray-500 text-lg leading-relaxed">
-            Every product is hand-selected, machine-cleaned, lab-tested, and packed to
-            international standards.
+            Pulses and grains, plus dry fruits, oils, staples, and everyday retail essentials
+            available at our outlets.
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.05, duration: 0.45 }}
+          className="mx-auto mb-6 flex max-w-2xl items-center justify-center gap-2 text-center text-sm font-semibold text-accent-800"
+        >
+          <Sparkles className="h-4 w-4 shrink-0 text-accent" aria-hidden />
+          New categories added — everything except Pulses and Grains.
+        </motion.p>
+
+        {/* Filter groups */}
         <motion.div
+          id="new-categories"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-2 mb-10"
-          role="tablist"
-          aria-label="Filter products by category"
+          className="mb-6 flex flex-col items-center gap-5"
         >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              role="tab"
-              aria-selected={active === cat}
-              onClick={() => setActive(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-primary/30
-                ${
-                  active === cat
-                    ? "bg-primary text-white shadow-md shadow-primary/20"
-                    : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
-                }`}
-            >
-              {cat}
-              {cat === "All" && (
-                <span className="ml-1.5 text-xs opacity-60">({products.length})</span>
-              )}
-            </button>
-          ))}
+          <div className="flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 sm:mr-1">
+              Our range
+            </span>
+            <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Original product categories">
+              {(["All", "Pulses", "Grains"] as const).map((cat) => (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={active === cat}
+                  onClick={() => setActive(cat)}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
+                    focus:outline-none focus:ring-2 focus:ring-primary/30
+                    ${
+                      active === cat
+                        ? "bg-primary text-white shadow-md shadow-primary/20"
+                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+                    }`}
+                >
+                  {cat}
+                  <span className="ml-1.5 text-xs opacity-60">({categoryCounts[cat] ?? 0})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex w-full max-w-4xl flex-col items-center gap-2 rounded-2xl border border-accent/25 bg-accent/5 px-4 py-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-accent-700">
+              Newly added
+            </span>
+            <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Newly added product categories">
+              {NEW_CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={active === cat}
+                  onClick={() => setActive(cat)}
+                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
+                    focus:outline-none focus:ring-2 focus:ring-accent/40
+                    ${
+                      active === cat
+                        ? "bg-accent text-white shadow-md shadow-accent/25"
+                        : "bg-white text-gray-700 hover:bg-accent/10 border border-accent/30"
+                    }`}
+                >
+                  {cat}
+                  <span className="ml-1.5 text-xs opacity-60">({categoryCounts[cat] ?? 0})</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </motion.div>
+
+        {/* Name search */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.45 }}
+          className="max-w-md mx-auto mb-10"
+        >
+          <label htmlFor="product-search" className="sr-only">
+            Search products by name
+          </label>
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              id="product-search"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search products (e.g. Badam, Colgate, Surf)…"
+              className="w-full rounded-full border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm
+                text-gray-700 placeholder:text-gray-400 shadow-sm
+                focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40"
+            />
+          </div>
+        </motion.div>
+
+        {isNewCategory(active) && (
+          <p className="mb-6 text-center text-sm font-medium text-accent-800">
+            {active} is a newly added category.
+          </p>
+        )}
 
         {/* Products Grid */}
         <motion.div
@@ -685,6 +816,12 @@ export default function ProductShowcase() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {filtered.length === 0 && (
+          <p className="text-center text-gray-500 text-sm mt-8">
+            No products match your search. Try another name or category.
+          </p>
+        )}
 
         {/* CTA */}
         <motion.div

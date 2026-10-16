@@ -60,26 +60,38 @@ for (const f of requiredFiles) {
 }
 
 // ── 2. PRODUCTS — COUNT, NAMES, UNIQUE IDs ───────────────────
-section("2 · ProductShowcase — 35 products, unique IDs");
+section("2 · ProductShowcase — product catalog integrity");
 
 const showcaseSrc = readFile("components/sections/ProductShowcase.tsx");
+const newProductsSrc = readFile("data/newProducts.ts");
+const catalogSrc = showcaseSrc + "\n" + newProductsSrc;
 
-const idMatches   = [...showcaseSrc.matchAll(/^\s+id:\s+"([^"]+)"/gm)].map(m => m[1]);
-const nameMatches = [...showcaseSrc.matchAll(/^\s+name:\s+"([^"]+)"/gm)].map(m => m[1]);
+const idMatches   = [...catalogSrc.matchAll(/^\s+id:\s+"([^"]+)"/gm)].map(m => m[1]);
+const nameMatches = [...catalogSrc.matchAll(/^\s+name:\s+"([^"]+)"/gm)].map(m => m[1]);
 
-idMatches.length === 35
+idMatches.length >= 90
   ? pass(`Product count = ${idMatches.length}`)
-  : fail(`Product count`, `Expected 35, got ${idMatches.length}`);
+  : fail(`Product count`, `Expected at least 90, got ${idMatches.length}`);
 
 const uniqueIds = new Set(idMatches);
 uniqueIds.size === idMatches.length
   ? pass("All product IDs are unique")
   : fail("Duplicate product IDs", `${idMatches.length - uniqueIds.size} duplicates found`);
 
+showcaseSrc.includes('product-search')
+  ? pass("Product name search input present")
+  : fail("Product search", "product-search input not found");
+
+for (const cat of ["Dry Fruits", "Oils", "Flours", "Staples", "Soap", "Shampoo", "Paste", "Detergent", "Phenyl"]) {
+  showcaseSrc.includes(`"${cat}"`)
+    ? pass(`Category tab: ${cat}`)
+    : fail(`Category tab: ${cat}`, "Missing from ProductShowcase");
+}
+
 // ── 3. PRODUCT IMAGES EXIST ───────────────────────────────────
 section("3 · Product images — all files present in /public/products/");
 
-const imageMatches = [...showcaseSrc.matchAll(/image:\s+"(\/products\/[^"]+)"/g)].map(m => m[1]);
+const imageMatches = [...catalogSrc.matchAll(/image:\s+"(\/products\/[^"]+)"/g)].map(m => m[1]);
 
 for (const imgPath of imageMatches) {
   const rel = `public${imgPath}`;
@@ -137,25 +149,10 @@ contactSrc.includes("disabled={loading || !isFormValid}")
   ? pass("Submit button disabled when form invalid")
   : fail("Submit button guard", "disabled condition not found");
 
-// ── 6. CONTACT FORM — ALL 35 PRODUCTS IN DROPDOWN ────────────
+// ── 6. CONTACT FORM — DROPDOWN MATCHES CATALOG NAMES ─────────
 section("6 · Contact — product dropdown matches ProductShowcase");
 
-const expectedProducts = [
-  "Wheat", "Bajari (Pearl Millet)", "Jawari (Sorghum)",
-  "Indrayani Rice", "Indrayani Pimpalner Rice", "Wada Kolam Rice",
-  "Surti Kolam Rice", "Flying Horse Basmati", "Indian Basmati Rice",
-  "Brown Sella Basmati", "White Sella Basmati", "Zafarani Basmati",
-  "Nagali (Finger Millet / Ragi)", "Harbhara (Desi Chana)",
-  "Kabuli Chana (White Chickpeas)", "Moong (Whole Green Gram)",
-  "Moongdaal Super", "Moongdaal Classic", "Moongdaal Premium",
-  "Moongdaal Saal", "Masoor Daal Classic", "Masoor Dal Premium",
-  "Moth (Whole Moth Beans)", "Moth Daal Classic",
-  "Moth Daal Premium", "Toor Daal Premium",
-  "Toor Daal Super", "Toordaal Classic",
-  "Udid Daal Black (Whole)", "Udiddaal Super",
-  "Udiddaal Classic", "Udiddaal Premium", "Chanadaal Polish",
-  "Chana Dal", "Chandaal Kori",
-];
+const expectedProducts = [...new Set(nameMatches)];
 
 let dropdownMissing = 0;
 for (const p of expectedProducts) {
@@ -164,7 +161,11 @@ for (const p of expectedProducts) {
     dropdownMissing++;
   }
 }
-if (dropdownMissing === 0) pass(`All 35 products present in dropdown`);
+if (dropdownMissing === 0) pass(`All ${expectedProducts.length} products present in dropdown`);
+
+showcaseSrc.includes('navigateToInquiry("bulk", { product: product.name })')
+  ? pass('Request Spec Sheet CTA wires product into bulk inquiry')
+  : fail("Request Spec Sheet CTA", "navigateToInquiry bulk product wiring missing");
 
 // ── 7. STATS SECTION — CORRECT VALUES ────────────────────────
 section("7 · Stats — values match website content");
@@ -172,7 +173,7 @@ section("7 · Stats — values match website content");
 const statsSrc = readFile("components/sections/Stats.tsx");
 
 const statChecks = [
-  ["35",     "Products stat"],
+  ["90",     "Products stat"],
   ["120000", "Facility sq.ft. stat"],
   ["99",     "Purity stat"],
   ["100",    "Farm-Direct stat"],
@@ -219,7 +220,7 @@ const heroSrc = readFile("components/sections/Hero.tsx");
   ["2023", "Since 2023 badge"],
   ["Farm-Direct", "Farm-Direct badge"],
   ["Dubai", "Dubai export badge"],
-  ["35+", "35+ products badge"],
+  ["90+", "90+ products badge"],
 ].forEach(([needle, label]) => {
   heroSrc.includes(needle)
     ? pass(label)

@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Sprout, Globe, Leaf, Store, Handshake, Package, Mail } from "lucide-react";
+import { ChevronDown, Sprout, Globe, Leaf, Store, Handshake, Package, Mail, Sparkles } from "lucide-react";
 import { navigateToInquiry } from "@/lib/inquiryNavigation";
 
 function useCountUp(target: number, duration = 2000, start = false) {
@@ -27,7 +27,7 @@ function useCountUp(target: number, duration = 2000, start = false) {
 
 const heroStats = [
   { target: 50, suffix: "K+", label: "Tons Processed" },
-  { target: 35, suffix: "+", label: "Premium Products" },
+  { target: 90, suffix: "+", label: "Premium Products" },
   { target: 100, suffix: "%", label: "Farm-Direct Sourcing" },
 ];
 
@@ -145,7 +145,7 @@ export default function Hero() {
             {[
               { icon: Sprout, text: "Farm-Direct Sourcing" },
               { icon: Globe, text: "Exporting to Dubai" },
-              { icon: Leaf, text: "35+ Premium Products" },
+              { icon: Leaf, text: "90+ Premium Products" },
               { icon: Store, text: "2 Outlets" },
             ].map(({ icon: Icon, text }, i) => (
               <motion.div
@@ -198,8 +198,8 @@ export default function Hero() {
             className="text-lg sm:text-xl text-white/75 leading-relaxed max-w-2xl mb-10"
           >
             From the richest farmlands of India to tables across the globe —
-            Abhidnya Agro delivers traceable, certified, and sustainably processed
-            pulses, grains, and specialty agricultural products.
+            Abhidnya Agro delivers pulses, grains, and now dry fruits, oils,
+            staples, and everyday retail essentials.
           </motion.p>
 
           {/* CTAs */}
@@ -215,6 +215,13 @@ export default function Hero() {
             >
               <Package className="w-5 h-5" />
               Explore Our Range
+            </button>
+            <button
+              onClick={() => handleScroll("#new-categories")}
+              className="btn-outline text-base px-8 py-4"
+            >
+              <Sparkles className="w-5 h-5" />
+              See new categories
             </button>
             <button
               onClick={handleBulkInquiryClick}
