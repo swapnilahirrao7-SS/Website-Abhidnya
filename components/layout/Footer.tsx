@@ -13,7 +13,7 @@ const footerLinks = {
   company: [
     { label: "About Us", href: "#about" },
     { label: "Our Story", href: "#about" },
-    { label: "Certifications", href: "#quality" },
+    { label: "Our Outlets", href: "#outlets" },
     { label: "Sustainability", href: "#about" },
     { label: "Careers", href: "#contact", inquiry: "bulk" as InquiryType },
   ],
@@ -28,7 +28,7 @@ const footerLinks = {
     { label: "Bulk Orders", href: "#contact", inquiry: "bulk" as InquiryType },
     { label: "B2B Inquiries", href: "#contact", inquiry: "bulk" as InquiryType },
     { label: "Export Queries", href: "#contact", inquiry: "bulk" as InquiryType },
-    { label: "Quality Reports", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "Visit an Outlet", href: "#outlets" },
     { label: "FAQs", href: "#contact", inquiry: "bulk" as InquiryType },
   ],
 };

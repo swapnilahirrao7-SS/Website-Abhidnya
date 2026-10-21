@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Star, Leaf, CheckCircle2, Search, Sparkles } from "lucide-react";
 import { navigateToInquiry } from "@/lib/inquiryNavigation";
 import { newProducts } from "@/data/newProducts";
@@ -15,11 +15,18 @@ type Category =
   | "Oils"
   | "Flours"
   | "Staples"
+  | "Masale"
+  | "Biscuits"
+  | "Tea & Coffee"
+  | "Food"
   | "Soap"
   | "Shampoo"
+  | "Hair Oil"
   | "Paste"
   | "Detergent"
-  | "Phenyl";
+  | "Phenyl"
+  | "Cosmetics"
+  | "Household";
 
 /** Categories added beyond the original Pulses & Grains range */
 const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
@@ -27,11 +34,18 @@ const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
   "Oils",
   "Flours",
   "Staples",
+  "Masale",
+  "Biscuits",
+  "Tea & Coffee",
+  "Food",
   "Soap",
   "Shampoo",
+  "Hair Oil",
   "Paste",
   "Detergent",
   "Phenyl",
+  "Cosmetics",
+  "Household",
 ];
 
 const isNewCategory = (cat: Category) =>
@@ -530,36 +544,44 @@ const badgeColors: Record<string, string> = {
   Shampoo:            "bg-violet-50 text-violet-700 border-violet-200",
   Toothpaste:         "bg-sky-50 text-sky-700 border-sky-200",
   Detergent:          "bg-indigo-50 text-indigo-700 border-indigo-200",
+  "Fabric Care":      "bg-sky-50 text-sky-700 border-sky-200",
+  Deodorant:          "bg-rose-50 text-rose-700 border-rose-200",
   Cleaner:            "bg-teal-50 text-teal-700 border-teal-200",
 };
 
+const PAGE_SIZE = 12;
+
+function withoutLabTested(text: string) {
+  return text.replace(/lab[\s-]*tested/gi, "").replace(/\s{2,}/g, " ").replace(/\s+([,.;])/g, "$1").trim();
+}
+
+function visibleSpecs(specs: string[]) {
+  return specs.map(withoutLabTested).filter(Boolean).slice(0, 2);
+}
+
 function ProductCard({ product }: { product: Product }) {
   const [hovered, setHovered] = useState(false);
+  const specs = visibleSpecs(product.specs);
+  const badge = withoutLabTested(product.badge);
+  const description = withoutLabTested(product.description);
 
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
+    <article
       className="group relative bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover
         transition-all duration-300 hover:-translate-y-1 border border-gray-100/80"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Image */}
       <div className="relative h-52 overflow-hidden bg-gray-50">
         <Image
           src={product.image}
           alt={product.name}
           fill
           unoptimized
-          loading="lazy"
           className={`object-cover transition-transform duration-700 ${
             hovered ? "scale-110" : "scale-100"
           }`}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
         />
 
         {/* Gradient overlay on hover — very light, just enough to lift the View Spec button */}
@@ -577,15 +599,16 @@ function ProductCard({ product }: { product: Product }) {
           }}
         />
 
-        {/* Badge */}
-        <div className="absolute top-3 left-3">
-          <span
-            className={`text-[11px] font-semibold border rounded-full px-2.5 py-0.5
-              ${badgeColors[product.badge] ?? "bg-gray-100 text-gray-700 border-gray-200"}`}
-          >
-            {product.badge}
-          </span>
-        </div>
+        {badge && (
+          <div className="absolute top-3 left-3">
+            <span
+              className={`text-[11px] font-semibold border rounded-full px-2.5 py-0.5
+                ${badgeColors[product.badge] ?? "bg-gray-100 text-gray-700 border-gray-200"}`}
+            >
+              {badge}
+            </span>
+          </div>
+        )}
 
         {/* Featured star */}
         {product.featured && (
@@ -630,26 +653,34 @@ function ProductCard({ product }: { product: Product }) {
         </h3>
 
         <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-2">
-          {product.description}
+          {description}
         </p>
 
-        {/* Specs */}
-        <div className="flex flex-col gap-1.5 border-t border-gray-100 pt-4">
-          {product.specs.slice(0, 2).map((spec) => (
-            <div key={spec} className="flex items-center gap-2 text-xs text-gray-500">
-              <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
-              {spec}
-            </div>
-          ))}
-        </div>
+        {specs.length > 0 && (
+          <div className="flex flex-col gap-1.5 border-t border-gray-100 pt-4">
+            {specs.map((spec) => (
+              <div key={spec} className="flex items-center gap-2 text-xs text-gray-500">
+                <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                {spec}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 export default function ProductShowcase() {
   const [active, setActive] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  const selectCategory = (cat: Category) => {
+    setActive(cat);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { All: products.length };
@@ -671,6 +702,25 @@ export default function ProductShowcase() {
       return catOk && searchOk;
     });
   }, [active, query]);
+
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  useEffect(() => {
+    const node = loadMoreRef.current;
+    if (!node || !hasMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        setVisibleCount((count) => count + PAGE_SIZE);
+      },
+      { rootMargin: "240px 0px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasMore, visibleCount]);
 
   return (
     <section id="products" className="section-pad bg-cream" aria-labelledby="products-heading">
@@ -730,7 +780,7 @@ export default function ProductShowcase() {
                   key={cat}
                   role="tab"
                   aria-selected={active === cat}
-                  onClick={() => setActive(cat)}
+                  onClick={() => selectCategory(cat)}
                   className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
                     focus:outline-none focus:ring-2 focus:ring-primary/30
                     ${
@@ -756,7 +806,7 @@ export default function ProductShowcase() {
                   key={cat}
                   role="tab"
                   aria-selected={active === cat}
-                  onClick={() => setActive(cat)}
+                  onClick={() => selectCategory(cat)}
                   className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200
                     focus:outline-none focus:ring-2 focus:ring-accent/40
                     ${
@@ -790,7 +840,10 @@ export default function ProductShowcase() {
               id="product-search"
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setVisibleCount(PAGE_SIZE);
+              }}
               placeholder="Search products (e.g. Badam, Colgate, Surf)…"
               className="w-full rounded-full border border-gray-200 bg-white py-2.5 pl-10 pr-4 text-sm
                 text-gray-700 placeholder:text-gray-400 shadow-sm
@@ -805,17 +858,17 @@ export default function ProductShowcase() {
           </p>
         )}
 
-        {/* Products Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {visible.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+
+        <p className="sr-only" aria-live="polite">
+          Showing {visible.length} of {filtered.length} products
+        </p>
+
+        {hasMore && <div ref={loadMoreRef} className="h-px w-full" aria-hidden />}
 
         {filtered.length === 0 && (
           <p className="text-center text-gray-500 text-sm mt-8">

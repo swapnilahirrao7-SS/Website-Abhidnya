@@ -4,11 +4,18 @@ export type NewCategory =
   | "Oils"
   | "Flours"
   | "Staples"
+  | "Masale"
+  | "Biscuits"
+  | "Tea & Coffee"
+  | "Food"
   | "Soap"
   | "Shampoo"
+  | "Hair Oil"
   | "Paste"
   | "Detergent"
-  | "Phenyl";
+  | "Phenyl"
+  | "Cosmetics"
+  | "Household";
 
 export interface CatalogProduct {
   id: string;
@@ -409,7 +416,7 @@ export const newProducts: CatalogProduct[] = [
     badge: "Bath Soap",
     grade: "Retail Pack",
     description: "Medimix herbal bathing soap — Ayurvedic care bar in patti and large packs.",
-    specs: ["Packs: Patti, 450 gm", "Type: Herbal Bath Soap", "Use: Personal Care"],
+    specs: ["Packs: Patti, 75 gm, 85 gm, 250 gm, 350 gm, 450 gm", "Type: Herbal Bath Soap", "Use: Personal Care"],
     rating: 4.7,
   },
   {
@@ -545,6 +552,17 @@ export const newProducts: CatalogProduct[] = [
     rating: 4.7,
   },
   {
+    id: "vim-liquid",
+    name: "Vim Liquid",
+    category: "Soap",
+    image: "/products/vim-liquid.webp",
+    badge: "Dish Soap",
+    grade: "Retail Pack",
+    description: "Vim dishwash liquid.",
+    specs: ["Packs: 85 ml, 115 ml, 190 ml, 250 ml", "Type: Dishwash Liquid", "Use: Utensils"],
+    rating: 4.7,
+  },
+  {
     id: "wheel-sabun",
     name: "Wheel Sabun",
     category: "Soap",
@@ -565,7 +583,7 @@ export const newProducts: CatalogProduct[] = [
     badge: "Shampoo",
     grade: "Retail Pack",
     description: "Clinic Plus shampoo — everyday hair care sachets and small retail packs.",
-    specs: ["Pack: Sachet / ₹1 line", "Type: Shampoo", "Use: Hair Care"],
+    specs: ["Packs: Sachet / ₹1 line, 650 ml", "Type: Shampoo", "Use: Hair Care"],
     rating: 4.6,
   },
   {
@@ -576,7 +594,7 @@ export const newProducts: CatalogProduct[] = [
     badge: "Shampoo",
     grade: "Retail Pack",
     description: "Dove shampoo for soft hair — available in small packs and pouches.",
-    specs: ["Packs: 5 gm, Pouch", "Type: Shampoo", "Use: Hair Care"],
+    specs: ["Packs: 5 gm, Pouch, 180 ml, 650 ml", "Type: Shampoo", "Use: Hair Care"],
     rating: 4.7,
   },
   {
@@ -598,7 +616,7 @@ export const newProducts: CatalogProduct[] = [
     badge: "Shampoo",
     grade: "Retail Pack",
     description: "Sunsilk shampoo pouches — pink and black variants for everyday hair care.",
-    specs: ["Variants: Pink, Black Pouch", "Type: Shampoo", "Use: Hair Care"],
+    specs: ["Variants: Pink pouch, Black pouch, Pink 180 ml, 180 ml, Black 650 ml, Pink 650 ml", "Type: Shampoo", "Use: Hair Care"],
     rating: 4.6,
   },
   {
@@ -609,7 +627,7 @@ export const newProducts: CatalogProduct[] = [
     badge: "Shampoo",
     grade: "Retail Pack",
     description: "TRESemmé shampoo and conditioner sachets for salon-like care at home.",
-    specs: ["Packs: 5.5 ml shampoo, +conditioner 5.5 ml, ₹2 line", "Type: Shampoo", "Use: Hair Care"],
+    specs: ["Packs: 5.5 ml, ₹2 line, Black 185 ml, Red 180 ml, 580 ml, Red 580 ml", "Type: Shampoo", "Use: Hair Care"],
     rating: 4.7,
   },
   {
@@ -632,7 +650,7 @@ export const newProducts: CatalogProduct[] = [
     image: "/products/colgate-white.webp",
     badge: "Toothpaste",
     grade: "Retail Pack",
-    description: "Colgate White toothpaste — trusted daily oral care in multiple pack sizes.",
+    description: "Colgate Strong Teeth / White toothpaste — trusted daily oral care in multiple pack sizes.",
     specs: ["Packs: 20 gm, 40 gm, 100 gm, 200 gm", "Type: Toothpaste", "Use: Oral Care"],
     rating: 4.8,
   },
@@ -715,6 +733,28 @@ export const newProducts: CatalogProduct[] = [
     specs: ["Packs: 95 gm, 500 gm, 1 kg", "Type: Washing Powder", "Use: Laundry"],
     rating: 4.5,
   },
+  {
+    id: "comfort",
+    name: "Comfort",
+    category: "Detergent",
+    image: "/products/comfort.webp",
+    badge: "Fabric Care",
+    grade: "Retail Pack",
+    description: "Comfort fabric conditioner in bottles and small packs.",
+    specs: ["Packs: Used 18 ml, Blue 210 ml, Red 210 ml, Blue 860 ml, Pink 860 ml", "Type: Fabric Conditioner", "Use: Laundry"],
+    rating: 4.6,
+  },
+  {
+    id: "rin-liquid",
+    name: "Rin Liquid",
+    category: "Detergent",
+    image: "/products/rin-liquid.webp",
+    badge: "Detergent",
+    grade: "Retail Pack",
+    description: "Rin liquid detergent, including the Ala bottle.",
+    specs: ["Packs: Ala 200 ml, 500 ml", "Type: Liquid Detergent", "Use: Laundry"],
+    rating: 4.6,
+  },
 
   // ── Phenyl ──────────────────────────────────────────────────
   {
@@ -750,4 +790,130 @@ export const newProducts: CatalogProduct[] = [
     specs: ["Packs: 200 ml, 500 ml, 1 Ltr", "Type: Phenyl", "Use: Floor Cleaning"],
     rating: 4.5,
   },
+
+  // ── Flours (added) ──────────────────────────────────────────
+  {
+    id: "rava",
+    name: "Rava (Semolina)",
+    category: "Flours",
+    image: "/products/rava.webp",
+    badge: "Flour",
+    grade: "Retail Pack",
+    description: "Semolina (rava) for upma, sheera, and snacks — half and full kilo packs.",
+    specs: ["Packs: ½ kg, 1 kg", "Type: Semolina", "Use: Upma & Sheera"],
+    rating: 4.6,
+  },
+
+  // ── Staples (added) ─────────────────────────────────────────
+  {
+    id: "soyawadi",
+    name: "Soyawadi (Soya Chunks)",
+    category: "Staples",
+    image: "/products/soyawadi.webp",
+    badge: "Staple",
+    grade: "Retail",
+    description: "Soya chunks (soyawadi) for curries and everyday protein.",
+    specs: ["Type: Soya Chunks", "Use: Curries", "Storage: Dry Place"],
+    rating: 4.6,
+  },
+
+  // ── Masale ──────────────────────────────────────────────────
+  { id: "aalashi", name: "Aalashi (Flaxseed)", category: "Masale", image: "/products/aalashi.webp", badge: "Masala", grade: "Retail", description: "Flaxseed (aalashi) for tempering, laddoos, and daily use.", specs: ["Type: Flaxseed", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "badishop", name: "Badishop (Fennel)", category: "Masale", image: "/products/badishop.webp", badge: "Masala", grade: "Retail", description: "Fennel seeds (badi shep) for mukhwas, sweets, and tempering.", specs: ["Type: Fennel", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "black-velachi", name: "Black Velachi (Black Cardamom)", category: "Masale", image: "/products/black-velachi.webp", badge: "Masala", grade: "Retail", description: "Black cardamom pods for biryani, pulao, and rich gravies.", specs: ["Type: Black Cardamom", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.7 },
+  { id: "dalchini", name: "Dalchini (Cinnamon)", category: "Masale", image: "/products/dalchini.webp", badge: "Masala", grade: "Retail", description: "Cinnamon bark for sweets, tea, and garam masala.", specs: ["Type: Cinnamon", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.7 },
+  { id: "dhane", name: "Dhane (Coriander)", category: "Masale", image: "/products/dhane.webp", badge: "Masala", grade: "Retail", description: "Coriander seeds for tempering, chutneys, and masala blends.", specs: ["Type: Coriander Seeds", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "dinkh", name: "Dinkh (Edible Gum)", category: "Masale", image: "/products/dinkh.webp", badge: "Masala", grade: "Retail", description: "Edible gum (dink / gond) for traditional laddoos and winter recipes.", specs: ["Type: Edible Gum", "Use: Sweets", "Storage: Dry Place"], rating: 4.5 },
+  { id: "halad", name: "Halad (Turmeric)", category: "Masale", image: "/products/halad.webp", badge: "Masala", grade: "Retail", description: "Turmeric for everyday cooking and colour.", specs: ["Type: Turmeric", "Use: Cooking", "Storage: Dry Place"], rating: 4.7 },
+  { id: "hing", name: "Hing (Asafoetida)", category: "Masale", image: "/products/hing.webp", badge: "Masala", grade: "Retail", description: "Asafoetida for dal, kadhi, and tempering.", specs: ["Type: Asafoetida", "Use: Tempering", "Storage: Airtight"], rating: 4.7 },
+  { id: "javitari", name: "Javitari (Mace)", category: "Masale", image: "/products/javitari.webp", badge: "Masala", grade: "Retail", description: "Mace blades for biryani, sweets, and garam masala.", specs: ["Type: Mace", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
+  { id: "jayfal", name: "Jayfal (Nutmeg)", category: "Masale", image: "/products/jayfal.webp", badge: "Masala", grade: "Retail", description: "Whole nutmeg for sweets, milk, and spice blends.", specs: ["Type: Nutmeg", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
+  { id: "jeera", name: "Jeera (Cumin)", category: "Masale", image: "/products/jeera.webp", badge: "Masala", grade: "Retail", description: "Cumin seeds for daily tempering and masalas.", specs: ["Type: Cumin", "Use: Tempering", "Storage: Dry Place"], rating: 4.8 },
+  { id: "kacchi-meethi", name: "Kacchi Meethi (Fenugreek)", category: "Masale", image: "/products/kacchi-meethi.webp", badge: "Masala", grade: "Retail", description: "Fenugreek seeds for pickles, methi dal, and tempering.", specs: ["Type: Fenugreek", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "karnapool", name: "Karnapool (Star Anise)", category: "Masale", image: "/products/karnapool.webp", badge: "Masala", grade: "Retail", description: "Star anise for biryani, chai, and gravies.", specs: ["Type: Star Anise", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
+  { id: "khaskhas", name: "Khaskhas (Poppy Seeds)", category: "Masale", image: "/products/khaskhas.webp", badge: "Masala", grade: "Retail", description: "Poppy seeds for gravies, sweets, and stuffing.", specs: ["Type: Poppy Seeds", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "khobara", name: "Khobara (Dry Coconut)", category: "Masale", image: "/products/khobara.webp", badge: "Masala", grade: "Retail", description: "Dry coconut for chutneys, masalas, and sweets.", specs: ["Type: Dry Coconut", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "lavang", name: "Lavang (Clove)", category: "Masale", image: "/products/lavang.webp", badge: "Masala", grade: "Retail", description: "Cloves for garam masala, rice, and sweets.", specs: ["Type: Clove", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.7 },
+  { id: "meere", name: "Meere (Black Pepper)", category: "Masale", image: "/products/meere.webp", badge: "Masala", grade: "Retail", description: "Black peppercorns for everyday seasoning.", specs: ["Type: Black Pepper", "Use: Seasoning", "Storage: Dry Place"], rating: 4.7 },
+  { id: "mirachi", name: "Mirachi (Red Chilli)", category: "Masale", image: "/products/mirachi.webp", badge: "Masala", grade: "Retail", description: "Dried red chillies for tempering and masala.", specs: ["Type: Dried Red Chilli", "Use: Cooking", "Storage: Dry Place"], rating: 4.7 },
+  { id: "mohari", name: "Mohari (Mustard)", category: "Masale", image: "/products/mohari.webp", badge: "Masala", grade: "Retail", description: "Mustard seeds for tempering, pickles, and tadka.", specs: ["Type: Mustard Seeds", "Use: Tempering", "Storage: Dry Place"], rating: 4.6 },
+  { id: "ova", name: "Ova (Ajwain)", category: "Masale", image: "/products/ova.webp", badge: "Masala", grade: "Retail", description: "Ajwain for fritters, parathas, and digestive recipes.", specs: ["Type: Ajwain", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "shah-jeera", name: "Shah Jeera (Caraway)", category: "Masale", image: "/products/shah-jeera.webp", badge: "Masala", grade: "Retail", description: "Caraway (shahi jeera) for biryani and rich dishes.", specs: ["Type: Caraway", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
+  { id: "suntha", name: "Suntha (Dry Ginger)", category: "Masale", image: "/products/suntha.webp", badge: "Masala", grade: "Retail", description: "Dry ginger for tea, masalas, and winter recipes.", specs: ["Type: Dry Ginger", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "teel", name: "Teel (Sesame)", category: "Masale", image: "/products/teel.webp", badge: "Masala", grade: "Retail", description: "Sesame seeds for laddoos, chutneys, and tempering.", specs: ["Type: Sesame", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
+  { id: "velachi", name: "Velachi (Green Cardamom)", category: "Masale", image: "/products/velachi.webp", badge: "Masala", grade: "Retail", description: "Green cardamom for tea, sweets, and biryani.", specs: ["Type: Green Cardamom", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.8 },
+
+  // ── Biscuits ────────────────────────────────────────────────
+  { id: "twenty-twenty", name: "20-20", category: "Biscuits", image: "/products/twenty-twenty.webp", badge: "Biscuit", grade: "Retail Pack", description: "20-20 salted biscuits in popular retail packs.", specs: ["Packs: Standard, 68.8 gm", "Type: Salted Biscuit", "Use: Snacks"], rating: 4.5 },
+  { id: "bounce", name: "Bounce", category: "Biscuits", image: "/products/bounce.webp", badge: "Biscuit", grade: "Retail Pack", description: "Bounce cream biscuits in chocolate and orange.", specs: ["Variants: Chocolate 25 gm, Orange", "Type: Cream Biscuit", "Use: Snacks"], rating: 4.6 },
+  { id: "bourbon", name: "Bourbon", category: "Biscuits", image: "/products/bourbon.webp", badge: "Biscuit", grade: "Retail Pack", description: "Bourbon chocolate cream biscuits.", specs: ["Pack: 63 gm", "Type: Cream Biscuit", "Use: Snacks"], rating: 4.6 },
+  { id: "jimjam", name: "Britannia Jim Jam", category: "Biscuits", image: "/products/jimjam.webp", badge: "Biscuit", grade: "Retail Pack", description: "Jim Jam jam-filled biscuits.", specs: ["Pack: 57 gm", "Type: Jam Biscuit", "Use: Snacks"], rating: 4.6 },
+  { id: "good-day", name: "Good Day", category: "Biscuits", image: "/products/good-day.webp", badge: "Biscuit", grade: "Retail Pack", description: "Good Day cookies in single and multipacks.", specs: ["Packs: 34.5 gm, 12×1 pack 52.5 gm", "Type: Cookie", "Use: Snacks"], rating: 4.7 },
+  { id: "happy-happy", name: "Happy Happy", category: "Biscuits", image: "/products/happy-happy.webp", badge: "Biscuit", grade: "Retail Pack", description: "Happy Happy cream biscuits.", specs: ["Packs: 31.5 gm, 63 gm", "Type: Cream Biscuit", "Use: Snacks"], rating: 4.5 },
+  { id: "krackjack", name: "Krackjack", category: "Biscuits", image: "/products/krackjack.webp", badge: "Biscuit", grade: "Retail Pack", description: "Krackjack sweet and salty biscuits.", specs: ["Packs: 31.5 gm, 63 gm, 176 gm", "Type: Sweet & Salty", "Use: Snacks"], rating: 4.6 },
+  { id: "marie-gold", name: "Marie Gold", category: "Biscuits", image: "/products/marie-gold.webp", badge: "Biscuit", grade: "Retail Pack", description: "Marie Gold tea biscuits in small and family packs.", specs: ["Packs: 36.6 gm, 68.9 gm, 200–250 gm", "Type: Tea Biscuit", "Use: Tea Time"], rating: 4.6 },
+  { id: "monaco", name: "Monaco", category: "Biscuits", image: "/products/monaco.webp", badge: "Biscuit", grade: "Retail Pack", description: "Monaco salted biscuits.", specs: ["Packs: 26.10 gm, 52 gm, 185.6 gm", "Type: Salted Biscuit", "Use: Snacks"], rating: 4.6 },
+  { id: "oreo", name: "Oreo", category: "Biscuits", image: "/products/oreo.webp", badge: "Biscuit", grade: "Retail Pack", description: "Oreo chocolate sandwich biscuits.", specs: ["Pack: 41.75 gm", "Type: Sandwich Biscuit", "Use: Snacks"], rating: 4.7 },
+  { id: "parle-coconut", name: "Parle Coconut", category: "Biscuits", image: "/products/parle-coconut.webp", badge: "Biscuit", grade: "Retail Pack", description: "Parle coconut biscuits.", specs: ["Pack: 84 gm", "Type: Coconut Biscuit", "Use: Snacks"], rating: 4.5 },
+  { id: "parle-g", name: "Parle-G", category: "Biscuits", image: "/products/parle-g.webp", badge: "Biscuit", grade: "Retail Pack", description: "Parle-G glucose biscuits, including the large pack.", specs: ["Packs: 45 gm, 90 gm, 800 gm", "Type: Glucose Biscuit", "Use: Tea Time"], rating: 4.8 },
+  { id: "patanjali-dudh", name: "Patanjali Dudh Biscuit", category: "Biscuits", image: "/products/patanjali-dudh.webp", badge: "Biscuit", grade: "Retail Pack", description: "Patanjali milk biscuits.", specs: ["Packs: 35 gm, 70 gm", "Type: Milk Biscuit", "Use: Snacks"], rating: 4.5 },
+  { id: "patanjali-nariyal", name: "Patanjali Nariyal Biscuit", category: "Biscuits", image: "/products/patanjali-nariyal.webp", badge: "Biscuit", grade: "Retail Pack", description: "Patanjali coconut biscuits.", specs: ["Pack: 68 gm", "Type: Coconut Biscuit", "Use: Snacks"], rating: 4.5 },
+
+  // ── Tea & Coffee ────────────────────────────────────────────
+  { id: "bru", name: "Bru Coffee", category: "Tea & Coffee", image: "/products/bru.webp", badge: "Coffee", grade: "Retail Pack", description: "Bru coffee in sachets, pouches, and jars.", specs: ["Packs: 10 gm, Pouch, 200 gm", "Type: Coffee", "Use: Beverage"], rating: 4.7 },
+  { id: "nescafe", name: "Nescafe Coffee", category: "Tea & Coffee", image: "/products/nescafe.webp", badge: "Coffee", grade: "Retail Pack", description: "Nescafe coffee bottle for home and outlet retail.", specs: ["Type: Instant Coffee", "Pack: Bottle", "Use: Beverage"], rating: 4.7 },
+  { id: "coffee-pouch", name: "Bru Gold", category: "Tea & Coffee", image: "/products/coffee-pouch.webp", badge: "Coffee", grade: "Retail Pack", description: "Bru Gold premium instant coffee pouch.", specs: ["Type: Instant Coffee", "Pack: Pouch", "Use: Beverage"], rating: 4.5 },
+  { id: "sahyadri-tea", name: "Sahyadri Tea", category: "Tea & Coffee", image: "/products/sahyadri-tea.webp", badge: "Tea", grade: "Retail Pack", description: "Sahyadri tea in small and kilo packs.", specs: ["Packs: 100 gm, 1 kg", "Type: Black Tea", "Use: Beverage"], rating: 4.6 },
+  { id: "red-label", name: "Red Label", category: "Tea & Coffee", image: "/products/red-label.webp", badge: "Tea", grade: "Retail Pack", description: "Red Label tea from sachets to family packs.", specs: ["Packs: 13 gm sachet, 100 gm, 180 gm, 250 gm, 500 gm, 1 kg", "Type: Black Tea", "Use: Beverage"], rating: 4.7 },
+  { id: "taj-tea", name: "Taj Tea", category: "Tea & Coffee", image: "/products/taj-tea.webp", badge: "Tea", grade: "Retail Pack", description: "Taj tea in retail packs.", specs: ["Packs: 100 gm, 500 gm", "Type: Black Tea", "Use: Beverage"], rating: 4.6 },
+  { id: "lipton-green", name: "Lipton Green Tea", category: "Tea & Coffee", image: "/products/lipton-green.webp", badge: "Tea", grade: "Retail Pack", description: "Lipton green tea bags.", specs: ["Pack: 100 pcs", "Type: Green Tea", "Use: Beverage"], rating: 4.6 },
+  { id: "taaza", name: "Tata Tea Taaza", category: "Tea & Coffee", image: "/products/taaza.webp", badge: "Tea", grade: "Retail Pack", description: "Tata Tea Taaza for daily chai — leaf and dust packs.", specs: ["Packs: 100 gm, 250 gm, 500 gm", "Type: Black Tea", "Use: Beverage"], rating: 4.5 },
+  { id: "parivar-tea", name: "Parivar Tea", category: "Tea & Coffee", image: "/products/parivar-tea.webp", badge: "Tea", grade: "Retail Pack", description: "Parivar tea in household packs.", specs: ["Packs: 100 gm, 250 gm", "Type: Black Tea", "Use: Beverage"], rating: 4.5 },
+
+  // ── Food ────────────────────────────────────────────────────
+  { id: "eno", name: "Eno", category: "Food", image: "/products/eno.webp", badge: "Food", grade: "Retail Pack", description: "Eno fruit salt in strip packs.", specs: ["Pack: 30 gm (12×1)", "Type: Fruit Salt", "Use: Digestive"], rating: 4.6 },
+  { id: "kissan-tomato", name: "Kissan Tomato", category: "Food", image: "/products/kissan-tomato.webp", badge: "Food", grade: "Retail Pack", description: "Kissan tomato ketchup in pouches and bottles.", specs: ["Packs: 45 gm, 90 gm, 350 gm, 400 gm pouch", "Type: Tomato Ketchup", "Use: Cooking"], rating: 4.7 },
+  { id: "kissan-jam", name: "Kissan Jam", category: "Food", image: "/products/kissan-jam.webp", badge: "Food", grade: "Retail Pack", description: "Kissan jam for breakfast.", specs: ["Pack: 500 gm", "Type: Jam", "Use: Breakfast"], rating: 4.6 },
+  { id: "maggie", name: "Maggie", category: "Food", image: "/products/maggie.webp", badge: "Food", grade: "Retail Pack", description: "Maggie instant noodles.", specs: ["Type: Instant Noodles", "Use: Snacks", "Availability: Outlet Retail"], rating: 4.7 },
+  { id: "masala-noodles", name: "Masala Noodles", category: "Food", image: "/products/masala-noodles.webp", badge: "Food", grade: "Retail Pack", description: "Masala noodles in small retail packs.", specs: ["Pack: 20 gm", "Type: Instant Noodles", "Use: Snacks"], rating: 4.5 },
+  { id: "horlicks", name: "Horlicks", category: "Food", image: "/products/horlicks.webp", badge: "Food", grade: "Retail Pack", description: "Horlicks malted drink in family packs.", specs: ["Packs: 200 gm, 400 gm, 470 gm", "Type: Health Drink", "Use: Beverage"], rating: 4.7 },
+  { id: "custard-powder", name: "Custard Powder", category: "Food", image: "/products/custard-powder.webp", badge: "Food", grade: "Retail Pack", description: "Custard powder for desserts.", specs: ["Pack: 100 gm", "Type: Custard", "Use: Dessert"], rating: 4.5 },
+  { id: "govardhan-ghee", name: "Govardhan Ghee", category: "Food", image: "/products/govardhan-ghee.webp", badge: "Food", grade: "Retail Pack", description: "Govardhan ghee in jar packs.", specs: ["Packs: 750 ml, 1 Ltr", "Type: Ghee", "Use: Cooking"], rating: 4.8 },
+
+  // ── Cosmetics ───────────────────────────────────────────────
+  { id: "fair-lovely", name: "Fair & Lovely", category: "Cosmetics", image: "/products/fair-lovely.webp", badge: "Cream", grade: "Retail Pack", description: "Fair & Lovely face cream in tube and jar packs.", specs: ["Packs: Tube 14 gm, 25 gm, 50 gm", "Type: Face Cream", "Use: Personal Care"], rating: 4.6 },
+  { id: "glow-lovely", name: "Glow & Lovely", category: "Cosmetics", image: "/products/glow-lovely.webp", badge: "Cream", grade: "Retail Pack", description: "Glow & Lovely face cream.", specs: ["Pack: 50 gm", "Type: Face Cream", "Use: Personal Care"], rating: 4.6 },
+  { id: "fair-handsome", name: "Fair & Handsome", category: "Cosmetics", image: "/products/fair-handsome.webp", badge: "Cream", grade: "Retail Pack", description: "Fair & Handsome men's face cream.", specs: ["Pack: 25 gm", "Type: Face Cream", "Use: Personal Care"], rating: 4.5 },
+  { id: "ponds-cream", name: "Ponds Cream", category: "Cosmetics", image: "/products/ponds-cream.webp", badge: "Cream", grade: "Retail Pack", description: "Ponds cold cream in patti packs.", specs: ["Pack: Patti", "Type: Cold Cream", "Use: Personal Care"], rating: 4.6 },
+  { id: "ponds-powder", name: "Ponds Powder", category: "Cosmetics", image: "/products/ponds-powder.webp", badge: "Powder", grade: "Retail Pack", description: "Ponds face powder in compact and box packs.", specs: ["Packs: 40 gm, 80 gm, 200 gm, 300 gm", "Type: Face Powder", "Use: Personal Care"], rating: 4.6 },
+  { id: "ponds-starlight", name: "Ponds Starlight", category: "Cosmetics", image: "/products/ponds-starlight.webp", badge: "Powder", grade: "Retail Pack", description: "Ponds Starlight face powder.", specs: ["Pack: 80 gm", "Type: Face Powder", "Use: Personal Care"], rating: 4.6 },
+  { id: "ponds-pink", name: "Ponds Pink", category: "Cosmetics", image: "/products/ponds-pink.webp", badge: "Powder", grade: "Retail Pack", description: "Ponds pink face powder.", specs: ["Packs: 40 gm, 80 gm", "Type: Face Powder", "Use: Personal Care"], rating: 4.5 },
+  { id: "ponds-body-lotion", name: "Ponds Body Lotion", category: "Cosmetics", image: "/products/ponds-lotion.webp", badge: "Lotion", grade: "Retail Pack", description: "Ponds body lotion.", specs: ["Pack: 275 ml", "Type: Body Lotion", "Use: Personal Care"], rating: 4.6 },
+  { id: "vaseline", name: "Vaseline", category: "Cosmetics", image: "/products/vaseline.webp", badge: "Cream", grade: "Retail Pack", description: "Vaseline petroleum jelly and lotions in the listed variants.", specs: ["Packs: 20 gm, 21 gm, 42 gm, 85 gm, Moisture 80 ml, Pink 100 ml, Pink 200 ml, Green 85 ml, Green 200 ml, Coco 200 ml, White 90 ml, White 100 ml, Yellow 85 ml", "Type: Petroleum Jelly & Lotion", "Use: Personal Care"], rating: 4.7 },
+  { id: "fogg", name: "Fogg", category: "Cosmetics", image: "/products/fogg.webp", badge: "Deodorant", grade: "Retail Pack", description: "Fogg deodorant spray.", specs: ["Pack: 150 ml", "Type: Deodorant", "Use: Personal Care"], rating: 4.6 },
+
+  // ── Hair Oil ────────────────────────────────────────────────
+  { id: "parachute", name: "Parachute", category: "Hair Oil", image: "/products/parachute.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Parachute coconut hair oil, including jasmine variants.", specs: ["Packs: 90 ml jasmine, 100 ml, 190 ml jasmine, 200 ml, 500 ml jasmine, 600 ml", "Type: Coconut Hair Oil", "Use: Hair Care"], rating: 4.8 },
+  { id: "indulekha", name: "Indulekha", category: "Hair Oil", image: "/products/indulekha.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Indulekha hair oil.", specs: ["Pack: 100 ml", "Type: Hair Oil", "Use: Hair Care"], rating: 4.7 },
+
+  // ── Paste (added) ───────────────────────────────────────────
+  { id: "pepsodent", name: "Pepsodent", category: "Paste", image: "/products/pepsodent.webp", badge: "Toothpaste", grade: "Retail Pack", description: "Pepsodent toothpaste.", specs: ["Packs: 80 gm, 150 gm", "Type: Toothpaste", "Use: Oral Care"], rating: 4.6 },
+  { id: "dantkanti", name: "Dantkanti", category: "Paste", image: "/products/dantkanti.webp", badge: "Toothpaste", grade: "Retail Pack", description: "Dantkanti toothpaste.", specs: ["Pack: 100 gm", "Type: Toothpaste", "Use: Oral Care"], rating: 4.7 },
+  { id: "vicco-vajradanti", name: "Vicco Vajradanti", category: "Paste", image: "/products/vicco-vajradanti.webp", badge: "Toothpaste", grade: "Retail Pack", description: "Vicco Vajradanti ayurvedic toothpaste.", specs: ["Packs: 25 gm, 250 gm", "Type: Toothpaste", "Use: Oral Care"], rating: 4.6 },
+  { id: "vicco-dantmanjan", name: "Patanjali Dant Manjan", category: "Paste", image: "/products/vicco-dantmanjan.webp", badge: "Tooth Powder", grade: "Retail Pack", description: "Patanjali Dant Manjan tooth powder in jar packs.", specs: ["Packs: 40 gm, 80 gm", "Type: Tooth Powder", "Use: Oral Care"], rating: 4.5 },
+
+  // ── Detergent (added) ───────────────────────────────────────
+  { id: "ariel", name: "Ariel", category: "Detergent", image: "/products/ariel.webp", badge: "Detergent", grade: "Retail Pack", description: "Ariel liquid and gel detergent.", specs: ["Packs: Green 1 Ltr, Gel Blue 900 gm", "Type: Detergent", "Use: Laundry"], rating: 4.7 },
+
+  // ── Soap (added) ────────────────────────────────────────────
+  { id: "liril", name: "Liril Soap", category: "Soap", image: "/products/liril.webp", badge: "Bath Soap", grade: "Retail Pack", description: "Liril bathing soap multipack.", specs: ["Pack: 4×100 gm", "Type: Bath Soap", "Use: Personal Care"], rating: 4.6 },
+  { id: "hamam", name: "Hamam Soap", category: "Soap", image: "/products/hamam.webp", badge: "Bath Soap", grade: "Retail Pack", description: "Hamam bathing soap multipack.", specs: ["Pack: 4×1", "Type: Bath Soap", "Use: Personal Care"], rating: 4.6 },
+  { id: "patanjali-soap", name: "Patanjali Soap", category: "Soap", image: "/products/patanjali-soap.webp", badge: "Bath Soap", grade: "Retail Pack", description: "Patanjali bathing soap, including the free-box pack. Separate from the dishwash bar.", specs: ["Pack: Free Box", "Type: Bath Soap", "Use: Personal Care"], rating: 4.5 },
+
+  // ── Shampoo (added) ─────────────────────────────────────────
+  { id: "dove-conditioner", name: "Dove Conditioner", category: "Shampoo", image: "/products/dove-conditioner.webp", badge: "Conditioner", grade: "Retail Pack", description: "Dove conditioner.", specs: ["Packs: 75 ml, 175 ml", "Type: Conditioner", "Use: Hair Care"], rating: 4.7 },
+  { id: "tresemme-conditioner", name: "TRESemmé Conditioner", category: "Shampoo", image: "/products/tresemme-conditioner.webp", badge: "Conditioner", grade: "Retail Pack", description: "TRESemmé conditioner.", specs: ["Pack: 190 ml", "Type: Conditioner", "Use: Hair Care"], rating: 4.7 },
+
+  // ── Household ───────────────────────────────────────────────
+  { id: "good-knight", name: "Good Knight Liquid", category: "Household", image: "/products/good-knight.webp", badge: "Household", grade: "Retail Pack", description: "Good Knight mosquito-repellent liquid.", specs: ["Type: Liquid Vaporiser", "Use: Household", "Availability: Outlet Retail"], rating: 4.6 },
 ];

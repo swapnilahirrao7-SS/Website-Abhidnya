@@ -94,7 +94,7 @@ const productGroups: { label: string; options: string[] }[] = [
   },
   {
     label: "── Flours ──",
-    options: ["Poha", "Maida", "Besan", "Atta"],
+    options: ["Poha", "Maida", "Besan", "Atta", "Rava (Semolina)"],
   },
   {
     label: "── Staples ──",
@@ -107,6 +107,82 @@ const productGroups: { label: string; options: string[] }[] = [
       "Narel (Coconut)",
       "Bhagar",
       "Murmura",
+      "Soyawadi (Soya Chunks)",
+    ],
+  },
+  {
+    label: "── Masale ──",
+    options: [
+      "Aalashi (Flaxseed)",
+      "Badishop (Fennel)",
+      "Black Velachi (Black Cardamom)",
+      "Dalchini (Cinnamon)",
+      "Dhane (Coriander)",
+      "Dinkh (Edible Gum)",
+      "Halad (Turmeric)",
+      "Hing (Asafoetida)",
+      "Javitari (Mace)",
+      "Jayfal (Nutmeg)",
+      "Jeera (Cumin)",
+      "Kacchi Meethi (Fenugreek)",
+      "Karnapool (Star Anise)",
+      "Khaskhas (Poppy Seeds)",
+      "Khobara (Dry Coconut)",
+      "Lavang (Clove)",
+      "Meere (Black Pepper)",
+      "Mirachi (Red Chilli)",
+      "Mohari (Mustard)",
+      "Ova (Ajwain)",
+      "Shah Jeera (Caraway)",
+      "Suntha (Dry Ginger)",
+      "Teel (Sesame)",
+      "Velachi (Green Cardamom)",
+    ],
+  },
+  {
+    label: "── Biscuits ──",
+    options: [
+      "20-20",
+      "Bounce",
+      "Bourbon",
+      "Britannia Jim Jam",
+      "Good Day",
+      "Happy Happy",
+      "Krackjack",
+      "Marie Gold",
+      "Monaco",
+      "Oreo",
+      "Parle Coconut",
+      "Parle-G",
+      "Patanjali Dudh Biscuit",
+      "Patanjali Nariyal Biscuit",
+    ],
+  },
+  {
+    label: "── Tea & Coffee ──",
+    options: [
+      "Bru Coffee",
+      "Nescafe Coffee",
+      "Bru Gold",
+      "Sahyadri Tea",
+      "Red Label",
+      "Taj Tea",
+      "Lipton Green Tea",
+      "Tata Tea Taaza",
+      "Parivar Tea",
+    ],
+  },
+  {
+    label: "── Food ──",
+    options: [
+      "Eno",
+      "Kissan Tomato",
+      "Kissan Jam",
+      "Maggie",
+      "Masala Noodles",
+      "Horlicks",
+      "Custard Powder",
+      "Govardhan Ghee",
     ],
   },
   {
@@ -132,7 +208,11 @@ const productGroups: { label: string; options: string[] }[] = [
       "Sargam Kapade Soap",
       "Surf Excel Kapade Soap",
       "Vim Bhade Soap",
+      "Vim Liquid",
       "Wheel Sabun",
+      "Liril Soap",
+      "Hamam Soap",
+      "Patanjali Soap",
     ],
   },
   {
@@ -144,11 +224,17 @@ const productGroups: { label: string; options: string[] }[] = [
       "Sunsilk Shampoo",
       "TRESemmé Shampoo",
       "Vatika Shampoo",
+      "Dove Conditioner",
+      "TRESemmé Conditioner",
     ],
   },
   {
+    label: "── Hair Oil ──",
+    options: ["Parachute", "Indulekha"],
+  },
+  {
     label: "── Paste ──",
-    options: ["Colgate White", "Colgate Max Fresh"],
+    options: ["Colgate White", "Colgate Max Fresh", "Pepsodent", "Dantkanti", "Vicco Vajradanti", "Patanjali Dant Manjan"],
   },
   {
     label: "── Detergent ──",
@@ -159,11 +245,33 @@ const productGroups: { label: string; options: string[] }[] = [
       "Surf Excel Powder",
       "Tide Powder",
       "Wheel Powder",
+      "Ariel",
+      "Comfort",
+      "Rin Liquid",
     ],
   },
   {
     label: "── Phenyl ──",
     options: ["Harpic", "Lizol", "Sunny Phenyl"],
+  },
+  {
+    label: "── Cosmetics ──",
+    options: [
+      "Fair & Lovely",
+      "Glow & Lovely",
+      "Fair & Handsome",
+      "Ponds Cream",
+      "Ponds Powder",
+      "Ponds Starlight",
+      "Ponds Pink",
+      "Ponds Body Lotion",
+      "Vaseline",
+      "Fogg",
+    ],
+  },
+  {
+    label: "── Household ──",
+    options: ["Good Knight Liquid"],
   },
   {
     label: "── Other ──",
@@ -672,7 +780,7 @@ export default function Contact() {
                         placeholder={
                           inquiryType === "franchise"
                             ? "Preferred outlet size, investment capacity, timeline, and any questions about franchise support..."
-                            : "Tell us about your requirements — grade, packaging, delivery location, certification needs, etc."
+                            : "Tell us about your requirements — grade, packaging, delivery location, and quantity."
                         }
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-9 pr-4 py-3 text-sm
                           text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2

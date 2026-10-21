@@ -5,7 +5,7 @@ import {
   Leaf,
   Factory,
   Globe,
-  FlaskConical,
+  BadgePercent,
   Truck,
   Handshake,
 } from "lucide-react";
@@ -30,19 +30,19 @@ const values = [
     border: "border-primary/10",
   },
   {
-    icon: FlaskConical,
-    title: "Rigorous Quality Testing",
+    icon: BadgePercent,
+    title: "Lower Wholesale Prices",
     description:
-      "FSSAI-accredited in-house labs test every lot for moisture, impurities, aflatoxin, and nutritional parameters before dispatch.",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+      "Direct bulk supply cuts the extra margin in the trade chain. Kirana stores and outlets stock the same grade for less — across grains, pulses, oils, and daily FMCG.",
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+    border: "border-amber-100",
   },
   {
     icon: Globe,
-    title: "Global Quality Standards",
+    title: "Exported to Dubai",
     description:
-      "Stringent in-house quality checks at every stage — from sourcing to packaging. Our products meet international standards and are currently exported to Dubai.",
+      "The same grains and pulses we pack for homes and outlets in Maharashtra are now shipped to Dubai.",
     color: "text-accent-700",
     bg: "bg-accent/8",
     border: "border-accent/15",

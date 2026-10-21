@@ -20,7 +20,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Abhidnya Agro Industries | Premium Pulses, Grains & Agricultural Products",
   description:
-    "Abhidnya Agro Industries delivers farm-to-fork traceability on premium pulses, grains, spices, and oilseeds. Certified quality, global standards, sustainable sourcing.",
+    "Abhidnya Agro Industries delivers farm-to-fork traceability on premium pulses, grains, spices, and oilseeds. Direct sourcing for homes, outlets, and export.",
   keywords: [
     "agro industries",
     "premium pulses",
