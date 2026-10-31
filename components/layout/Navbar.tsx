@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { navigateToInquiry } from "@/lib/inquiryNavigation";
+import { navigateToInquiry, scrollToContactSection } from "@/lib/inquiryNavigation";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -28,6 +28,10 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
+    if (href === "#contact") {
+      scrollToContactSection();
+      return;
+    }
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -141,7 +145,10 @@ export default function Navbar() {
                 ))}
                 <li className="pt-2 border-t border-gray-100 mt-2">
                   <button
-                    onClick={() => navigateToInquiry("bulk")}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      navigateToInquiry("bulk");
+                    }}
                     className="btn-primary w-full justify-center text-sm"
                   >
                     Get a Quote

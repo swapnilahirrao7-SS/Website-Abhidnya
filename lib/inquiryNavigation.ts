@@ -9,6 +9,48 @@ export interface InquiryNavigateDetail {
   product?: string;
 }
 
+/** Blocks product infinite-scroll while navigating to Contact (All list expands mid-scroll). */
+let productLoadPausedUntil = 0;
+
+export function pauseProductInfiniteScroll(ms = 1600): void {
+  productLoadPausedUntil = Date.now() + ms;
+}
+
+export function isProductInfiniteScrollPaused(): boolean {
+  return Date.now() < productLoadPausedUntil;
+}
+
+const NAV_OFFSET_PX = 80;
+
+export function scrollToContactSection(): void {
+  pauseProductInfiniteScroll(1800);
+
+  const el = document.getElementById("contact");
+  if (!el) return;
+
+  const scrollToTarget = (behavior: ScrollBehavior) => {
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;
+    window.scrollTo({ top: Math.max(0, top), behavior });
+  };
+
+  scrollToTarget("smooth");
+
+  // Re-align if product-grid growth shifted #contact during smooth scroll
+  window.setTimeout(() => {
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;
+    if (Math.abs(window.scrollY - top) > 56) {
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    }
+  }, 450);
+
+  window.setTimeout(() => {
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;
+    if (Math.abs(window.scrollY - top) > 56) {
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    }
+  }, 900);
+}
+
 export function navigateToInquiry(
   type: InquiryType,
   options?: { product?: string },
@@ -27,7 +69,7 @@ export function navigateToInquiry(
     }),
   );
 
-  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+  scrollToContactSection();
 }
 
 export function readInquiryNavigation(): InquiryNavigateDetail | null {

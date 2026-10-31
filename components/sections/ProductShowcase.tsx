@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Star, Leaf, CheckCircle2, Search, Sparkles } from "lucide-react";
-import { navigateToInquiry } from "@/lib/inquiryNavigation";
+import { isProductInfiniteScrollPaused, navigateToInquiry } from "@/lib/inquiryNavigation";
 import { newProducts } from "@/data/newProducts";
 
 type Category =
@@ -16,9 +16,12 @@ type Category =
   | "Flours"
   | "Staples"
   | "Masale"
+  | "Masale Mix"
   | "Biscuits"
+  | "Chocolate"
   | "Tea & Coffee"
   | "Food"
+  | "Soup"
   | "Soap"
   | "Shampoo"
   | "Hair Oil"
@@ -26,7 +29,8 @@ type Category =
   | "Detergent"
   | "Phenyl"
   | "Cosmetics"
-  | "Household";
+  | "Household"
+  | "Cleaning";
 
 /** Categories added beyond the original Pulses & Grains range */
 const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
@@ -35,9 +39,12 @@ const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
   "Flours",
   "Staples",
   "Masale",
+  "Masale Mix",
   "Biscuits",
+  "Chocolate",
   "Tea & Coffee",
   "Food",
+  "Soup",
   "Soap",
   "Shampoo",
   "Hair Oil",
@@ -46,6 +53,7 @@ const NEW_CATEGORIES: Exclude<Category, "All" | "Pulses" | "Grains">[] = [
   "Phenyl",
   "Cosmetics",
   "Household",
+  "Cleaning",
 ];
 
 const isNewCategory = (cat: Category) =>
@@ -547,6 +555,31 @@ const badgeColors: Record<string, string> = {
   "Fabric Care":      "bg-sky-50 text-sky-700 border-sky-200",
   Deodorant:          "bg-rose-50 text-rose-700 border-rose-200",
   Cleaner:            "bg-teal-50 text-teal-700 border-teal-200",
+  Broom:              "bg-lime-50 text-lime-800 border-lime-200",
+  Mop:                "bg-sky-50 text-sky-700 border-sky-200",
+  Wiper:              "bg-cyan-50 text-cyan-700 border-cyan-200",
+  Scrubber:           "bg-amber-50 text-amber-800 border-amber-200",
+  Brush:              "bg-stone-50 text-stone-700 border-stone-200",
+  Candy:              "bg-pink-50 text-pink-700 border-pink-200",
+  Chocolate:          "bg-amber-50 text-amber-900 border-amber-200",
+  Soup:               "bg-orange-50 text-orange-700 border-orange-200",
+  "Masala Mix":       "bg-red-50 text-red-700 border-red-200",
+  "Hair Colour":      "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
+  Makeup:             "bg-rose-50 text-rose-700 border-rose-200",
+  Lotion:             "bg-sky-50 text-sky-700 border-sky-200",
+  "Hair Gel":         "bg-violet-50 text-violet-700 border-violet-200",
+  Toothbrush:         "bg-cyan-50 text-cyan-700 border-cyan-200",
+  Handwash:           "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Battery:            "bg-neutral-100 text-neutral-700 border-neutral-300",
+  Polish:             "bg-yellow-50 text-yellow-800 border-yellow-200",
+  Ointment:           "bg-blue-50 text-blue-700 border-blue-200",
+  Incense:            "bg-orange-50 text-orange-800 border-orange-200",
+  Matches:            "bg-red-50 text-red-700 border-red-200",
+  Candle:             "bg-stone-50 text-stone-600 border-stone-200",
+  Cream:              "bg-emerald-50 text-emerald-800 border-emerald-200",
+  Tea:                "bg-amber-50 text-amber-800 border-amber-200",
+  Food:               "bg-lime-50 text-lime-800 border-lime-200",
+  Household:          "bg-stone-50 text-stone-700 border-stone-200",
 };
 
 const PAGE_SIZE = 12;
@@ -713,6 +746,9 @@ export default function ProductShowcase() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
+        // Skip while Get a Quote / Contact scroll is in progress — otherwise
+        // loading more "All" products shifts #contact and lands mid-page.
+        if (isProductInfiniteScrollPaused()) return;
         setVisibleCount((count) => count + PAGE_SIZE);
       },
       { rootMargin: "240px 0px" }

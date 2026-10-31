@@ -82,7 +82,7 @@ showcaseSrc.includes('product-search')
   ? pass("Product name search input present")
   : fail("Product search", "product-search input not found");
 
-for (const cat of ["Dry Fruits", "Oils", "Flours", "Staples", "Masale", "Biscuits", "Tea & Coffee", "Food", "Soap", "Shampoo", "Hair Oil", "Paste", "Detergent", "Phenyl", "Cosmetics", "Household"]) {
+for (const cat of ["Dry Fruits", "Oils", "Flours", "Staples", "Masale", "Masale Mix", "Biscuits", "Chocolate", "Tea & Coffee", "Food", "Soup", "Soap", "Shampoo", "Hair Oil", "Paste", "Detergent", "Phenyl", "Cosmetics", "Household", "Cleaning"]) {
   showcaseSrc.includes(`"${cat}"`)
     ? pass(`Category tab: ${cat}`)
     : fail(`Category tab: ${cat}`, "Missing from ProductShowcase");
@@ -173,7 +173,7 @@ section("7 · Stats — values match website content");
 const statsSrc = readFile("components/sections/Stats.tsx");
 
 const statChecks = [
-  ["180",    "Products stat"],
+  ["250",    "Products stat"],
   ["120000", "Facility sq.ft. stat"],
   ["99",     "Purity stat"],
   ["100",    "Farm-Direct stat"],
@@ -220,7 +220,7 @@ const heroSrc = readFile("components/sections/Hero.tsx");
   ["2023", "Since 2023 badge"],
   ["Farm-Direct", "Farm-Direct badge"],
   ["Dubai", "Dubai export badge"],
-  ["180+", "180+ products badge"],
+  ["250+", "250+ products badge"],
 ].forEach(([needle, label]) => {
   heroSrc.includes(needle)
     ? pass(label)

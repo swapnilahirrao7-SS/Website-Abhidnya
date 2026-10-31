@@ -27,7 +27,7 @@ function useCountUp(target: number, duration = 2000, start = false) {
 
 const heroStats = [
   { target: 50, suffix: "K+", label: "Tons Processed" },
-  { target: 180, suffix: "+", label: "Premium Products" },
+  { target: 200, suffix: "+", label: "Premium Products" },
   { target: 100, suffix: "%", label: "Farm-Direct Sourcing" },
 ];
 
@@ -145,7 +145,7 @@ export default function Hero() {
             {[
               { icon: Sprout, text: "Farm-Direct Sourcing" },
               { icon: Globe, text: "Exporting to Dubai" },
-              { icon: Leaf, text: "180+ Premium Products" },
+              { icon: Leaf, text: "250+ Premium Products" },
               { icon: Store, text: "2 Outlets" },
             ].map(({ icon: Icon, text }, i) => (
               <motion.div
