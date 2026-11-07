@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,8 +18,11 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const onHome = pathname === "/";
+  const lightBar = onHome && scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -33,15 +37,21 @@ export default function Navbar() {
       return;
     }
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    window.location.href = `/${href}`;
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        lightBar
           ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
-          : "bg-transparent"
+          : onHome
+            ? "bg-transparent"
+            : "bg-forest"
       }`}
     >
       <nav className="section-container" aria-label="Main navigation">
@@ -63,14 +73,14 @@ export default function Navbar() {
             <div className="flex flex-col leading-none">
               <span
                 className={`font-display font-bold text-base tracking-tight transition-colors ${
-                  scrolled ? "text-primary" : "text-white"
+                  lightBar ? "text-primary" : "text-white"
                 }`}
               >
                 Abhidnya Agro
               </span>
               <span
                 className={`text-[10px] font-medium tracking-widest uppercase transition-colors ${
-                  scrolled ? "text-accent-700" : "text-accent-300"
+                  lightBar ? "text-accent-700" : "text-accent-300"
                 }`}
               >
                 Industries
@@ -85,13 +95,13 @@ export default function Navbar() {
                 <button
                   onClick={() => handleNavClick(link.href)}
                   className={`group relative text-sm font-medium transition-colors duration-150 ${
-                    scrolled ? "text-gray-700 hover:text-primary" : "text-white/90 hover:text-white"
+                    lightBar ? "text-gray-700 hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                 >
                   {link.label}
                   <span className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full scale-x-0 group-hover:scale-x-100
                     transition-transform duration-300 origin-left
-                    ${scrolled ? "bg-primary" : "bg-accent-300"}`} />
+                    ${lightBar ? "bg-primary" : "bg-accent-300"}`} />
                 </button>
               </li>
             ))}
@@ -110,7 +120,7 @@ export default function Navbar() {
           {/* Mobile toggle */}
           <button
             className={`md:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? "text-primary hover:bg-primary/10" : "text-white hover:bg-white/10"
+              lightBar ? "text-primary hover:bg-primary/10" : "text-white hover:bg-white/10"
             }`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}

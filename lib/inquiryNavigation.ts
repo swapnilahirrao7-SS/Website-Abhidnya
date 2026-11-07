@@ -26,7 +26,10 @@ export function scrollToContactSection(): void {
   pauseProductInfiniteScroll(1800);
 
   const el = document.getElementById("contact");
-  if (!el) return;
+  if (!el) {
+    window.location.href = "/#contact";
+    return;
+  }
 
   const scrollToTarget = (behavior: ScrollBehavior) => {
     const top = el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX;

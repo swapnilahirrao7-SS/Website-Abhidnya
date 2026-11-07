@@ -16,6 +16,7 @@ const footerLinks = {
     { label: "Our Outlets", href: "#outlets" },
     { label: "Sustainability", href: "#about" },
     { label: "Careers", href: "#contact", inquiry: "bulk" as InquiryType },
+    { label: "Privacy Policy", href: "/privacy-policy" },
   ],
   products: [
     { label: "Pulses & Lentils", href: "#products" },
@@ -41,7 +42,11 @@ export default function Footer() {
     }
 
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    window.location.href = `/${href}`;
   };
 
   return (
@@ -138,12 +143,21 @@ export default function Footer() {
               <ul className="space-y-3" role="list">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => handleNavClick(link.href, "inquiry" in link ? link.inquiry : undefined)}
-                      className="text-sm text-white/55 hover:text-accent transition-colors text-left"
-                    >
-                      {link.label}
-                    </button>
+                    {link.href.startsWith("/") ? (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/55 hover:text-accent transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => handleNavClick(link.href, "inquiry" in link ? link.inquiry : undefined)}
+                        className="text-sm text-white/55 hover:text-accent transition-colors text-left"
+                      >
+                        {link.label}
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -156,7 +170,8 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
             <p>© {new Date().getFullYear()} Abhidnya Agro Industries Pvt. Ltd. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
+              <Link href="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+              <Link href="/data-deletion" className="hover:text-white/70 transition-colors">Delete account</Link>
               <a href="#" className="hover:text-white/70 transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white/70 transition-colors">Cookie Policy</a>
             </div>
