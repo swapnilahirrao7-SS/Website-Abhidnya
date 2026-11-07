@@ -17,6 +17,7 @@ const footerLinks = {
     { label: "Sustainability", href: "#about" },
     { label: "Careers", href: "#contact", inquiry: "bulk" as InquiryType },
     { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Use", href: "/terms" },
   ],
   products: [
     { label: "Pulses & Lentils", href: "#products" },
@@ -172,7 +173,7 @@ export default function Footer() {
             <div className="flex items-center gap-6">
               <Link href="/privacy-policy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
               <Link href="/data-deletion" className="hover:text-white/70 transition-colors">Delete account</Link>
-              <a href="#" className="hover:text-white/70 transition-colors">Terms of Service</a>
+              <Link href="/terms" className="hover:text-white/70 transition-colors">Terms of Use</Link>
               <a href="#" className="hover:text-white/70 transition-colors">Cookie Policy</a>
             </div>
           </div>
