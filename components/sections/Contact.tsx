@@ -151,7 +151,7 @@ const productGroups: { label: string; options: string[] }[] = [
       "Everest Meat Masala",
       "Everest Chole Masala",
       "Everest Shahi Paneer Masala",
-      "Massi Masala",
+      "Maggi Masale",
       "Rambhandu Chivda Masala",
       "Suhana Chicken Masala",
       "Suhana Chole Masala",
