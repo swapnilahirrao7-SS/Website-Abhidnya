@@ -213,6 +213,7 @@ const productGroups: { label: string; options: string[] }[] = [
     label: "── Food ──",
     options: [
       "Eno",
+      "Baking Soda",
       "Kissan Tomato",
       "Kissan Jam",
       "Maggie",
@@ -285,7 +286,7 @@ const productGroups: { label: string; options: string[] }[] = [
   },
   {
     label: "── Hair Oil ──",
-    options: ["Parachute", "Indulekha"],
+    options: ["Parachute", "Parachute Jasmine", "Indulekha"],
   },
   {
     label: "── Paste ──",
@@ -342,7 +343,6 @@ const productGroups: { label: string; options: string[] }[] = [
       "Lakme Foundation",
       "Nivea Body Lotion",
       "Streax Hair Colour",
-      "Grizzer Gel",
     ],
   },
   {
@@ -350,7 +350,9 @@ const productGroups: { label: string; options: string[] }[] = [
     options: [
       "Good Knight Liquid",
       "AA Battery Cell",
+      "Geyser Cell",
       "Pitambari",
+      "Bhaiya G Powder",
       "Vicks BabyRub",
       "Agarbatti",
       "Matches",

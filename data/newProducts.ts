@@ -231,8 +231,8 @@ export const newProducts: CatalogProduct[] = [
     badge: "Flour",
     grade: "Family Pack",
     description:
-      "Whole wheat atta for soft rotis and daily meals — available in a convenient 5 kg family pack.",
-    specs: ["Pack: 5 kg", "Type: Whole Wheat Atta", "Use: Roti & Paratha"],
+      "Samrat MP Chakki Atta whole wheat flour for soft rotis and daily meals — 5 kg family pack.",
+    specs: ["Pack: 5 kg", "Type: MP Chakki Atta", "Brand: Samrat"],
     rating: 4.8,
   },
 
@@ -293,8 +293,8 @@ export const newProducts: CatalogProduct[] = [
     badge: "Staple",
     grade: "Retail Pack",
     description:
-      "Iodised cooking salt in 1 kg pack — everyday essential for every kitchen.",
-    specs: ["Pack: 1 kg", "Type: Cooking Salt", "Use: Everyday"],
+      "Tata Salt vacuum evaporated iodised salt in 1 kg pack — everyday essential for every kitchen.",
+    specs: ["Pack: 1 kg", "Type: Iodised Salt", "Brand: Tata Salt"],
     rating: 4.5,
   },
   {
@@ -305,8 +305,8 @@ export const newProducts: CatalogProduct[] = [
     badge: "Staple",
     grade: "Retail",
     description:
-      "Coconut (narel) for chutneys, sweets, and Maharashtrian cooking — stocked fresh at outlets.",
-    specs: ["Type: Coconut", "Use: Cooking & Sweets", "Availability: Outlet Retail"],
+      "Whole fresh coconut (narel) for chutneys, sweets, and Maharashtrian cooking — stocked at outlets.",
+    specs: ["Type: Whole Coconut", "Use: Cooking & Sweets", "Availability: Outlet Retail"],
     rating: 4.6,
   },
   {
@@ -829,7 +829,7 @@ export const newProducts: CatalogProduct[] = [
   { id: "dhane", name: "Dhane (Coriander)", category: "Masale", image: "/products/dhane.webp", badge: "Masala", grade: "Retail", description: "Coriander seeds for tempering, chutneys, and masala blends.", specs: ["Type: Coriander Seeds", "Use: Cooking", "Storage: Dry Place"], rating: 4.6 },
   { id: "dinkh", name: "Dinkh (Edible Gum)", category: "Masale", image: "/products/dinkh.webp", badge: "Masala", grade: "Retail", description: "Edible gum (dink / gond) for traditional laddoos and winter recipes.", specs: ["Type: Edible Gum", "Use: Sweets", "Storage: Dry Place"], rating: 4.5 },
   { id: "halad", name: "Halad (Turmeric)", category: "Masale", image: "/products/halad.webp", badge: "Masala", grade: "Retail", description: "Turmeric for everyday cooking and colour.", specs: ["Type: Turmeric", "Use: Cooking", "Storage: Dry Place"], rating: 4.7 },
-  { id: "hing", name: "Hing (Asafoetida)", category: "Masale", image: "/products/hing.webp", badge: "Masala", grade: "Retail", description: "Asafoetida for dal, kadhi, and tempering.", specs: ["Type: Asafoetida", "Use: Tempering", "Storage: Airtight"], rating: 4.7 },
+  { id: "hing", name: "Hing (Asafoetida)", category: "Masale", image: "/products/hing.webp", badge: "Masala", grade: "Retail Pack", description: "Mahalaxmi hing powder jar for dal, kadhi, and everyday tempering.", specs: ["Brand: Mahalaxmi", "Type: Hing Powder", "Use: Tempering"], rating: 4.7 },
   { id: "javitari", name: "Javitari (Mace)", category: "Masale", image: "/products/javitari.webp", badge: "Masala", grade: "Retail", description: "Mace blades for biryani, sweets, and garam masala.", specs: ["Type: Mace", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
   { id: "jayfal", name: "Jayfal (Nutmeg)", category: "Masale", image: "/products/jayfal.webp", badge: "Masala", grade: "Retail", description: "Whole nutmeg for sweets, milk, and spice blends.", specs: ["Type: Nutmeg", "Use: Whole Spice", "Storage: Dry Place"], rating: 4.6 },
   { id: "jeera", name: "Jeera (Cumin)", category: "Masale", image: "/products/jeera.webp", badge: "Masala", grade: "Retail", description: "Cumin seeds for daily tempering and masalas.", specs: ["Type: Cumin", "Use: Tempering", "Storage: Dry Place"], rating: 4.8 },
@@ -877,6 +877,7 @@ export const newProducts: CatalogProduct[] = [
 
   // ── Food ────────────────────────────────────────────────────
   { id: "eno", name: "Eno", category: "Food", image: "/products/eno.webp", badge: "Food", grade: "Retail Pack", description: "Eno fruit salt in strip packs.", specs: ["Pack: 30 gm (12×1)", "Type: Fruit Salt", "Use: Digestive"], rating: 4.6 },
+  { id: "baking-soda", name: "Baking Soda", category: "Food", image: "/products/baking-soda.webp", badge: "Food", grade: "Retail Pack", description: "Pik baking soda — 100% pure food grade sodium bicarbonate for cooking, baking, and cleaning.", specs: ["Pack: 50 gm", "Brand: Pik", "Type: Food Grade Sodium Bicarbonate"], rating: 4.5 },
   { id: "kissan-tomato", name: "Kissan Tomato", category: "Food", image: "/products/kissan-tomato.webp", badge: "Food", grade: "Retail Pack", description: "Kissan tomato ketchup in pouches and bottles.", specs: ["Packs: 45 gm, 90 gm, 350 gm, 400 gm pouch", "Type: Tomato Ketchup", "Use: Cooking"], rating: 4.7 },
   { id: "kissan-jam", name: "Kissan Jam", category: "Food", image: "/products/kissan-jam.webp", badge: "Food", grade: "Retail Pack", description: "Kissan jam for breakfast.", specs: ["Pack: 500 gm", "Type: Jam", "Use: Breakfast"], rating: 4.6 },
   { id: "maggie", name: "Maggie", category: "Food", image: "/products/maggie.webp", badge: "Food", grade: "Retail Pack", description: "Maggie instant noodles.", specs: ["Type: Instant Noodles", "Use: Snacks", "Availability: Outlet Retail"], rating: 4.7 },
@@ -898,7 +899,8 @@ export const newProducts: CatalogProduct[] = [
   { id: "fogg", name: "Fogg", category: "Cosmetics", image: "/products/fogg.webp", badge: "Deodorant", grade: "Retail Pack", description: "Fogg deodorant spray.", specs: ["Pack: 150 ml", "Type: Deodorant", "Use: Personal Care"], rating: 4.6 },
 
   // ── Hair Oil ────────────────────────────────────────────────
-  { id: "parachute", name: "Parachute", category: "Hair Oil", image: "/products/parachute.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Parachute coconut hair oil, including jasmine variants.", specs: ["Packs: 90 ml jasmine, 100 ml, 190 ml jasmine, 200 ml, 500 ml jasmine, 600 ml", "Type: Coconut Hair Oil", "Use: Hair Care"], rating: 4.8 },
+  { id: "parachute", name: "Parachute", category: "Hair Oil", image: "/products/parachute.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Parachute coconut hair oil in classic retail bottles.", specs: ["Packs: 100 ml, 200 ml, 600 ml", "Type: Coconut Hair Oil", "Use: Hair Care"], rating: 4.8 },
+  { id: "parachute-jasmine", name: "Parachute Jasmine", category: "Hair Oil", image: "/products/parachute-jasmine.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Parachute Advansed Jasmine non-sticky coconut hair oil with jasmine fragrance.", specs: ["Type: Jasmine Coconut Hair Oil", "Brand: Parachute Advansed", "Use: Hair Care"], rating: 4.7 },
   { id: "indulekha", name: "Indulekha", category: "Hair Oil", image: "/products/indulekha.webp", badge: "Hair Oil", grade: "Retail Pack", description: "Indulekha hair oil.", specs: ["Pack: 100 ml", "Type: Hair Oil", "Use: Hair Care"], rating: 4.7 },
 
   // ── Paste (added) ───────────────────────────────────────────
@@ -998,8 +1000,6 @@ export const newProducts: CatalogProduct[] = [
   { id: "nivea-body-lotion", name: "Nivea Body Lotion", category: "Cosmetics", image: "/products/nivea-body-lotion.webp", badge: "Lotion", grade: "Retail Pack", description: "NIVEA Nourishing Body Milk lotion with pump — 48h intensive moisture.", specs: ["Pack: 400 ml", "Type: Body Lotion", "Use: Personal Care"], rating: 4.7 },
   { id: "streax", name: "Streax Hair Colour", category: "Cosmetics", image: "/products/streax.webp", badge: "Hair Colour", grade: "Retail Pack", description: "Streax Creme Hair Colour kit for rich natural black shine.", specs: ["Shade: 2 Natural Black", "Type: Hair Colour Kit", "Use: Hair Care"], rating: 4.5 },
   { id: "vaseline-body-lotion", name: "Vaseline Body Lotion", category: "Cosmetics", image: "/products/vaseline-body-lotion.webp", badge: "Lotion", grade: "Retail Pack", description: "Vaseline Intensive Care deep moisture body lotion with pump.", specs: ["Pack: 400 ml", "Type: Body Lotion", "Use: Personal Care"], rating: 4.7 },
-  { id: "grizzer-gel", name: "Grizzer Gel", category: "Cosmetics", image: "/products/grizzer-gel.webp", badge: "Hair Gel", grade: "Retail Pack", description: "Grizzer Professional Hair Gel — maximum hold styling gel.", specs: ["Type: Hair Gel", "Hold: Maximum", "Use: Hair Styling"], rating: 4.5 },
-
   // ── Paste (added) ───────────────────────────────────────────
   { id: "vithoba-premium", name: "Vithoba Premium", category: "Paste", image: "/products/vithoba-premium.webp", badge: "Toothpaste", grade: "Retail Pack", description: "Vithoba Premium ayurvedic toothpaste in box and tube packs.", specs: ["Pack: 150 gm", "Type: Ayurvedic Toothpaste", "Brand: Vithoba"], rating: 4.6 },
   { id: "vithoba-rootfix", name: "Vithoba Rootfix", category: "Paste", image: "/products/vithoba-rootfix.webp", badge: "Toothpaste", grade: "Retail Pack", description: "Vithoba Rootfix Natural ayurvedic toothpaste.", specs: ["Pack: 150 gm", "Type: Ayurvedic Toothpaste", "Brand: Vithoba"], rating: 4.6 },
@@ -1016,7 +1016,9 @@ export const newProducts: CatalogProduct[] = [
 
   // ── Household (added) ───────────────────────────────────────
   { id: "aa-battery", name: "AA Battery Cell", category: "Household", image: "/products/aa-battery.webp", badge: "Battery", grade: "Retail Pack", description: "AA alkaline battery cells for remotes, toys, and household devices.", specs: ["Type: AA Alkaline", "Use: Household Power", "Availability: Outlet Retail"], rating: 4.5 },
+  { id: "geyser-cell", name: "Geyser Cell", category: "Household", image: "/products/geyser-cell.webp", badge: "Battery", grade: "Retail Pack", description: "Eveready Super Heavy Duty geyser / large cell battery — leakproof household power.", specs: ["Brand: Eveready", "Type: Super Heavy Duty Cell", "Use: Geyser / Household Power"], rating: 4.5 },
   { id: "pitambari", name: "Pitambari", category: "Household", image: "/products/pitambari.webp", badge: "Polish", grade: "Retail Pack", description: "Pitambari shining powder for copper, brass, aluminium, iron, and silver.", specs: ["Type: Metal Polish Powder", "Use: Utensil Shine", "Availability: Outlet Retail"], rating: 4.6 },
+  { id: "bhaiya-g-powder", name: "Bhaiya G Powder", category: "Household", image: "/products/bhaiya-g-powder.webp", badge: "Polish", grade: "Retail Pack", description: "Hamara Bhaiya G cleaning powder — ultra shine for brass, copper, and metal utensils.", specs: ["Brand: Hamara Bhaiya G", "Type: Cleaning Powder", "Use: Utensil Shine"], rating: 4.5 },
   { id: "vicks-babyrub", name: "Vicks BabyRub", category: "Household", image: "/products/vicks-babyrub.webp", badge: "Ointment", grade: "Retail Pack", description: "Vicks BabyRub soothing ointment — comfort for babies with aloe vera and coconut oil.", specs: ["Pack: 50 ml", "Type: Baby Rub Ointment", "Use: Baby Care"], rating: 4.6 },
   { id: "agarbatti", name: "Agarbatti", category: "Household", image: "/products/agarbatti.webp", badge: "Incense", grade: "Retail Pack", description: "Aroma agarbatti incense sticks in festive retail cartons.", specs: ["Type: Incense Sticks", "Use: Puja / Home", "Availability: Outlet Retail"], rating: 4.5 },
   { id: "matches", name: "Matches", category: "Household", image: "/products/matches.webp", badge: "Matches", grade: "Retail Pack", description: "Safety matchboxes (माचिस) for kitchen and puja use.", specs: ["Type: Safety Matches", "Use: Household", "Availability: Outlet Retail"], rating: 4.5 },
